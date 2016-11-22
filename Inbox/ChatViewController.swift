@@ -12,10 +12,12 @@ class ChatViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
     fileprivate var messages = [Message]()
+    fileprivate var cellIdentifier = "Cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
         
         for i in 0...10 {
@@ -35,9 +37,9 @@ extension ChatViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChatCell
         let message = messages[indexPath.row]
-        cell.textLabel?.text = message.text
+        cell.messageLabel.text = message.text
         return cell
     }
     
