@@ -11,7 +11,7 @@ import UIKit
 class ChatCell: UITableViewCell {
 
     let messageLabel = UILabel()
-    private let bubbleImageView = UIImageView()
+    private let bubbleImageView = BubbleImageView()
     private var imageName = "MessageBubble"
     
     private var incomingConstraint : NSLayoutConstraint!
@@ -39,10 +39,7 @@ class ChatCell: UITableViewCell {
         
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
-        
-        let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
-        bubbleImageView.tintColor = UIColor(red: 33/255, green: 150/255, blue: 243/255, alpha: 1.0)
-        bubbleImageView.image = image
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,9 +50,12 @@ class ChatCell: UITableViewCell {
         if messageType {
             incomingConstraint.isActive = true
             outgoingConstraint.isActive = false
+            bubbleImageView.incomingBubble()
         } else {
             incomingConstraint.isActive = false
             outgoingConstraint.isActive = true
+            messageLabel.textColor = UIColor.white
+            bubbleImageView.outgoingBubble()
         }
     }
 
