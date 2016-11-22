@@ -20,9 +20,13 @@ class ChatViewController: UIViewController {
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
         
+        var localIncoming = true
+        
         for i in 0...10 {
             let message = Message()
             message.text = String(i)
+            message.incoming = localIncoming
+            localIncoming = !localIncoming
             messages.append(message)
         }
         
@@ -40,6 +44,7 @@ extension ChatViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChatCell
         let message = messages[indexPath.row]
         cell.messageLabel.text = message.text
+        cell.incoming(messageType: message.incoming)
         return cell
     }
     

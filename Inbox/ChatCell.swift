@@ -14,6 +14,9 @@ class ChatCell: UITableViewCell {
     private let bubbleImageView = UIImageView()
     private var imageName = "MessageBubble"
     
+    private var incomingConstraint : NSLayoutConstraint!
+    private var outgoingConstraint : NSLayoutConstraint!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -26,11 +29,13 @@ class ChatCell: UITableViewCell {
         messageLabel.centerXAnchor.constraint(equalTo: bubbleImageView.centerXAnchor).isActive = true
         messageLabel.centerYAnchor.constraint(equalTo: bubbleImageView.centerYAnchor).isActive = true
         
-        bubbleImageView.widthAnchor.constraint(equalTo: messageLabel.widthAnchor, constant: 20)
+        bubbleImageView.widthAnchor.constraint(equalTo: messageLabel.widthAnchor)
         bubbleImageView.heightAnchor.constraint(equalTo: messageLabel.heightAnchor).isActive = true
         
         bubbleImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        bubbleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10)
+        
+        incomingConstraint = bubbleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
+        outgoingConstraint = bubbleImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
@@ -42,6 +47,16 @@ class ChatCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func incoming(messageType: Bool) {
+        if messageType {
+            incomingConstraint.isActive = true
+            outgoingConstraint.isActive = false
+        } else {
+            incomingConstraint.isActive = false
+            outgoingConstraint.isActive = true
+        }
     }
 
 }
