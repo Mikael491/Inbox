@@ -19,12 +19,13 @@ class ChatViewController: UIViewController {
         
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
+        tableView.delegate = self
         
         var localIncoming = true
         
-        for i in 0...10 {
+        for _ in 0...10 {
             let message = Message()
-            message.text = String(i)
+            message.text = "Hello, world!"
             message.incoming = localIncoming
             localIncoming = !localIncoming
             messages.append(message)
@@ -49,4 +50,36 @@ extension ChatViewController : UITableViewDataSource {
     }
     
 }
+
+extension ChatViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

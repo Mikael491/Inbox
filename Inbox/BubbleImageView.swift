@@ -15,13 +15,15 @@ class BubbleImageView: UIImageView {
     func incomingBubble() {
         let image = UIImage(named: bubbleImageName)!
         let flippedImage = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: .upMirrored)
-        let incoming = coloredImage(image: flippedImage, red: 211/255, green: 211/255, blue: 211/255, alpha: 1.0)
+        let insets = UIEdgeInsets(top: 17, left: 26.6, bottom: 17.5, right: 21)
+        let incoming = coloredImage(image: flippedImage, red: 211/255, green: 211/255, blue: 211/255, alpha: 1.0).resizableImage(withCapInsets: insets)
         self.image = incoming
     }
     
     func outgoingBubble() {
         let image = UIImage(named: bubbleImageName)!
-        let outgoing = coloredImage(image: image, red: 33/255, green: 150/255, blue: 243/255, alpha: 1.0)
+        let insets = UIEdgeInsets(top: 17, left: 21, bottom: 17.5, right: 26.5)
+        let outgoing = coloredImage(image: image, red: 33/255, green: 150/255, blue: 243/255, alpha: 1.0).resizableImage(withCapInsets: insets)
         self.image = outgoing
     }
     
