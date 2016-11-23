@@ -24,6 +24,7 @@ class ChatViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 44
+        tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
         
         let blur = UIBlurEffect(style: .extraLight)
         let visualEffectView = UIVisualEffectView(effect: blur)
@@ -63,6 +64,10 @@ class ChatViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(messageAreaConstraints)
         
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ChatViewController.handleSwipe(gesture:)))
+        swipeGesture.direction = .down
+        messageAreaView.addGestureRecognizer(swipeGesture)
+        
         var localIncoming = true
         for _ in 0...10 {
             let message = Message()
@@ -74,18 +79,30 @@ class ChatViewController: UIViewController {
      
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
     }
     
     func keyboardWillShow(notification: Notification) {
-        
+        updateMessageAreaBottomConstraint(notification)
+    }
+    
+    func keyboardWillHide(notification: Notification) {
+        updateMessageAreaBottomConstraint(notification)
+    }
+    
+    func updateMessageAreaBottomConstraint(_ notification: Notification) {
         if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey], let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] {
             let newFrame = view.convert((frame as! NSValue).cgRectValue, from: (UIApplication.shared.delegate?.window)!)
             bottomConstraint.constant = newFrame.origin.y - view.frame.height
-            UIView.animate(withDuration: animationDuration as! TimeInterval, animations: { 
+            UIView.animate(withDuration: animationDuration as! TimeInterval, animations: {
                 self.view.layoutIfNeeded()
             })
         }
-        
+    }
+    
+    func handleSwipe(gesture: UISwipeGestureRecognizer) {
+        messageTextView.resignFirstResponder()
     }
     
 }
