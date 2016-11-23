@@ -25,6 +25,8 @@ class ChatViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 44
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+        
+        //TODO: animate bottom inset with keyboard show and disappear
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         tableView.scrollIndicatorInsets = tableView.contentInset
         
@@ -90,6 +92,11 @@ class ChatViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.scrollToBottom()
     }
     
     func keyboardWillShow(notification: Notification) {

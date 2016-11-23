@@ -59,6 +59,7 @@ class ChatCell: UITableViewCell {
             NSLayoutConstraint.deactivate(outgoingConstraints)
             NSLayoutConstraint.activate(incomingConstraints)
             bubbleImageView.incomingBubble()
+            messageLabel.textColor = UIColor.black
         } else {
             NSLayoutConstraint.deactivate(incomingConstraints)
             NSLayoutConstraint.activate(outgoingConstraints)

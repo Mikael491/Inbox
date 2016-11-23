@@ -62,6 +62,7 @@
 		FC85E4361DE3DB48004AE574 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
+				FC85E4591DE63B20004AE574 /* Resources */,
 				FC85E4561DE6360A004AE574 /* Extensions */,
 				FC85E44B1DE4B2D9004AE574 /* Views */,
 				FC85E44A1DE4B2CE004AE574 /* Models */,
@@ -106,6 +107,13 @@
 				FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		FC85E4591DE63B20004AE574 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
