@@ -23,9 +23,25 @@ class ChatViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 44
         
+        let blur = UIBlurEffect(style: .light)
+        let visualEffectView = UIVisualEffectView(effect: blur)
+        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        let messageAreaView = UIView()
+        messageAreaView.translatesAutoresizingMaskIntoConstraints = false
+        messageAreaView.backgroundColor = UIColor.clear
+        visualEffectView.frame = messageAreaView.bounds
+        messageAreaView.addSubview(visualEffectView)
+        view.addSubview(messageAreaView)
+        let messageAreaConstraints = [
+            messageAreaView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            messageAreaView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            messageAreaView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            messageAreaView.heightAnchor.constraint(equalToConstant: 50)
+        ]
+        NSLayoutConstraint.activate(messageAreaConstraints)
+        
         
         var localIncoming = true
-        
         for _ in 0...10 {
             let message = Message()
             message.text = "My name is Mikael, I am an iOS Engineer!"
@@ -59,8 +75,6 @@ extension ChatViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
-    
-    
     
 }
 
