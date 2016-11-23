@@ -14,8 +14,8 @@ class ChatCell: UITableViewCell {
     private let bubbleImageView = BubbleImageView()
     private var imageName = "MessageBubble"
     
-    private var incomingConstraint : NSLayoutConstraint!
-    private var outgoingConstraint : NSLayoutConstraint!
+    private var incomingConstraints : [NSLayoutConstraint]!
+    private var outgoingConstraints : [NSLayoutConstraint]!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,10 +32,18 @@ class ChatCell: UITableViewCell {
         bubbleImageView.widthAnchor.constraint(equalTo: messageLabel.widthAnchor, constant: 50).isActive = true
         bubbleImageView.heightAnchor.constraint(equalTo: messageLabel.heightAnchor, constant: 10).isActive = true
         
-        bubbleImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        incomingConstraints = [
+            bubbleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            bubbleImageView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.centerXAnchor, constant: 50)
+        ]
+        outgoingConstraints = [
+            bubbleImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            bubbleImageView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.centerXAnchor, constant: -50)
+        ]
         
-        incomingConstraint = bubbleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
-        outgoingConstraint = bubbleImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        bubbleImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        bubbleImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+
         
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
@@ -48,12 +56,12 @@ class ChatCell: UITableViewCell {
     
     func incoming(messageType: Bool) {
         if messageType {
-            incomingConstraint.isActive = true
-            outgoingConstraint.isActive = false
+            NSLayoutConstraint.deactivate(outgoingConstraints)
+            NSLayoutConstraint.activate(incomingConstraints)
             bubbleImageView.incomingBubble()
         } else {
-            incomingConstraint.isActive = false
-            outgoingConstraint.isActive = true
+            NSLayoutConstraint.deactivate(incomingConstraints)
+            NSLayoutConstraint.activate(outgoingConstraints)
             messageLabel.textColor = UIColor.white
             bubbleImageView.outgoingBubble()
         }
