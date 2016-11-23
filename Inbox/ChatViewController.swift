@@ -14,6 +14,7 @@ class ChatViewController: UIViewController {
     fileprivate var messages = [Message]()
     fileprivate var cellIdentifier = "Cell"
     private let messageTextView = UITextView()
+    private var bottomConstraint : NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +44,11 @@ class ChatViewController: UIViewController {
         visualEffectView.contentView.addSubview(sendButton)
         messageAreaView.addSubview(visualEffectView)
         view.addSubview(messageAreaView)
+        bottomConstraint = messageAreaView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        bottomConstraint.isActive = true
         let messageAreaConstraints = [
             messageAreaView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             messageAreaView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            messageAreaView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             messageAreaView.heightAnchor.constraint(equalToConstant: 50),
             visualEffectView.topAnchor.constraint(equalTo: messageAreaView.topAnchor),
             visualEffectView.bottomAnchor.constraint(equalTo: messageAreaView.bottomAnchor),
@@ -69,9 +71,23 @@ class ChatViewController: UIViewController {
             localIncoming = !localIncoming
             messages.append(message)
         }
+     
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
     }
-
+    
+    func keyboardWillShow(notification: Notification) {
+        
+        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey], let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] {
+            let newFrame = view.convert((frame as! NSValue).cgRectValue, from: (UIApplication.shared.delegate?.window)!)
+            bottomConstraint.constant = newFrame.origin.y - view.frame.height
+            UIView.animate(withDuration: animationDuration as! TimeInterval, animations: { 
+                self.view.layoutIfNeeded()
+            })
+        }
+        
+    }
+    
 }
 
 extension ChatViewController : UITableViewDataSource {
