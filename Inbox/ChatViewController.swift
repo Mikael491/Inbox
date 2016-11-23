@@ -15,8 +15,8 @@ class ChatViewController: UIViewController {
     private let messageTextView = UITextView()
     private var bottomConstraint : NSLayoutConstraint!
     
-    private var sections = [Date: [Message]]()
-    private var dates = [Date]()
+    fileprivate var sections = [Date: [Message]]()
+    fileprivate var dates = [Date]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,15 +155,24 @@ class ChatViewController: UIViewController {
 
 extension ChatViewController : UITableViewDataSource {
     
+    func getMessages(_ section: Int) -> [Message] {
+        let date = dates[section]
+        return sections[date]!
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        return getMessages(section).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChatCell
+        let messages = getMessages(indexPath.section)
         let message = messages[indexPath.row]
         cell.messageLabel.text = message.text
         cell.incoming(messageType: message.incoming)
+        
+        cell.backgroundColor = UIColor.clear
+        
         return cell
     }
     
