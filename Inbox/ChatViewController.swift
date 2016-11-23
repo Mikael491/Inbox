@@ -20,12 +20,15 @@ class ChatViewController: UIViewController {
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.estimatedRowHeight = 44
+        
         
         var localIncoming = true
         
         for _ in 0...10 {
             let message = Message()
-            message.text = "Hello, world!"
+            message.text = "My name is Mikael, I am an iOS Engineer!"
             message.incoming = localIncoming
             localIncoming = !localIncoming
             messages.append(message)
