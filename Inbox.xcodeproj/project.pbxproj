@@ -15,6 +15,7 @@
 		FC85E44D1DE4B30B004AE574 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E44C1DE4B30B004AE574 /* Message.swift */; };
 		FC85E44F1DE4B715004AE574 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E44E1DE4B715004AE574 /* ChatCell.swift */; };
 		FC85E4511DE4D1B7004AE574 /* BubbleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */; };
+		FC85E4581DE6362A004AE574 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FC85E44C1DE4B30B004AE574 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FC85E44E1DE4B715004AE574 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleImageView.swift; sourceTree = "<group>"; };
+		FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Scroll.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		FC85E4361DE3DB48004AE574 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
+				FC85E4561DE6360A004AE574 /* Extensions */,
 				FC85E44B1DE4B2D9004AE574 /* Views */,
 				FC85E44A1DE4B2CE004AE574 /* Models */,
 				FC85E4491DE4B2C6004AE574 /* Controllers */,
@@ -95,6 +98,14 @@
 				FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		FC85E4561DE6360A004AE574 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +185,7 @@
 				FC85E4511DE4D1B7004AE574 /* BubbleImageView.swift in Sources */,
 				FC85E44F1DE4B715004AE574 /* ChatCell.swift in Sources */,
 				FC85E43A1DE3DB48004AE574 /* ChatViewController.swift in Sources */,
+				FC85E4581DE6362A004AE574 /* UITableView+Scroll.swift in Sources */,
 				FC85E4381DE3DB48004AE574 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

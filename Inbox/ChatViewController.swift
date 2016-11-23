@@ -26,6 +26,8 @@ class ChatViewController: UIViewController {
         tableView.estimatedRowHeight = 44
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
         
+        
+        
         let blur = UIBlurEffect(style: .extraLight)
         let visualEffectView = UIVisualEffectView(effect: blur)
         visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -40,6 +42,7 @@ class ChatViewController: UIViewController {
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.setTitle("Send", for: .normal)
         sendButton.setTitleColor(UIColor.gray, for: .normal)
+        sendButton.addTarget(self, action: #selector(ChatViewController.sendTapped(sender:)), for: .touchUpInside)
         sendButton.setContentHuggingPriority(251, for: .horizontal)
         visualEffectView.contentView.addSubview(messageTextView)
         visualEffectView.contentView.addSubview(sendButton)
@@ -68,6 +71,8 @@ class ChatViewController: UIViewController {
         swipeGesture.direction = .down
         messageAreaView.addGestureRecognizer(swipeGesture)
         
+        
+        
         var localIncoming = true
         for _ in 0...10 {
             let message = Message()
@@ -76,6 +81,8 @@ class ChatViewController: UIViewController {
             localIncoming = !localIncoming
             messages.append(message)
         }
+        
+        
      
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -103,6 +110,18 @@ class ChatViewController: UIViewController {
     
     func handleSwipe(gesture: UISwipeGestureRecognizer) {
         messageTextView.resignFirstResponder()
+    }
+    
+    func sendTapped(sender: UIButton) {
+        guard let text = messageTextView.text , text.characters.count > 0 else { return }
+        let message = Message()
+        message.text = text
+        message.incoming = false
+        message.timestamp = Date()
+        messages.append(message)
+        tableView.reloadData()
+        tableView.scrollToBottom()
+        messageTextView.text = ""
     }
     
 }
