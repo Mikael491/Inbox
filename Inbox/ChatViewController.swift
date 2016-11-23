@@ -13,7 +13,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var tableView : UITableView!
     fileprivate var messages = [Message]()
     fileprivate var cellIdentifier = "Cell"
-    private var messageTextView = UITextView()
+    private let messageTextView = UITextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,30 +24,42 @@ class ChatViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 44
         
-        let blur = UIBlurEffect(style: .light)
+        let blur = UIBlurEffect(style: .extraLight)
         let visualEffectView = UIVisualEffectView(effect: blur)
         visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         let messageAreaView = UIView()
         messageAreaView.translatesAutoresizingMaskIntoConstraints = false
         messageAreaView.backgroundColor = UIColor.clear
         visualEffectView.frame = messageAreaView.bounds
-        messageAreaView.addSubview(visualEffectView)
         messageTextView.translatesAutoresizingMaskIntoConstraints = false
         messageTextView.isScrollEnabled = true
-        messageAreaView.addSubview(messageTextView)
+        messageTextView.backgroundColor = UIColor.white
         let sendButton = UIButton()
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.setTitle("Send", for: .normal)
+        sendButton.setTitleColor(UIColor.gray, for: .normal)
         sendButton.setContentHuggingPriority(251, for: .horizontal)
-        messageAreaView.addSubview(sendButton)
+        visualEffectView.contentView.addSubview(messageTextView)
+        visualEffectView.contentView.addSubview(sendButton)
+        messageAreaView.addSubview(visualEffectView)
         view.addSubview(messageAreaView)
         let messageAreaConstraints = [
             messageAreaView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             messageAreaView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             messageAreaView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            messageAreaView.heightAnchor.constraint(equalToConstant: 50)
+            messageAreaView.heightAnchor.constraint(equalToConstant: 50),
+            visualEffectView.topAnchor.constraint(equalTo: messageAreaView.topAnchor),
+            visualEffectView.bottomAnchor.constraint(equalTo: messageAreaView.bottomAnchor),
+            visualEffectView.leadingAnchor.constraint(equalTo: messageAreaView.leadingAnchor),
+            visualEffectView.trailingAnchor.constraint(equalTo: messageAreaView.trailingAnchor),
+            messageTextView.leadingAnchor.constraint(equalTo: visualEffectView.contentView.leadingAnchor, constant: 10),
+            messageTextView.centerYAnchor.constraint(equalTo: visualEffectView.contentView.centerYAnchor),
+            sendButton.trailingAnchor.constraint(equalTo: visualEffectView.contentView.trailingAnchor, constant: -10),
+            messageTextView.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor, constant: -10),
+            sendButton.centerYAnchor.constraint(equalTo: visualEffectView.contentView.centerYAnchor),
+            messageTextView.heightAnchor.constraint(equalToConstant: 30)
         ]
         NSLayoutConstraint.activate(messageAreaConstraints)
-        
         
         var localIncoming = true
         for _ in 0...10 {
