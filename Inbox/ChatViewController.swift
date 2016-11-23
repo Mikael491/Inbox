@@ -13,6 +13,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var tableView : UITableView!
     fileprivate var messages = [Message]()
     fileprivate var cellIdentifier = "Cell"
+    private var messageTextView = UITextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,13 @@ class ChatViewController: UIViewController {
         messageAreaView.backgroundColor = UIColor.clear
         visualEffectView.frame = messageAreaView.bounds
         messageAreaView.addSubview(visualEffectView)
+        messageTextView.translatesAutoresizingMaskIntoConstraints = false
+        messageTextView.isScrollEnabled = true
+        messageAreaView.addSubview(messageTextView)
+        let sendButton = UIButton()
+        sendButton.setTitle("Send", for: .normal)
+        sendButton.setContentHuggingPriority(251, for: .horizontal)
+        messageAreaView.addSubview(sendButton)
         view.addSubview(messageAreaView)
         let messageAreaConstraints = [
             messageAreaView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
