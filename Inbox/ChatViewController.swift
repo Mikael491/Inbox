@@ -11,10 +11,12 @@ import UIKit
 class ChatViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
-    fileprivate var messages = [Message]()
     fileprivate var cellIdentifier = "Cell"
     private let messageTextView = UITextView()
     private var bottomConstraint : NSLayoutConstraint!
+    
+    private var sections = [Date: [Message]]()
+    private var dates = [Date]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +85,7 @@ class ChatViewController: UIViewController {
             message.text = "My name is Mikael, I am an iOS Engineer!"
             message.incoming = localIncoming
             localIncoming = !localIncoming
-            messages.append(message)
+            addMessage(message: message)
         }
         
         
@@ -127,10 +129,26 @@ class ChatViewController: UIViewController {
         message.text = text
         message.incoming = false
         message.timestamp = Date()
-        messages.append(message)
+        addMessage(message: message)
         tableView.reloadData()
         tableView.scrollToBottom()
         messageTextView.text = ""
+    }
+    
+    
+    func addMessage(message: Message) {
+        
+        guard let date = message.timestamp else { return }
+        let calander = Calendar.current
+        let day = calander.startOfDay(for: date)
+        
+        var messages = sections[day]
+        if messages == nil {
+            dates.append(day)
+            messages = [Message]()
+        }
+        messages?.append(message)
+        sections[day] = messages
     }
     
 }
