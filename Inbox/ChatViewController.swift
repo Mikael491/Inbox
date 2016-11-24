@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ChatViewController: UIViewController {
     
@@ -17,6 +18,8 @@ class ChatViewController: UIViewController {
     
     fileprivate var sections = [Date: [Message]]()
     fileprivate var dates = [Date]()
+    
+    var context : NSManagedObjectContext?
     
     override func viewDidLoad() {
         super.viewDidLoad()
