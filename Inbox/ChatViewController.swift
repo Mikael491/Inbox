@@ -89,15 +89,20 @@ class ChatViewController: UIViewController {
         swipeGesture.direction = .down
         messageAreaView.addGestureRecognizer(swipeGesture)
         
-        
-        
+        var date = Date()
         var localIncoming = true
-        for _ in 0...10 {
+        for i in 0...10 {
             let message = Message()
             message.text = "My name is Mikael, I am an iOS Engineer!"
+            message.timestamp = date
             message.incoming = localIncoming
             localIncoming = !localIncoming
             addMessage(message: message)
+        
+//            if i%2 == 0 {
+//                date = Date(timeInterval: 60 * 60 * 24, since: date)
+//            }
+            
         }
         
         
@@ -183,7 +188,7 @@ extension ChatViewController : UITableViewDataSource {
         cell.messageLabel.text = message.text
         cell.incoming(messageType: message.incoming)
         
-        cell.backgroundColor = UIColor.clear
+//        cell.backgroundColor = UIColor.clear
         
         return cell
     }
