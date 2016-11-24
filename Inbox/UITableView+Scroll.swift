@@ -11,7 +11,9 @@ import UIKit
 extension UITableView {
     
     func scrollToBottom() {
-        self.scrollToRow(at: IndexPath.init(row: self.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+        if self.numberOfRows(inSection: 0) > 0 {
+            self.scrollToRow(at: IndexPath.init(row: self.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+        }
     }
     
 }
