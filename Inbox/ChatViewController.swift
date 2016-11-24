@@ -10,7 +10,7 @@ import UIKit
 
 class ChatViewController: UIViewController {
     
-    @IBOutlet weak var tableView : UITableView!
+    fileprivate var tableView : UITableView!
     fileprivate var cellIdentifier = "Cell"
     private let messageTextView = UITextView()
     private var bottomConstraint : NSLayoutConstraint!
@@ -20,6 +20,18 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView = UITableView(frame: CGRect.init(origin: view.frame.origin, size: view.frame.size), style: .grouped)
+        
+        view.addSubview(tableView)
+        
+        //TODO: Configure TableView programatically
+        let tableViewConstrinats = [
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ]
+        NSLayoutConstraint.activate(tableViewConstrinats)
         
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
