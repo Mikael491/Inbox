@@ -220,10 +220,12 @@ extension ChatViewController : UITableViewDataSource {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, YYYY"
         dateLabel.text = formatter.string(from: dates[section])
+        dateLabel.textAlignment = .center
+        dateLabel.font = UIFont(name: dateLabel.font.fontName, size: 12)
         
-        paddingView.layer.cornerRadius = 10
-        paddingView.layer.masksToBounds = true
-        paddingView.backgroundColor = UIColor.gray
+//        paddingView.layer.cornerRadius = 10
+//        paddingView.layer.masksToBounds = true
+//        paddingView.backgroundColor = UIColor.gray
     
         return headerView
     }
