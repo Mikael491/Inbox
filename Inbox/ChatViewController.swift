@@ -145,10 +145,11 @@ class ChatViewController: UIViewController {
     
     func sendTapped(sender: UIButton) {
         guard let text = messageTextView.text , text.characters.count > 0 else { return }
-        let message = Message()
+        guard let context = context else { return }
+        guard let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as? Message else { return }
         message.text = text
         message.incoming = false
-        message.timestamp = Date()
+        message.timestamp = NSDate()
         addMessage(message: message)
         tableView.reloadData()
         tableView.scrollToBottom()
@@ -160,7 +161,7 @@ class ChatViewController: UIViewController {
         
         guard let date = message.timestamp else { return }
         let calander = Calendar.current
-        let day = calander.startOfDay(for: date)
+        let day = calander.startOfDay(for: date as Date)
         
         var messages = sections[day]
         if messages == nil {
