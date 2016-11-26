@@ -16,8 +16,8 @@ class ChatViewController: UIViewController {
     private let messageTextView = UITextView()
     private var bottomConstraint : NSLayoutConstraint!
     
-    fileprivate var sections = [Date: [Message]]()
-    fileprivate var dates = [Date]()
+    fileprivate var sections = [NSDate: [Message]]()
+    fileprivate var dates = [NSDate]()
     
     var context : NSManagedObjectContext?
     
@@ -176,23 +176,26 @@ class ChatViewController: UIViewController {
 
 extension ChatViewController : UITableViewDataSource {
     
-    func getMessages(_ section: Int) -> [Message] {
-        let date = dates[section]
-        return sections[date]!
+    func getMessages(_ section: Int) -> [Message]? {
+        if dates.count > 0 {
+            let date = dates[section]
+            return sections[date]!
+        }
+        return [Message]()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return getMessages(section).count
+        return getMessages(section)!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChatCell
         let messages = getMessages(indexPath.section)
-        let message = messages[indexPath.row]
-        cell.messageLabel.text = message.text
-        cell.incoming(messageType: message.incoming)
+        let message = messages?[indexPath.row]
+        cell.messageLabel.text = message?.text
+        cell.incoming(messageType: (message?.incoming)!)
         
-//        cell.backgroundColor = UIColor.clear
+        cell.backgroundColor = UIColor.clear
         
         return cell
     }
@@ -221,11 +224,13 @@ extension ChatViewController : UITableViewDataSource {
         NSLayoutConstraint.activate(constraints)
         
         //TODO: Update date label style
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd, YYYY"
-        dateLabel.text = formatter.string(from: dates[section])
-        dateLabel.textAlignment = .center
-        dateLabel.font = UIFont(name: dateLabel.font.fontName, size: 12)
+        if dates.count > 0 {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM dd, YYYY"
+            dateLabel.text = formatter.string(from: dates[section] as Date)
+            dateLabel.textAlignment = .center
+            dateLabel.font = UIFont(name: dateLabel.font.fontName, size: 12)
+        }
         
 //        paddingView.layer.cornerRadius = 10
 //        paddingView.layer.masksToBounds = true
