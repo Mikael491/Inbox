@@ -42,11 +42,23 @@ class ChatViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 44
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+        tableView.backgroundColor = UIColor.white
         
         //TODO: animate bottom inset with keyboard show and disappear
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
         tableView.scrollIndicatorInsets = tableView.contentInset
         
+        
+        do {
+            let request : NSFetchRequest<Message> = NSFetchRequest.init(entityName: "Message")
+            if let result = try context?.fetch(request) {
+                for message in result {
+                    addMessage(message: message)
+                }
+            }
+        } catch let error as NSError {
+            print("There was an error pulling from core data: \(error)")
+        }
         
         
         let blur = UIBlurEffect(style: .extraLight)
@@ -91,23 +103,7 @@ class ChatViewController: UIViewController {
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ChatViewController.handleSwipe(gesture:)))
         swipeGesture.direction = .down
         messageAreaView.addGestureRecognizer(swipeGesture)
-        
-        var date = Date()
-        var localIncoming = true
-        for i in 0...10 {
-            let message = Message()
-            message.text = "My name is Mikael, I am an iOS Engineer!"
-            message.timestamp = date
-            message.incoming = localIncoming
-            localIncoming = !localIncoming
-            addMessage(message: message)
-        
-//            if i%2 == 0 {
-//                date = Date(timeInterval: 60 * 60 * 24, since: date)
-//            }
-            
-        }
-        
+
         
      
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -151,6 +147,11 @@ class ChatViewController: UIViewController {
         message.incoming = false
         message.timestamp = NSDate()
         addMessage(message: message)
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("There was an error saving message to core data: \(error)")
+        }
         tableView.reloadData()
         tableView.scrollToBottom()
         messageTextView.text = ""
@@ -161,7 +162,7 @@ class ChatViewController: UIViewController {
         
         guard let date = message.timestamp else { return }
         let calander = Calendar.current
-        let day = calander.startOfDay(for: date as Date)
+        let day = calander.startOfDay(for: date as Date) as NSDate
         
         var messages = sections[day]
         if messages == nil {
