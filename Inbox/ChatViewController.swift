@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ChatViewController: UIViewController {
     
@@ -15,8 +16,10 @@ class ChatViewController: UIViewController {
     private let messageTextView = UITextView()
     private var bottomConstraint : NSLayoutConstraint!
     
-    fileprivate var sections = [Date: [Message]]()
-    fileprivate var dates = [Date]()
+    fileprivate var sections = [NSDate: [Message]]()
+    fileprivate var dates = [NSDate]()
+    
+    var context : NSManagedObjectContext?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +42,24 @@ class ChatViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 44
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+        tableView.backgroundColor = UIColor.white
         
         //TODO: animate bottom inset with keyboard show and disappear
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
         tableView.scrollIndicatorInsets = tableView.contentInset
         
+        
+        do {
+            let request : NSFetchRequest<Message> = NSFetchRequest.init(entityName: "Message")
+            request.sortDescriptors = [NSSortDescriptor.init(key: "timestamp", ascending: false)]
+            if let result = try context?.fetch(request) {
+                for message in result {
+                    addMessage(message: message)
+                }
+            }
+        } catch let error as NSError {
+            print("There was an error pulling from core data: \(error)")
+        }
         
         
         let blur = UIBlurEffect(style: .extraLight)
@@ -88,23 +104,7 @@ class ChatViewController: UIViewController {
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ChatViewController.handleSwipe(gesture:)))
         swipeGesture.direction = .down
         messageAreaView.addGestureRecognizer(swipeGesture)
-        
-        var date = Date()
-        var localIncoming = true
-        for i in 0...10 {
-            let message = Message()
-            message.text = "My name is Mikael, I am an iOS Engineer!"
-            message.timestamp = date
-            message.incoming = localIncoming
-            localIncoming = !localIncoming
-            addMessage(message: message)
-        
-//            if i%2 == 0 {
-//                date = Date(timeInterval: 60 * 60 * 24, since: date)
-//            }
-            
-        }
-        
+
         
      
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -142,11 +142,17 @@ class ChatViewController: UIViewController {
     
     func sendTapped(sender: UIButton) {
         guard let text = messageTextView.text , text.characters.count > 0 else { return }
-        let message = Message()
+        guard let context = context else { return }
+        guard let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as? Message else { return }
         message.text = text
         message.incoming = false
-        message.timestamp = Date()
+        message.timestamp = NSDate()
         addMessage(message: message)
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("There was an error saving message to core data: \(error)")
+        }
         tableView.reloadData()
         tableView.scrollToBottom()
         messageTextView.text = ""
@@ -157,14 +163,20 @@ class ChatViewController: UIViewController {
         
         guard let date = message.timestamp else { return }
         let calander = Calendar.current
-        let day = calander.startOfDay(for: date)
+        let day = calander.startOfDay(for: date as Date) as NSDate
         
         var messages = sections[day]
         if messages == nil {
             dates.append(day)
+            if dates.count > 1 {
+                dates = dates.sorted(by: {$0.earlierDate($1 as Date) == $0 as Date})
+            }
             messages = [Message]()
         }
         messages?.append(message)
+        if messages!.count > 1 {
+            messages?.sort{$0.timestamp!.earlierDate($1.timestamp! as Date) == $0.timestamp! as Date}
+        }
         sections[day] = messages
     }
     
@@ -172,23 +184,26 @@ class ChatViewController: UIViewController {
 
 extension ChatViewController : UITableViewDataSource {
     
-    func getMessages(_ section: Int) -> [Message] {
-        let date = dates[section]
-        return sections[date]!
+    func getMessages(_ section: Int) -> [Message]? {
+        if dates.count > 0 {
+            let date = dates[section]
+            return sections[date]!
+        }
+        return [Message]()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return getMessages(section).count
+        return getMessages(section)!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChatCell
         let messages = getMessages(indexPath.section)
-        let message = messages[indexPath.row]
-        cell.messageLabel.text = message.text
-        cell.incoming(messageType: message.incoming)
+        let message = messages?[indexPath.row]
+        cell.messageLabel.text = message?.text
+        cell.incoming(messageType: (message?.incoming)!)
         
-//        cell.backgroundColor = UIColor.clear
+        cell.backgroundColor = UIColor.clear
         
         return cell
     }
@@ -217,11 +232,13 @@ extension ChatViewController : UITableViewDataSource {
         NSLayoutConstraint.activate(constraints)
         
         //TODO: Update date label style
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd, YYYY"
-        dateLabel.text = formatter.string(from: dates[section])
-        dateLabel.textAlignment = .center
-        dateLabel.font = UIFont(name: dateLabel.font.fontName, size: 12)
+        if dates.count > 0 {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM dd, YYYY"
+            dateLabel.text = formatter.string(from: dates[section] as Date)
+            dateLabel.textAlignment = .center
+            dateLabel.font = UIFont(name: dateLabel.font.fontName, size: 12)
+        }
         
 //        paddingView.layer.cornerRadius = 10
 //        paddingView.layer.masksToBounds = true

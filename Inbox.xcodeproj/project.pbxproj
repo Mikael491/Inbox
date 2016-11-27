@@ -12,10 +12,13 @@
 		FC85E43D1DE3DB48004AE574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC85E43B1DE3DB48004AE574 /* Main.storyboard */; };
 		FC85E43F1DE3DB48004AE574 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC85E43E1DE3DB48004AE574 /* Assets.xcassets */; };
 		FC85E4421DE3DB48004AE574 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC85E4401DE3DB48004AE574 /* LaunchScreen.storyboard */; };
-		FC85E44D1DE4B30B004AE574 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E44C1DE4B30B004AE574 /* Message.swift */; };
 		FC85E44F1DE4B715004AE574 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E44E1DE4B715004AE574 /* ChatCell.swift */; };
 		FC85E4511DE4D1B7004AE574 /* BubbleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */; };
 		FC85E4581DE6362A004AE574 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */; };
+		FC85E45B1DE7A314004AE574 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E45A1DE7A314004AE574 /* CoreDataHelper.swift */; };
+		FC85E45E1DE7B2F8004AE574 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC85E45C1DE7B2F8004AE574 /* Model.xcdatamodeld */; };
+		FC85E4611DE7B3D4004AE574 /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E45F1DE7B3D4004AE574 /* Message+CoreDataClass.swift */; };
+		FC85E4621DE7B3D4004AE574 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4601DE7B3D4004AE574 /* Message+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +29,13 @@
 		FC85E43E1DE3DB48004AE574 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC85E4411DE3DB48004AE574 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC85E4431DE3DB48004AE574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC85E44C1DE4B30B004AE574 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FC85E44E1DE4B715004AE574 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleImageView.swift; sourceTree = "<group>"; };
 		FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Scroll.swift"; sourceTree = "<group>"; };
+		FC85E45A1DE7A314004AE574 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		FC85E45D1DE7B2F8004AE574 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		FC85E45F1DE7B3D4004AE574 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC85E4601DE7B3D4004AE574 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +93,9 @@
 		FC85E44A1DE4B2CE004AE574 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FC85E44C1DE4B30B004AE574 /* Message.swift */,
+				FC85E45F1DE7B3D4004AE574 /* Message+CoreDataClass.swift */,
+				FC85E4601DE7B3D4004AE574 /* Message+CoreDataProperties.swift */,
+				FC85E45C1DE7B2F8004AE574 /* Model.xcdatamodeld */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -112,6 +120,7 @@
 		FC85E4591DE63B20004AE574 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FC85E45A1DE7A314004AE574 /* CoreDataHelper.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -189,12 +198,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC85E44D1DE4B30B004AE574 /* Message.swift in Sources */,
 				FC85E4511DE4D1B7004AE574 /* BubbleImageView.swift in Sources */,
 				FC85E44F1DE4B715004AE574 /* ChatCell.swift in Sources */,
+				FC85E45E1DE7B2F8004AE574 /* Model.xcdatamodeld in Sources */,
+				FC85E45B1DE7A314004AE574 /* CoreDataHelper.swift in Sources */,
 				FC85E43A1DE3DB48004AE574 /* ChatViewController.swift in Sources */,
+				FC85E4621DE7B3D4004AE574 /* Message+CoreDataProperties.swift in Sources */,
 				FC85E4581DE6362A004AE574 /* UITableView+Scroll.swift in Sources */,
 				FC85E4381DE3DB48004AE574 /* AppDelegate.swift in Sources */,
+				FC85E4611DE7B3D4004AE574 /* Message+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,8 +372,22 @@
 				FC85E4481DE3DB48004AE574 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FC85E45C1DE7B2F8004AE574 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FC85E45D1DE7B2F8004AE574 /* Model.xcdatamodel */,
+			);
+			currentVersion = FC85E45D1DE7B2F8004AE574 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FC85E42C1DE3DB48004AE574 /* Project object */;
 }
