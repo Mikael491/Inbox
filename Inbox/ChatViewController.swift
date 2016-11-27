@@ -51,6 +51,7 @@ class ChatViewController: UIViewController {
         
         do {
             let request : NSFetchRequest<Message> = NSFetchRequest.init(entityName: "Message")
+            request.sortDescriptors = [NSSortDescriptor.init(key: "timestamp", ascending: false)]
             if let result = try context?.fetch(request) {
                 for message in result {
                     addMessage(message: message)
@@ -167,9 +168,15 @@ class ChatViewController: UIViewController {
         var messages = sections[day]
         if messages == nil {
             dates.append(day)
+            if dates.count > 1 {
+                dates = dates.sorted(by: {$0.earlierDate($1 as Date) == $0 as Date})
+            }
             messages = [Message]()
         }
         messages?.append(message)
+        if messages!.count > 1 {
+            messages?.sort{$0.timestamp!.earlierDate($1.timestamp! as Date) == $0.timestamp! as Date}
+        }
         sections[day] = messages
     }
     
