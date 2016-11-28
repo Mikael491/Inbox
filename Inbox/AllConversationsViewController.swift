@@ -12,7 +12,7 @@ import CoreData
 class AllConversationsViewController: UIViewController {
     
     var context : NSManagedObjectContext?
-//    private var fetchedResultsController : NSFetchedResultsController<Conversation>?
+    private var fetchedResultsController : NSFetchedResultsController<Conversation>?
     
     private let tableView = UITableView(frame: CGRect.zero, style: .plain)
     private let cellIdentifier = "ConvoCell"
@@ -36,6 +36,18 @@ class AllConversationsViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor)
         ]
         NSLayoutConstraint.activate(tableViewContstraints)
+        
+        if let context = context {
+            
+            let request : NSFetchRequest<Conversation> = NSFetchRequest(entityName: "Conversation")
+            request.sortDescriptors = [NSSortDescriptor(key: "lastMessage", ascending: false)]
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            do {
+                try fetchedResultsController?.performFetch()
+            } catch let error as NSError {
+                print("There was an error performing fetch on AllConversationsVC: \(error)")
+            }
+        }
         
     }
     
