@@ -48,11 +48,79 @@ class AllConversationsViewController: UIViewController {
                 print("There was an error performing fetch on AllConversationsVC: \(error)")
             }
         }
-        
+        fakeData()
     }
     
     func newConvo() {
         
     }
+    
+    func fakeData() {
+        
+        guard let context = context else { return }
+        let convo = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation
+    }
+    
+    func configureCell (cell: UITableViewCell, indexPath: IndexPath) {
+        
+        let cell = cell as! ConversationCell
+        guard let convo = fetchedResultsController?.object(at: indexPath) else { return } //not casting necessary b/c fetchResultsVC is generic
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/DD/YY"
+        cell.nameLabel.text = "Mitta"
+        cell.messageLabel.text = "Hey!"
+        cell.dateLabel.text = formatter.string(from: Date())
+    }
+    
+    
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
