@@ -10,27 +10,37 @@ import UIKit
 import CoreData
 
 class AllConversationsViewController: UIViewController {
+    
+    var context : NSManagedObjectContext?
+//    private var fetchedResultsController : NSFetchedResultsController<Conversation>?
+    
+    private let tableView = UITableView(frame: CGRect.zero, style: .plain)
+    private let cellIdentifier = "ConvoCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        title = "Messages"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "new-chat"), style: .plain, target: self, action: #selector(AllConversationsViewController.newConvo))
+        automaticallyAdjustsScrollViewInsets = false
+        
+        tableView.register(ConversationCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        
+        let tableViewContstraints = [
+            tableView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor)
+        ]
+        NSLayoutConstraint.activate(tableViewContstraints)
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func newConvo() {
+        
     }
-    */
 
 }
