@@ -9,7 +9,21 @@
 import UIKit
 
 class ConversationCell: UITableViewCell {
+    
+    let nameLabel = UILabel()
+    let messageLabel = UILabel()
+    let detaLabel = UILabel()
 
-
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        
+        
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) failed to initialize.")
+    }
 
 }

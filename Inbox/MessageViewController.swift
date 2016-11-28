@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MessageViewController.swift
 //  Inbox
 //
 //  Created by Mikael Teklehaimanot on 11/21/16.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ChatViewController: UIViewController {
+class MessageViewController: UIViewController {
     
     fileprivate var tableView : UITableView!
     fileprivate var cellIdentifier = "Cell"
@@ -76,7 +76,7 @@ class ChatViewController: UIViewController {
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.setTitle("Send", for: .normal)
         sendButton.setTitleColor(UIColor.gray, for: .normal)
-        sendButton.addTarget(self, action: #selector(ChatViewController.sendTapped(sender:)), for: .touchUpInside)
+        sendButton.addTarget(self, action: #selector(MessageViewController.sendTapped(sender:)), for: .touchUpInside)
         sendButton.setContentHuggingPriority(251, for: .horizontal)
         visualEffectView.contentView.addSubview(messageTextView)
         visualEffectView.contentView.addSubview(sendButton)
@@ -101,15 +101,15 @@ class ChatViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(messageAreaConstraints)
         
-        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ChatViewController.handleSwipe(gesture:)))
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(MessageViewController.handleSwipe(gesture:)))
         swipeGesture.direction = .down
         messageAreaView.addGestureRecognizer(swipeGesture)
 
         
      
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MessageViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MessageViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
@@ -182,7 +182,7 @@ class ChatViewController: UIViewController {
     
 }
 
-extension ChatViewController : UITableViewDataSource {
+extension MessageViewController : UITableViewDataSource {
     
     func getMessages(_ section: Int) -> [Message]? {
         if dates.count > 0 {
@@ -253,7 +253,7 @@ extension ChatViewController : UITableViewDataSource {
     
 }
 
-extension ChatViewController : UITableViewDelegate {
+extension MessageViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
