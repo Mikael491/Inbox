@@ -21,6 +21,7 @@
 		FC85E46A1DECA4AE004AE574 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4661DECA4AE004AE574 /* Conversation+CoreDataProperties.swift */; };
 		FC85E46D1DECA4F3004AE574 /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E46B1DECA4F3004AE574 /* Message+CoreDataClass.swift */; };
 		FC85E46E1DECA4F3004AE574 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E46C1DECA4F3004AE574 /* Message+CoreDataProperties.swift */; };
+		FC85E4701DECACDB004AE574 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E46F1DECACDB004AE574 /* ConversationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		FC85E4661DECA4AE004AE574 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC85E46B1DECA4F3004AE574 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataClass.swift"; path = "../Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC85E46C1DECA4F3004AE574 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "../Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC85E46F1DECACDB004AE574 /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				FC85E44E1DE4B715004AE574 /* ChatCell.swift */,
 				FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */,
+				FC85E46F1DECACDB004AE574 /* ConversationCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				FC85E43A1DE3DB48004AE574 /* ChatViewController.swift in Sources */,
 				FC85E46A1DECA4AE004AE574 /* Conversation+CoreDataProperties.swift in Sources */,
 				FC85E4581DE6362A004AE574 /* UITableView+Scroll.swift in Sources */,
+				FC85E4701DECACDB004AE574 /* ConversationCell.swift in Sources */,
 				FC85E4691DECA4AE004AE574 /* Conversation+CoreDataClass.swift in Sources */,
 				FC85E4381DE3DB48004AE574 /* AppDelegate.swift in Sources */,
 				FC85E46D1DECA4F3004AE574 /* Message+CoreDataClass.swift in Sources */,
