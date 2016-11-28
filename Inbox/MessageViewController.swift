@@ -36,7 +36,7 @@ class MessageViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(tableViewConstrinats)
         
-        tableView.register(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(MessageCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
@@ -197,7 +197,7 @@ extension MessageViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChatCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MessageCell
         let messages = getMessages(indexPath.section)
         let message = messages?[indexPath.row]
         cell.messageLabel.text = message?.text

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatCell: UITableViewCell {
+class MessageCell: UITableViewCell {
 
     let messageLabel = UILabel()
     private let bubbleImageView = BubbleImageView()

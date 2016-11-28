@@ -12,7 +12,7 @@
 		FC85E43D1DE3DB48004AE574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC85E43B1DE3DB48004AE574 /* Main.storyboard */; };
 		FC85E43F1DE3DB48004AE574 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC85E43E1DE3DB48004AE574 /* Assets.xcassets */; };
 		FC85E4421DE3DB48004AE574 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC85E4401DE3DB48004AE574 /* LaunchScreen.storyboard */; };
-		FC85E44F1DE4B715004AE574 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E44E1DE4B715004AE574 /* ChatCell.swift */; };
+		FC85E44F1DE4B715004AE574 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E44E1DE4B715004AE574 /* MessageCell.swift */; };
 		FC85E4511DE4D1B7004AE574 /* BubbleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */; };
 		FC85E4581DE6362A004AE574 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */; };
 		FC85E45B1DE7A314004AE574 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E45A1DE7A314004AE574 /* CoreDataHelper.swift */; };
@@ -32,7 +32,7 @@
 		FC85E43E1DE3DB48004AE574 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC85E4411DE3DB48004AE574 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC85E4431DE3DB48004AE574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC85E44E1DE4B715004AE574 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		FC85E44E1DE4B715004AE574 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleImageView.swift; sourceTree = "<group>"; };
 		FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Scroll.swift"; sourceTree = "<group>"; };
 		FC85E45A1DE7A314004AE574 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		FC85E44B1DE4B2D9004AE574 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FC85E44E1DE4B715004AE574 /* ChatCell.swift */,
+				FC85E44E1DE4B715004AE574 /* MessageCell.swift */,
 				FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */,
 				FC85E46F1DECACDB004AE574 /* ConversationCell.swift */,
 			);
@@ -209,12 +209,13 @@
 			files = (
 				FC85E46E1DECA4F3004AE574 /* Message+CoreDataProperties.swift in Sources */,
 				FC85E4511DE4D1B7004AE574 /* BubbleImageView.swift in Sources */,
-				FC85E44F1DE4B715004AE574 /* ChatCell.swift in Sources */,
+				FC85E44F1DE4B715004AE574 /* MessageCell.swift in Sources */,
 				FC85E45E1DE7B2F8004AE574 /* Model.xcdatamodeld in Sources */,
 				FC85E45B1DE7A314004AE574 /* CoreDataHelper.swift in Sources */,
 				FC85E43A1DE3DB48004AE574 /* MessageViewController.swift in Sources */,
 				FC85E46A1DECA4AE004AE574 /* Conversation+CoreDataProperties.swift in Sources */,
 				FC85E4581DE6362A004AE574 /* UITableView+Scroll.swift in Sources */,
+				FC85E4721DECDB20004AE574 /* AllConversationsViewController.swift in Sources */,
 				FC85E4701DECACDB004AE574 /* ConversationCell.swift in Sources */,
 				FC85E4691DECA4AE004AE574 /* Conversation+CoreDataClass.swift in Sources */,
 				FC85E4381DE3DB48004AE574 /* AppDelegate.swift in Sources */,
