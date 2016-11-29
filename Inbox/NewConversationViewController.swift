@@ -58,5 +58,10 @@ class NewConversationViewController: UIViewController {
     func cancelMessage(sender: AnyObject) {
         dismiss(animated: true, completion: nil)
     }
+    
+    func configureCell(cell: UITableViewCell, indexPath: IndexPath) {
+        guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
+        cell.textLabel?.text = contact.fullName
+    }
 
 }
