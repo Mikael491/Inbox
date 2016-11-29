@@ -29,7 +29,7 @@ public class Conversation: NSManagedObject {
     }
     
     func add(participant contact: Contact) {
-        mutableSetValue(forKey: "participant").add(contact)
+        mutableSetValue(forKey: "participants").add(contact)
     }
     
 }
