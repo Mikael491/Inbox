@@ -28,6 +28,7 @@
 		FCDE7C101DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0F1DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift */; };
 		FCDE7C171DEE28970049F1D0 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C151DEE28970049F1D0 /* Conversation+CoreDataProperties.swift */; };
 		FCDE7C181DEE28970049F1D0 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C161DEE28970049F1D0 /* Contact+CoreDataProperties.swift */; };
+		FCDE7C1B1DEE41C80049F1D0 /* ConversationBeganDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C1A1DEE41C80049F1D0 /* ConversationBeganDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		FCDE7C0F1DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SetupMainView.swift"; sourceTree = "<group>"; };
 		FCDE7C151DEE28970049F1D0 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FCDE7C161DEE28970049F1D0 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataProperties.swift"; path = "../Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FCDE7C1A1DEE41C80049F1D0 /* ConversationBeganDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationBeganDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		FC85E4361DE3DB48004AE574 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
+				FCDE7C191DEE419C0049F1D0 /* Protocols */,
 				FC85E4591DE63B20004AE574 /* Resources */,
 				FC85E4561DE6360A004AE574 /* Extensions */,
 				FC85E44B1DE4B2D9004AE574 /* Views */,
@@ -138,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */,
-				FCDE7C0D1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift */,
 				FCDE7C0F1DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift */,
 			);
 			name = Extensions;
@@ -150,6 +152,15 @@
 				FC85E45A1DE7A314004AE574 /* CoreDataHelper.swift */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		FCDE7C191DEE419C0049F1D0 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FCDE7C0D1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift */,
+				FCDE7C1A1DEE41C80049F1D0 /* ConversationBeganDelegate.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +254,7 @@
 				FC85E4691DECA4AE004AE574 /* Conversation+CoreDataClass.swift in Sources */,
 				FC85E4381DE3DB48004AE574 /* AppDelegate.swift in Sources */,
 				FC85E46D1DECA4F3004AE574 /* Message+CoreDataClass.swift in Sources */,
+				FCDE7C1B1DEE41C80049F1D0 /* ConversationBeganDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
