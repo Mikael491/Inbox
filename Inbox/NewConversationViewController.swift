@@ -101,6 +101,10 @@ extension NewConversationViewController : UITableViewDataSource {
 
 extension NewConversationViewController : UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
+    }
+    
 }
 
 extension NewConversationViewController : NSFetchedResultsControllerDelegate {
