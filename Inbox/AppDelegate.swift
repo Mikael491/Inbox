@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         context.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
         allConvosVC.context = context
         
+        fakeData(context: context)
+        
         return true
     }
 
@@ -47,6 +49,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func fakeData(context: NSManagedObjectContext) {
+        
+        let dataSeeded = UserDefaults.standard.bool(forKey: "dataSeeded")
+        
+        guard !dataSeeded else { return }
+        
+        let people = [("Mitta", "Tesfa"), ("Mikael", "Teklehaimanot"), ("Tiffany", "Walker")]
+        for person in people {
+            
+            let contact = NSEntityDescription.insertNewObject(forEntityName: "Contact", into: context) as! Contact
+            contact.firstName = person.0
+            contact.lastName = person.1
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("There was an error seeding fake contact data: \(error)")
+            }
+            UserDefaults.standard.set(true, forKey: "dataSeeded")
+        }
     }
 
 

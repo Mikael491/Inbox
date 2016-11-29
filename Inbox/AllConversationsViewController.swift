@@ -9,13 +9,14 @@
 import UIKit
 import CoreData
 
-class AllConversationsViewController: UIViewController {
+class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController {
     
     var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Conversation>?
     
     fileprivate let tableView = UITableView(frame: CGRect.zero, style: .plain)
     fileprivate let cellIdentifier = "ConvoCell"
+    fileprivate var tableViewFetchedResults : UITableViewFetchedResultsDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,25 +27,18 @@ class AllConversationsViewController: UIViewController {
         
         tableView.register(ConversationCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
         
-        let tableViewContstraints = [
-            tableView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor)
-        ]
-        NSLayoutConstraint.activate(tableViewContstraints)
+        setupMainView(subview: tableView)
         
         if let context = context {
             
             let request : NSFetchRequest<Conversation> = NSFetchRequest(entityName: "Conversation")
             request.sortDescriptors = [NSSortDescriptor(key: "lastMessageTime", ascending: false)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchedResultsController?.delegate = self
+            tableViewFetchedResults = UITableViewFetchedResultsDelegate(tableView: tableView, controller: self)
+            fetchedResultsController?.delegate = tableViewFetchedResults
             do {
                 try fetchedResultsController?.performFetch()
             } catch let error as NSError {
@@ -55,7 +49,11 @@ class AllConversationsViewController: UIViewController {
     }
     
     func newConvo() {
-        
+        let vc = NewConversationViewController()
+        vc.context = context
+        let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.barTintColor = UIColor.white
+        self.present(nav, animated: true, completion: nil)
     }
     
     func fakeData() {
