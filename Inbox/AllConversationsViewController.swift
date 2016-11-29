@@ -44,6 +44,7 @@ class AllConversationsViewController: UIViewController {
             let request : NSFetchRequest<Conversation> = NSFetchRequest(entityName: "Conversation")
             request.sortDescriptors = [NSSortDescriptor(key: "lastMessage", ascending: false)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController?.delegate = self
             do {
                 try fetchedResultsController?.performFetch()
             } catch let error as NSError {
@@ -109,8 +110,46 @@ extension AllConversationsViewController : UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    private func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let convo = fetchedResultsController?.object(at: indexPath) else { return }
+    }
+    
+}
+
+extension AllConversationsViewController : NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet.init(integer: sectionIndex), with: .fade)
+        case .delete:
+            tableView.deleteSections(IndexSet.init(integer: sectionIndex), with: .fade)
+        default:
+            break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .update:
+            let cell = tableView.cellForRow(at: indexPath!)
+            configureCell(cell: cell!, indexPath: indexPath!)
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [indexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
     }
     
 }
