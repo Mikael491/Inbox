@@ -12,7 +12,7 @@ import CoreData
 class NewConversationViewController: UIViewController {
     
     fileprivate let tableView = UITableView(frame: .zero, style: .plain)
-    fileprivate var context : NSManagedObjectContext?
+    var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Contact>?
     fileprivate let cellIdentifier = "ContactCell"
     
@@ -20,14 +20,15 @@ class NewConversationViewController: UIViewController {
         super.viewDidLoad()
         
         title = "New Message"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NewConversationViewController.cancelMessage(sender:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(NewConversationViewController.cancelMessage(sender:)))
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        automaticallyAdjustsScrollViewInsets = true
+        automaticallyAdjustsScrollViewInsets = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         
         let tableViewConstraints = [
             tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
