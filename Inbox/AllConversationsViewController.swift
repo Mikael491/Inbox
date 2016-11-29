@@ -27,18 +27,10 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         
         tableView.register(ConversationCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
         
-        let tableViewContstraints = [
-            tableView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor)
-        ]
-        NSLayoutConstraint.activate(tableViewContstraints)
+        setupMainView(subview: tableView)
         
         if let context = context {
             

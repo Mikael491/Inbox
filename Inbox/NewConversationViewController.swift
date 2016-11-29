@@ -24,20 +24,12 @@ class NewConversationViewController: UIViewController, UITableViewFetchedResults
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(NewConversationViewController.cancelMessage(sender:)))
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        automaticallyAdjustsScrollViewInsets = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
+        automaticallyAdjustsScrollViewInsets = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
         
-        let tableViewConstraints = [
-            tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor)
-        ]
-        NSLayoutConstraint.activate(tableViewConstraints)
+        setupMainView(subview: tableView)
         
         if let context = context {
             let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
