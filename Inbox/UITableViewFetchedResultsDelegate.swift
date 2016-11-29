@@ -9,18 +9,18 @@
 import UIKit
 import CoreData
 
-protocol UITableViewFetchedResultsDisplayer {
+protocol UITableViewFetchedResultsController {
     func configureCell(cell: UITableViewCell, indexPath: IndexPath)
 }
 
 class UITableViewFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDelegate {
 
     fileprivate var tableView : UITableView?
-    fileprivate var displayer : UITableViewFetchedResultsDisplayer?
+    fileprivate var controller : UITableViewFetchedResultsController?
     
-    init(tableView: UITableView, displayer: UITableViewFetchedResultsDisplayer) {
+    init(tableView: UITableView, controller: UITableViewFetchedResultsController) {
         self.tableView = tableView
-        self.displayer = displayer
+        self.controller = controller
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -44,7 +44,7 @@ class UITableViewFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDel
             tableView?.insertRows(at: [indexPath!], with: .fade)
         case .update:
             let cell = tableView?.cellForRow(at: indexPath!)
-            displayer?.configureCell(cell: cell!, indexPath: indexPath!)
+            self.controller?.configureCell(cell: cell!, indexPath: indexPath!)
             tableView?.reloadRows(at: [indexPath!], with: .fade)
         case .move:
             tableView?.deleteRows(at: [indexPath!], with: .fade)
