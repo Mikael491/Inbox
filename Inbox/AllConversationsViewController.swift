@@ -80,6 +80,14 @@ class AllConversationsViewController: UIViewController {
 
 
 extension AllConversationsViewController : UITableViewDelegate {
+   
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
 }
 
@@ -99,6 +107,10 @@ extension AllConversationsViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         configureCell(cell: cell, indexPath: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let convo = fetchedResultsController?.object(at: indexPath) else { return }
     }
     
 }
