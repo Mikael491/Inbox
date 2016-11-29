@@ -9,13 +9,14 @@
 import UIKit
 import CoreData
 
-class AllConversationsViewController: UIViewController {
+class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController {
     
     var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Conversation>?
     
     fileprivate let tableView = UITableView(frame: CGRect.zero, style: .plain)
     fileprivate let cellIdentifier = "ConvoCell"
+    fileprivate var tableViewFetchedResults : UITableViewFetchedResultsDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,8 @@ class AllConversationsViewController: UIViewController {
             let request : NSFetchRequest<Conversation> = NSFetchRequest(entityName: "Conversation")
             request.sortDescriptors = [NSSortDescriptor(key: "lastMessageTime", ascending: false)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchedResultsController?.delegate = self
+            tableViewFetchedResults = UITableViewFetchedResultsDelegate(tableView: tableView, controller: self)
+            fetchedResultsController?.delegate = tableViewFetchedResults
             do {
                 try fetchedResultsController?.performFetch()
             } catch let error as NSError {

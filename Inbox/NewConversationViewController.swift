@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 
-class NewConversationViewController: UIViewController {
+class NewConversationViewController: UIViewController, UITableViewFetchedResultsController {
     
     fileprivate let tableView = UITableView(frame: .zero, style: .plain)
     var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Contact>?
     fileprivate let cellIdentifier = "ContactCell"
+    fileprivate var tableViewFetchedResults : UITableViewFetchedResultsDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,8 @@ class NewConversationViewController: UIViewController {
             let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
             request.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: "NewConversationViewController")
-            fetchedResultsController?.delegate = self
+            tableViewFetchedResults = UITableViewFetchedResultsDelegate(tableView: tableView, controller: self)
+            fetchedResultsController?.delegate = tableViewFetchedResults
             do {
                 try fetchedResultsController?.performFetch()
             } catch let error as NSError {

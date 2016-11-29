@@ -41,7 +41,7 @@ class UITableViewFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDel
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            tableView?.insertRows(at: [indexPath!], with: .fade)
+            tableView?.insertRows(at: [newIndexPath!], with: .fade)
         case .update:
             let cell = tableView?.cellForRow(at: indexPath!)
             self.controller?.configureCell(cell: cell!, indexPath: indexPath!)
