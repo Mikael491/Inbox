@@ -22,7 +22,7 @@ class AllConversationsViewController: UIViewController {
 
         title = "Messages"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "new-chat"), style: .plain, target: self, action: #selector(AllConversationsViewController.newConvo))
-        automaticallyAdjustsScrollViewInsets = false
+        automaticallyAdjustsScrollViewInsets = true
         
         tableView.register(ConversationCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -42,7 +42,7 @@ class AllConversationsViewController: UIViewController {
         if let context = context {
             
             let request : NSFetchRequest<Conversation> = NSFetchRequest(entityName: "Conversation")
-            request.sortDescriptors = [NSSortDescriptor(key: "lastMessage", ascending: false)]
+            request.sortDescriptors = [NSSortDescriptor(key: "lastMessageTime", ascending: false)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController?.delegate = self
             do {
