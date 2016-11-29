@@ -21,6 +21,13 @@ class MessageViewController: UIViewController {
     
     var context : NSManagedObjectContext?
     
+    var conversation : Conversation?
+    
+    private enum ErrorType : Error {
+        case NoConversation
+        case NoContext
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView = UITableView(frame: CGRect.init(origin: view.frame.origin, size: view.frame.size), style: .grouped)
@@ -50,9 +57,11 @@ class MessageViewController: UIViewController {
         
         
         do {
+            guard let conversation = conversation else { throw ErrorType.NoConversation }
+            guard let context = context else { throw ErrorType.NoContext }
             let request : NSFetchRequest<Message> = NSFetchRequest.init(entityName: "Message")
             request.sortDescriptors = [NSSortDescriptor.init(key: "timestamp", ascending: false)]
-            if let result = try context?.fetch(request) {
+            if let result = try self.context?.fetch(request) {
                 for message in result {
                     addMessage(message: message)
                 }
