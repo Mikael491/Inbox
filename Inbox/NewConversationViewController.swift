@@ -71,6 +71,32 @@ class NewConversationViewController: UIViewController {
 
 extension NewConversationViewController : UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController?.sections?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let sections = fetchedResultsController?.sections else { return 0 }
+        let currentSection = sections[section]
+        return currentSection.numberOfObjects
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        configureCell(cell: cell, indexPath: indexPath)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController?.sections else { return nil }
+        let currentSection = sections[section]
+        return currentSection.name
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
 }
 
 extension NewConversationViewController : UITableViewDelegate {
