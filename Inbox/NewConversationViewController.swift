@@ -26,6 +26,8 @@ class NewConversationViewController: UIViewController {
         automaticallyAdjustsScrollViewInsets = true
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
         
         let tableViewConstraints = [
             tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
@@ -65,3 +67,119 @@ class NewConversationViewController: UIViewController {
     }
 
 }
+
+
+extension NewConversationViewController : UITableViewDataSource {
+    
+}
+
+extension NewConversationViewController : UITableViewDelegate {
+    
+}
+
+extension NewConversationViewController : NSFetchedResultsControllerDelegate {
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
