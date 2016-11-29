@@ -17,6 +17,8 @@ class NewConversationViewController: UIViewController, UITableViewFetchedResults
     fileprivate let cellIdentifier = "ContactCell"
     fileprivate var tableViewFetchedResults : UITableViewFetchedResultsDelegate?
     
+    var conversationStartedDelegate : ConversationStartedDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,12 +98,13 @@ extension NewConversationViewController : UITableViewDataSource {
 
 extension NewConversationViewController : UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
         guard let context = context else { return }
         guard let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation else { return }
         conversation.add(participant: contact)
-        
+        conversationStartedDelegate?.conversationStarted(withConvo: conversation, inContext: context)
+        dismiss(animated: false, completion: nil)
     }
     
 }

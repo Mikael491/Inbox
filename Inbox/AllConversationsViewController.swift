@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController {
+class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController, ConversationStartedDelegate {
     
     var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Conversation>?
@@ -51,6 +51,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
     func newConvo() {
         let vc = NewConversationViewController()
         vc.context = context
+        vc.conversationStartedDelegate = self
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.barTintColor = UIColor.white
         self.present(nav, animated: true, completion: nil)
@@ -72,6 +73,14 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         cell.nameLabel.text = "Mitta"
         cell.messageLabel.text = "Hey!"
         cell.dateLabel.text = formatter.string(from: Date())
+    }
+    
+    func conversationStarted(withConvo convo: Conversation, inContext: NSManagedObjectContext) {
+        let vc = MessageViewController()
+        vc.context = inContext
+        vc.conversation = convo
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
