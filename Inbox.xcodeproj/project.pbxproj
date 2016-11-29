@@ -25,6 +25,7 @@
 		FC85E46E1DECA4F3004AE574 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E46C1DECA4F3004AE574 /* Message+CoreDataProperties.swift */; };
 		FC85E4701DECACDB004AE574 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E46F1DECACDB004AE574 /* ConversationCell.swift */; };
 		FC85E4721DECDB20004AE574 /* AllConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4711DECDB20004AE574 /* AllConversationsViewController.swift */; };
+		FCDE7C0C1DED6D670049F1D0 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		FC85E46C1DECA4F3004AE574 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "../Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC85E46F1DECACDB004AE574 /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		FC85E4711DECDB20004AE574 /* AllConversationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllConversationsViewController.swift; sourceTree = "<group>"; };
+		FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				FC85E4391DE3DB48004AE574 /* MessageViewController.swift */,
 				FC85E4711DECDB20004AE574 /* AllConversationsViewController.swift */,
+				FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			files = (
 				FC85E46E1DECA4F3004AE574 /* Message+CoreDataProperties.swift in Sources */,
 				FC85E4511DE4D1B7004AE574 /* BubbleImageView.swift in Sources */,
+				FCDE7C0C1DED6D670049F1D0 /* NewConversationViewController.swift in Sources */,
 				FC85E44F1DE4B715004AE574 /* MessageCell.swift in Sources */,
 				FC1547631DED57CC009037ED /* Contact+CoreDataProperties.swift in Sources */,
 				FC85E45E1DE7B2F8004AE574 /* Model.xcdatamodeld in Sources */,
