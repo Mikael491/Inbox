@@ -150,6 +150,7 @@ extension AllConversationsViewController : NSFetchedResultsControllerDelegate {
             tableView.insertRows(at: [indexPath!], with: .fade)
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .fade)
+        }
     }
     
 }

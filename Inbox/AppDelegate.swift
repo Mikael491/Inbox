@@ -17,10 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let vc = window?.rootViewController as! MessageViewController
+        let allConvosVC = AllConversationsViewController()
+        let nav = UINavigationController(rootViewController: allConvosVC)
+        window?.rootViewController = nav
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
-        vc.context = context
+        allConvosVC.context = context
         
         return true
     }
