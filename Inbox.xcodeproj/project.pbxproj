@@ -28,7 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataClass.swift"; path = "../Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC1547611DED57CC009037ED /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataProperties.swift"; path = "../Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC85E4341DE3DB48004AE574 /* Inbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85E4371DE3DB48004AE574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +64,6 @@
 		FC85E42B1DE3DB48004AE574 = {
 			isa = PBXGroup;
 			children = (
-				FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */,
 				FC85E4361DE3DB48004AE574 /* Inbox */,
 				FC85E4351DE3DB48004AE574 /* Products */,
 			);
@@ -107,6 +106,7 @@
 		FC85E44A1DE4B2CE004AE574 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */,
 				FC1547611DED57CC009037ED /* Contact+CoreDataProperties.swift */,
 				FC85E46B1DECA4F3004AE574 /* Message+CoreDataClass.swift */,
 				FC85E46C1DECA4F3004AE574 /* Message+CoreDataProperties.swift */,
