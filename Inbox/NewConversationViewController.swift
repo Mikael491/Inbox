@@ -98,6 +98,10 @@ extension NewConversationViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
+        guard let context = context else { return }
+        guard let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation else { return }
+        conversation.add(participant: contact)
+        
     }
     
 }

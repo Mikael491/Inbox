@@ -28,4 +28,8 @@ public class Conversation: NSManagedObject {
         return nil
     }
     
+    func add(participant contact: Contact) {
+        mutableSetValue(forKey: "participant").add(contact)
+    }
+    
 }
