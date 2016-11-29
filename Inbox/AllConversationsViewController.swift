@@ -12,10 +12,10 @@ import CoreData
 class AllConversationsViewController: UIViewController {
     
     var context : NSManagedObjectContext?
-    private var fetchedResultsController : NSFetchedResultsController<Conversation>?
+    fileprivate var fetchedResultsController : NSFetchedResultsController<Conversation>?
     
-    private let tableView = UITableView(frame: CGRect.zero, style: .plain)
-    private let cellIdentifier = "ConvoCell"
+    fileprivate let tableView = UITableView(frame: CGRect.zero, style: .plain)
+    fileprivate let cellIdentifier = "ConvoCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,8 @@ class AllConversationsViewController: UIViewController {
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+        tableView.dataSource = self
+        tableView.delegate = self
         
         let tableViewContstraints = [
             tableView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor),
@@ -73,8 +75,32 @@ class AllConversationsViewController: UIViewController {
         cell.dateLabel.text = formatter.string(from: Date())
     }
     
-    
+}
 
+
+
+extension AllConversationsViewController : UITableViewDelegate {
+    
+}
+
+extension AllConversationsViewController : UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController?.sections?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let sections = fetchedResultsController?.sections else { return 0 }
+        let currentSection = sections[section]
+        return currentSection.numberOfObjects
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        configureCell(cell: cell, indexPath: indexPath)
+        return cell
+    }
+    
 }
 
 
