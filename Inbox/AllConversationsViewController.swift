@@ -55,7 +55,11 @@ class AllConversationsViewController: UIViewController {
     }
     
     func newConvo() {
-        
+        let vc = NewConversationViewController()
+        vc.context = context
+        let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.barTintColor = UIColor.white
+        self.present(nav, animated: true, completion: nil)
     }
     
     func fakeData() {
