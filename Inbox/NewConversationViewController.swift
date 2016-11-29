@@ -35,6 +35,19 @@ class NewConversationViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(tableViewConstraints)
         
+        if let context = context {
+            let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
+            request.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true)]
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: "NewConversationViewController")
+            fetchedResultsController?.delegate = self
+            do {
+                try fetchedResultsController?.performFetch()
+            } catch let error as NSError {
+                print("There was an error fetching contacts in NewConversationsVC: \(error)")
+            }
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
