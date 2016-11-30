@@ -50,7 +50,9 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
     
     func newConvo() {
         let vc = NewConversationViewController()
-        vc.context = context
+        let newConverationContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        newConverationContext.parent = context
+        vc.context = newConverationContext
         vc.conversationStartedDelegate = self
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.barTintColor = UIColor.white
