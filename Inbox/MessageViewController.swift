@@ -120,11 +120,26 @@ class MessageViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(MessageViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+        if let mainContext = context?.parent ?? context {
+            NotificationCenter.default.addObserver(self, selector: #selector(MessageViewController.contextUpdated(notification:)), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: mainContext)
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.scrollToBottom()
+    }
+    
+    func contextUpdated(notification: Notification) {
+        guard let set = notification.userInfo![NSInsertedObjectsKey] as? NSSet else { return }
+        let objects = set.allObjects
+        for object in objects {
+            guard let message = object as? Message else {continue}
+            if message.conversation?.objectID == conversation?.objectID {
+                addMessage(message: message)
+            }
+        }
     }
     
     func keyboardWillShow(notification: Notification) {
