@@ -50,7 +50,9 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
     
     func newConvo() {
         let vc = NewConversationViewController()
-        vc.context = context
+        let newConverationContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        newConverationContext.parent = context
+        vc.context = newConverationContext
         vc.conversationStartedDelegate = self
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.barTintColor = UIColor.white
@@ -67,12 +69,14 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         
         let cell = cell as! ConversationCell
         guard let convo = fetchedResultsController?.object(at: indexPath) else { return } //not casting necessary b/c fetchResultsVC is generic
+        guard let contact = convo.participants?.anyObject() as? Contact else { return }
+        guard let lastMessage = convo.lastMessage, let timestamp = lastMessage.timestamp, let text = lastMessage.text else { return }
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/DD/YY"
-        cell.nameLabel.text = "Mitta"
-        cell.messageLabel.text = "Hey!"
-        cell.dateLabel.text = formatter.string(from: Date())
+        cell.nameLabel.text = contact.fullName
+        cell.messageLabel.text = text
+        cell.dateLabel.text = formatter.string(from: timestamp as Date)
     }
     
     func conversationStarted(withConvo convo: Conversation, inContext: NSManagedObjectContext) {
@@ -97,6 +101,16 @@ extension AllConversationsViewController : UITableViewDelegate {
         return true
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let convo = fetchedResultsController?.object(at: indexPath) else { return }
+        print(convo)
+        let vc = MessageViewController()
+        vc.conversation = convo
+        vc.context = context
+        self.navigationController?.pushViewController(vc, animated: true)
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension AllConversationsViewController : UITableViewDataSource {
@@ -115,10 +129,6 @@ extension AllConversationsViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         configureCell(cell: cell, indexPath: indexPath)
         return cell
-    }
-    
-    private func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let convo = fetchedResultsController?.object(at: indexPath) else { return }
     }
     
 }

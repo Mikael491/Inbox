@@ -61,6 +61,7 @@ class MessageViewController: UIViewController {
             guard let context = context else { throw ErrorType.NoContext }
             let request : NSFetchRequest<Message> = NSFetchRequest.init(entityName: "Message")
             request.sortDescriptors = [NSSortDescriptor.init(key: "timestamp", ascending: false)]
+            request.predicate = NSPredicate(format: "conversation=%@", conversation)
             if let result = try self.context?.fetch(request) {
                 for message in result {
                     addMessage(message: message)
@@ -120,11 +121,45 @@ class MessageViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(MessageViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+        if let mainContext = context?.parent ?? context {
+            NotificationCenter.default.addObserver(self, selector: #selector(MessageViewController.contextUpdated(notification:)), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: mainContext)
+        }
+        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.scrollToBottom()
+    }
+    
+    func contextUpdated(notification: Notification) {
+        guard let set = notification.userInfo![NSInsertedObjectsKey] as? NSSet else { return }
+        let objects = set.allObjects
+        for object in objects {
+            guard let message = object as? Message else {continue}
+            if message.conversation?.objectID == conversation?.objectID {
+                addMessage(message: message)
+            }
+        }
+        tableView.reloadData()
+        tableView.scrollToBottom()
+    }
+    
+    func checkTemporaryContext() {
+        if let mainContext = context?.parent, let conversation = conversation {
+            let temporaryContext = context
+            context = mainContext
+            do {
+                try temporaryContext?.save()
+            } catch {
+                print("There was an error saving temporary context: \(error)")
+            }
+            self.conversation = mainContext.object(with: conversation.objectID) as? Conversation
+        }
     }
     
     func keyboardWillShow(notification: Notification) {
@@ -151,19 +186,18 @@ class MessageViewController: UIViewController {
     
     func sendTapped(sender: UIButton) {
         guard let text = messageTextView.text , text.characters.count > 0 else { return }
+        checkTemporaryContext()
         guard let context = context else { return }
         guard let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as? Message else { return }
         message.text = text
-        message.incoming = false
         message.timestamp = NSDate()
-        addMessage(message: message)
+        message.conversation = conversation
+        conversation?.lastMessageTime = message.timestamp
         do {
             try context.save()
         } catch let error as NSError {
             print("There was an error saving message to core data: \(error)")
         }
-        tableView.reloadData()
-        tableView.scrollToBottom()
         messageTextView.text = ""
     }
     
@@ -210,7 +244,7 @@ extension MessageViewController : UITableViewDataSource {
         let messages = getMessages(indexPath.section)
         let message = messages?[indexPath.row]
         cell.messageLabel.text = message?.text
-        cell.incoming(messageType: (message?.incoming)!)
+        cell.incoming(messageType: message!.isIncoming)
         
         cell.backgroundColor = UIColor.clear
         
