@@ -189,7 +189,6 @@ class MessageViewController: UIViewController {
         guard let context = context else { return }
         guard let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as? Message else { return }
         message.text = text
-        message.incoming = false
         message.timestamp = NSDate()
         conversation?.lastMessageTime = message.timestamp
         do {
@@ -243,7 +242,7 @@ extension MessageViewController : UITableViewDataSource {
         let messages = getMessages(indexPath.section)
         let message = messages?[indexPath.row]
         cell.messageLabel.text = message?.text
-        cell.incoming(messageType: (message?.incoming)!)
+        cell.incoming(messageType: message!.isIncoming)
         
         cell.backgroundColor = UIColor.clear
         

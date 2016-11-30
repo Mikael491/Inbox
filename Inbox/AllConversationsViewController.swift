@@ -69,12 +69,14 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         
         let cell = cell as! ConversationCell
         guard let convo = fetchedResultsController?.object(at: indexPath) else { return } //not casting necessary b/c fetchResultsVC is generic
+        guard let contact = convo.participants?.anyObject() as? Contact else { return }
+        guard let lastMessage = convo.lastMessage, let timestamp = lastMessage.timestamp, let text = lastMessage.text else { return }
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/DD/YY"
-        cell.nameLabel.text = "Mitta"
-        cell.messageLabel.text = "Hey!"
-        cell.dateLabel.text = formatter.string(from: Date())
+        cell.nameLabel.text = contact.fullName
+        cell.messageLabel.text = lastMessage.text
+        cell.dateLabel.text = formatter.string(from: timestamp as Date)
     }
     
     func conversationStarted(withConvo convo: Conversation, inContext: NSManagedObjectContext) {
