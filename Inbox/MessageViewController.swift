@@ -191,6 +191,7 @@ class MessageViewController: UIViewController {
         message.text = text
         message.incoming = false
         message.timestamp = NSDate()
+        conversation?.lastMessageTime = message.timestamp
         do {
             try context.save()
         } catch let error as NSError {
