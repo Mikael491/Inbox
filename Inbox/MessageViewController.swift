@@ -190,6 +190,7 @@ class MessageViewController: UIViewController {
         guard let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as? Message else { return }
         message.text = text
         message.timestamp = NSDate()
+        message.conversation = conversation
         conversation?.lastMessageTime = message.timestamp
         do {
             try context.save()

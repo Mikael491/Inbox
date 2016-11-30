@@ -75,7 +75,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/DD/YY"
         cell.nameLabel.text = contact.fullName
-        cell.messageLabel.text = lastMessage.text
+        cell.messageLabel.text = text
         cell.dateLabel.text = formatter.string(from: timestamp as Date)
     }
     
