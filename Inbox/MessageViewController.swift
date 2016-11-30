@@ -61,6 +61,7 @@ class MessageViewController: UIViewController {
             guard let context = context else { throw ErrorType.NoContext }
             let request : NSFetchRequest<Message> = NSFetchRequest.init(entityName: "Message")
             request.sortDescriptors = [NSSortDescriptor.init(key: "timestamp", ascending: false)]
+            request.predicate = NSPredicate(format: "conversation=%@", conversation)
             if let result = try self.context?.fetch(request) {
                 for message in result {
                     addMessage(message: message)

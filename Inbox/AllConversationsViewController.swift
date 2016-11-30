@@ -101,6 +101,16 @@ extension AllConversationsViewController : UITableViewDelegate {
         return true
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let convo = fetchedResultsController?.object(at: indexPath) else { return }
+        print(convo)
+        let vc = MessageViewController()
+        vc.conversation = convo
+        vc.context = context
+        self.navigationController?.pushViewController(vc, animated: true)
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension AllConversationsViewController : UITableViewDataSource {
@@ -119,10 +129,6 @@ extension AllConversationsViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         configureCell(cell: cell, indexPath: indexPath)
         return cell
-    }
-    
-    private func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let convo = fetchedResultsController?.object(at: indexPath) else { return }
     }
     
 }
