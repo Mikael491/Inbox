@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController {
+class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController, ConversationStartedDelegate {
     
     var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Conversation>?
@@ -51,6 +51,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
     func newConvo() {
         let vc = NewConversationViewController()
         vc.context = context
+        vc.conversationStartedDelegate = self
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.barTintColor = UIColor.white
         self.present(nav, animated: true, completion: nil)
@@ -72,6 +73,14 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         cell.nameLabel.text = "Mitta"
         cell.messageLabel.text = "Hey!"
         cell.dateLabel.text = formatter.string(from: Date())
+    }
+    
+    func conversationStarted(withConvo convo: Conversation, inContext: NSManagedObjectContext) {
+        let vc = MessageViewController()
+        vc.context = inContext
+        vc.conversation = convo
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -113,64 +122,6 @@ extension AllConversationsViewController : UITableViewDataSource {
     }
     
 }
-
-extension AllConversationsViewController : NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert:
-            tableView.insertSections(IndexSet.init(integer: sectionIndex), with: .fade)
-        case .delete:
-            tableView.deleteSections(IndexSet.init(integer: sectionIndex), with: .fade)
-        default:
-            break
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
-        case .update:
-            let cell = tableView.cellForRow(at: indexPath!)
-            configureCell(cell: cell!, indexPath: indexPath!)
-            tableView.reloadRows(at: [indexPath!], with: .fade)
-        case .move:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-            tableView.insertRows(at: [indexPath!], with: .fade)
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-        }
-    }
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

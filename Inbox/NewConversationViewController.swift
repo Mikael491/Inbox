@@ -17,6 +17,8 @@ class NewConversationViewController: UIViewController, UITableViewFetchedResults
     fileprivate let cellIdentifier = "ContactCell"
     fileprivate var tableViewFetchedResults : UITableViewFetchedResultsDelegate?
     
+    var conversationStartedDelegate : ConversationStartedDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,119 +98,16 @@ extension NewConversationViewController : UITableViewDataSource {
 
 extension NewConversationViewController : UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
+        guard let context = context else { return }
+        guard let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation else { return }
+        conversation.add(participant: contact)
+        conversationStartedDelegate?.conversationStarted(withConvo: conversation, inContext: context)
+        dismiss(animated: false, completion: nil)
     }
     
 }
-
-extension NewConversationViewController : NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        
-        switch type {
-        case .insert:
-            tableView.insertSections(NSIndexSet.init(index: sectionIndex) as IndexSet, with: .fade)
-        case .delete:
-            tableView.deleteSections(NSIndexSet.init(index: sectionIndex) as IndexSet, with: .fade)
-        default:
-            break
-        }
-        
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            tableView.insertRows(at: [indexPath!], with: .fade)
-        case .update:
-            let cell = tableView.cellForRow(at: indexPath!)
-            configureCell(cell: cell!, indexPath: indexPath!)
-            tableView.reloadRows(at: [indexPath!], with: .fade)
-        case .move:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-            tableView.insertRows(at: [indexPath!], with: .fade)
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-        }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

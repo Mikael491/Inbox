@@ -2,7 +2,7 @@
 //  Conversation+CoreDataProperties.swift
 //  Inbox
 //
-//  Created by Mikael Teklehaimanot on 11/28/16.
+//  Created by Mikael Teklehaimanot on 11/29/16.
 //  Copyright © 2016 Mikael Teklehaimanot. All rights reserved.
 //
 
@@ -17,6 +17,7 @@ extension Conversation {
 
     @NSManaged public var lastMessageTime: NSDate?
     @NSManaged public var message: NSSet?
+    @NSManaged public var participants: NSSet?
 
 }
 
@@ -34,5 +35,22 @@ extension Conversation {
 
     @objc(removeMessage:)
     @NSManaged public func removeFromMessage(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for participants
+extension Conversation {
+
+    @objc(addParticipantsObject:)
+    @NSManaged public func addToParticipants(_ value: Contact)
+
+    @objc(removeParticipantsObject:)
+    @NSManaged public func removeFromParticipants(_ value: Contact)
+
+    @objc(addParticipants:)
+    @NSManaged public func addToParticipants(_ values: NSSet)
+
+    @objc(removeParticipants:)
+    @NSManaged public func removeFromParticipants(_ values: NSSet)
 
 }
