@@ -126,6 +126,10 @@ class MessageViewController: UIViewController {
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.scrollToBottom()
@@ -139,6 +143,21 @@ class MessageViewController: UIViewController {
             if message.conversation?.objectID == conversation?.objectID {
                 addMessage(message: message)
             }
+        }
+        tableView.reloadData()
+        tableView.scrollToBottom()
+    }
+    
+    func checkTemporaryContext() {
+        if let mainContext = context?.parent, let conversation = conversation {
+            let temporaryContext = context
+            context = mainContext
+            do {
+                try temporaryContext?.save()
+            } catch {
+                print("There was an error saving temporary context: \(error)")
+            }
+            self.conversation = mainContext.object(with: conversation.objectID) as? Conversation
         }
     }
     
@@ -166,19 +185,17 @@ class MessageViewController: UIViewController {
     
     func sendTapped(sender: UIButton) {
         guard let text = messageTextView.text , text.characters.count > 0 else { return }
+        checkTemporaryContext()
         guard let context = context else { return }
         guard let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as? Message else { return }
         message.text = text
         message.incoming = false
         message.timestamp = NSDate()
-        addMessage(message: message)
         do {
             try context.save()
         } catch let error as NSError {
             print("There was an error saving message to core data: \(error)")
         }
-        tableView.reloadData()
-        tableView.scrollToBottom()
         messageTextView.text = ""
     }
     
