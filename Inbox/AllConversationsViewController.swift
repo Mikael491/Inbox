@@ -130,6 +130,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         tempContext.parent = context
         vc.context = tempContext
         vc.conversationStartedDelegate = self
+        vc.view.backgroundColor = UIColor.gray
         navigationController?.pushViewController(vc, animated: true)
     }
     
