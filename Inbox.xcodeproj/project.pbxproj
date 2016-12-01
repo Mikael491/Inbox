@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC06CD0F1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */; };
+		FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */; };
 		FC1547621DED57CC009037ED /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */; };
 		FC6E9A0C1DEE9FDA006EDFE2 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E9A0A1DEE9FDA006EDFE2 /* Contact+CoreDataProperties.swift */; };
 		FC6E9A0D1DEE9FDA006EDFE2 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E9A0B1DEE9FDA006EDFE2 /* Message+CoreDataProperties.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectParticipantsViewController.swift; sourceTree = "<group>"; };
 		FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataClass.swift"; path = "../Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC6E9A0A1DEE9FDA006EDFE2 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataProperties.swift"; path = "../Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC6E9A0B1DEE9FDA006EDFE2 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "../Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				FC85E4711DECDB20004AE574 /* AllConversationsViewController.swift */,
 				FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */,
 				FC6E9A0E1DEFCADC006EDFE2 /* NewGroupViewController.swift */,
+				FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				FC6E9A0C1DEE9FDA006EDFE2 /* Contact+CoreDataProperties.swift in Sources */,
 				FC85E4701DECACDB004AE574 /* ConversationCell.swift in Sources */,
 				FC06CD0F1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift in Sources */,
+				FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */,
 				FC85E4691DECA4AE004AE574 /* Conversation+CoreDataClass.swift in Sources */,
 				FC85E4381DE3DB48004AE574 /* AppDelegate.swift in Sources */,
 				FC85E46D1DECA4F3004AE574 /* Message+CoreDataClass.swift in Sources */,
