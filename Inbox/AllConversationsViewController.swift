@@ -125,7 +125,12 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
     }
     
     func newGroupButtonTapped(sender: AnyObject) {
-        
+        let vc = NewGroupViewController()
+        let tempContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        tempContext.parent = context
+        vc.context = tempContext
+        vc.conversationStartedDelegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
