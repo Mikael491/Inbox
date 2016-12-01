@@ -198,7 +198,7 @@
 				TargetAttributes = {
 					FC85E4331DE3DB48004AE574 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 2WAWR77T4M;
+						DevelopmentTeam = 89W2VT2ZMS;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -381,11 +381,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2WAWR77T4M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 89W2VT2ZMS;
 				INFOPLIST_FILE = Inbox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.mikael.Inbox;
+				PRODUCT_BUNDLE_IDENTIFIER = io.MikaelTeklehaimanot.Inbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -395,11 +396,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2WAWR77T4M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 89W2VT2ZMS;
 				INFOPLIST_FILE = Inbox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.mikael.Inbox;
+				PRODUCT_BUNDLE_IDENTIFIER = io.MikaelTeklehaimanot.Inbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
