@@ -24,16 +24,17 @@ class NewGroupViewController: UIViewController {
         view.backgroundColor = UIColor.white
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(NewGroupViewController.dismissView))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(NewGroupViewController.pushNextViewController))
+        updateNextButton(forCharacterCount: 0)
         
         subjectField.placeholder = "Subject"
         subjectField.delegate = self
         subjectField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(subjectField)
         
-        characterNumberLabel.text = "25"
         characterNumberLabel.textColor = UIColor.gray
         characterNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(characterNumberLabel)
+        updateCharacterLabel(forCharacterCount: 0)
         
         let border = UIView()
         border.backgroundColor = UIColor.lightGray
@@ -67,6 +68,14 @@ class NewGroupViewController: UIViewController {
     func pushNextViewController() {
         guard let context = context, let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation else { return }
         conversation.name = subjectField.text
+        
+        let vc = SelectParticipantsViewController()
+        vc.context = context
+        vc.conversation = conversation
+        
+        //delegate is set as AllConvosVC
+        vc.conversationStartedDelegate = conversationStartedDelegate
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func updateCharacterLabel(forCharacterCount length: Int) {

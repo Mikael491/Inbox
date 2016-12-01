@@ -13,11 +13,12 @@ class SelectParticipantsViewController: UIViewController {
 
     var context : NSManagedObjectContext?
     var conversation : Conversation?
+    var conversationStartedDelegate : ConversationStartedDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        title = "Select Participants"
     }
 
     override func didReceiveMemoryWarning() {
