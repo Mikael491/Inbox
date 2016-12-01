@@ -27,6 +27,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         
         tableView.register(ConversationCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        tableView.tableHeaderView = createHeader()
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -87,6 +88,46 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func createHeader() -> UIView {
+        let header = UIView()
+        let groupButton = UIButton()
+        groupButton.translatesAutoresizingMaskIntoConstraints = false
+        header.addSubview(groupButton)
+
+        groupButton.setTitle("New Group", for: .normal)
+        groupButton.setTitleColor(view.tintColor, for: .normal)
+        groupButton.addTarget(self, action: #selector(AllConversationsViewController.newGroupButtonTapped(sender:)), for: .touchUpInside)
+        
+        let border = UIView()
+        border.translatesAutoresizingMaskIntoConstraints = false
+        header.addSubview(border)
+        border.backgroundColor = UIColor.lightGray
+        
+        let constraints = [
+            groupButton.heightAnchor.constraint(equalTo: header.heightAnchor),
+            groupButton.trailingAnchor.constraint(equalTo: header.layoutMarginsGuide.trailingAnchor),
+            border.heightAnchor.constraint(equalToConstant: 1.0),
+            border.leadingAnchor.constraint(equalTo: header.leadingAnchor),
+            border.trailingAnchor.constraint(equalTo: header.trailingAnchor),
+            border.bottomAnchor.constraint(equalTo: header.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
+        header.setNeedsLayout()
+        header.layoutIfNeeded()
+        
+        let height = header.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        var frame = header.frame
+        frame.size.height = height
+        header.frame = frame
+        
+        return header
+    }
+    
+    func newGroupButtonTapped(sender: AnyObject) {
+        
+    }
+    
 }
 
 
@@ -103,7 +144,6 @@ extension AllConversationsViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let convo = fetchedResultsController?.object(at: indexPath) else { return }
-        print(convo)
         let vc = MessageViewController()
         vc.conversation = convo
         vc.context = context
