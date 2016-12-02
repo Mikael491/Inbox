@@ -21,6 +21,9 @@ class SelectParticipantsViewController: UIViewController {
     
     fileprivate var contactsToDisplay = [Contact]()
     fileprivate var allContacts = [Contact]()
+    fileprivate var selectedContacts = [Contact]()
+    
+    fileprivate var isSearching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +41,14 @@ class SelectParticipantsViewController: UIViewController {
         searchField.delegate = self
         tableView.tableHeaderView = searchField
         tableView.dataSource = self
+        tableView.delegate = self
         
         setupMainView(subview: tableView)
         
         
         if let context = context {
             let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
-            request.sortDescriptors = [NSSortDescriptor.init(key: "firstName", ascending: false), NSSortDescriptor.init(key: "lastName", ascending: false)]
+            request.sortDescriptors = [NSSortDescriptor.init(key: "lastName", ascending: true), NSSortDescriptor.init(key: "firstName", ascending: true)]
             do {
                 if let result = try context.fetch(request) as? [Contact] {
                     allContacts = result
@@ -109,6 +113,25 @@ class SelectParticipantsViewController: UIViewController {
 }
 
 
+extension SelectParticipantsViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard isSearching else { return }
+        let contact = contactsToDisplay[indexPath.row]
+        guard !selectedContacts.contains(contact) else { return }
+        selectedContacts.append(contact)
+        allContacts.remove(at: allContacts.index(of: contact)!)
+        searchField.text = ""
+        endSearch()
+        showCreateButton(show: true)
+    }
+    
+}
+
 extension SelectParticipantsViewController : UITableViewDataSource {
     
     
@@ -128,6 +151,8 @@ extension SelectParticipantsViewController : UITableViewDataSource {
 
 extension SelectParticipantsViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        isSearching = true
         guard let currentText = textField.text else {
             endSearch()
             return true
