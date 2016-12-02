@@ -62,7 +62,7 @@ class NewGroupViewController: UIViewController {
     }
     
     func dismissView() {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     func pushNextViewController() {
@@ -72,7 +72,6 @@ class NewGroupViewController: UIViewController {
         let vc = SelectParticipantsViewController()
         vc.context = context
         vc.conversation = conversation
-        
         //delegate is set as AllConvosVC
         vc.conversationStartedDelegate = conversationStartedDelegate
         navigationController?.pushViewController(vc, animated: true)

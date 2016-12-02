@@ -130,7 +130,8 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         tempContext.parent = context
         vc.context = tempContext
         vc.conversationStartedDelegate = self
-        navigationController?.pushViewController(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true, completion: nil)
     }
     
 }
