@@ -31,7 +31,7 @@ class SelectParticipantsViewController: UIViewController {
         title = "Select Participants"
         view.backgroundColor = UIColor.white
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(SelectParticipantsViewController.createConversation))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(SelectParticipantsViewController.createConvo))
         showCreateButton(show: false)
         automaticallyAdjustsScrollViewInsets = true
     
@@ -101,8 +101,11 @@ class SelectParticipantsViewController: UIViewController {
         }
     }
     
-    func createConversation() {
-        
+    func createConvo() {
+        guard let conversation = conversation, let context = context else { return }
+        conversation.participants = NSSet(array: selectedContacts)
+        conversationStartedDelegate?.conversationStarted(withConvo: conversation, inContext: context)
+        dismiss(animated: true, completion: nil)
     }
     
     func endSearch() {
@@ -140,7 +143,7 @@ extension SelectParticipantsViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let contact = allContacts[indexPath.row]
+        let contact = contactsToDisplay[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         cell.textLabel?.text = contact.fullName
         cell.selectionStyle = .none
