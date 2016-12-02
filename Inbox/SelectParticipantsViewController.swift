@@ -17,7 +17,9 @@ class SelectParticipantsViewController: UIViewController {
     
     private var searchField : UITextField!
     private let tableView = UITableView(frame: CGRect.zero, style: .plain)
-    private let cellidentifier = "ContactCell"
+    fileprivate let cellIdentifier = "ContactCell"
+    
+    fileprivate var contactsToDisplay = [Contact]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +31,11 @@ class SelectParticipantsViewController: UIViewController {
         showCreateButton(show: false)
         automaticallyAdjustsScrollViewInsets = true
     
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellidentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         searchField = createSearchField()
         tableView.tableHeaderView = searchField
+        tableView.dataSource = self
         
         setupMainView(subview: tableView)
     }
@@ -83,3 +86,69 @@ class SelectParticipantsViewController: UIViewController {
     }
 
 }
+
+
+extension SelectParticipantsViewController : UITableViewDataSource {
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contactsToDisplay.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let contact = contactsToDisplay[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        cell.textLabel?.text = contact.fullName
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
