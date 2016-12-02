@@ -15,11 +15,12 @@ class SelectParticipantsViewController: UIViewController {
     var conversation : Conversation?
     var conversationStartedDelegate : ConversationStartedDelegate?
     
-    private var searchField : UITextField!
-    private let tableView = UITableView(frame: CGRect.zero, style: .plain)
+    fileprivate var searchField : UITextField!
+    fileprivate let tableView = UITableView(frame: CGRect.zero, style: .plain)
     fileprivate let cellIdentifier = "ContactCell"
     
     fileprivate var contactsToDisplay = [Contact]()
+    fileprivate var allContacts = [Contact]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,7 @@ class SelectParticipantsViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         searchField = createSearchField()
+        searchField.delegate = self
         tableView.tableHeaderView = searchField
         tableView.dataSource = self
         
@@ -84,6 +86,11 @@ class SelectParticipantsViewController: UIViewController {
     func createConversation() {
         
     }
+    
+    func endSearch() {
+        contactsToDisplay = selectedContacts
+        tableView.reloadData()
+    }
 
 }
 
@@ -96,13 +103,35 @@ extension SelectParticipantsViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let contact = contactsToDisplay[indexPath.row]
+        let contact = allContacts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         cell.textLabel?.text = contact.fullName
         cell.selectionStyle = .none
         return cell
     }
     
+}
+
+extension SelectParticipantsViewController : UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let currentText = textField.text else {
+            endSearch()
+            return true
+        }
+        
+        let text = NSString(string: currentText).replacingCharacters(in: range, with: string)
+        if text.characters.count == 0 {
+            endSearch()
+            return true
+        }
+        
+        contactsToDisplay = allContacts.filter({ (contact) -> Bool in
+            let match = contact.fullName.range(of: text) != nil
+            return match
+        })
+        tableView.reloadData()
+        return true
+    }
 }
 
 
