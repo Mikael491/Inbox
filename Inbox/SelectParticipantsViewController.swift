@@ -40,6 +40,20 @@ class SelectParticipantsViewController: UIViewController {
         tableView.dataSource = self
         
         setupMainView(subview: tableView)
+        
+        
+        if let context = context {
+            let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
+            request.sortDescriptors = [NSSortDescriptor.init(key: "firstName", ascending: false), NSSortDescriptor.init(key: "lastName", ascending: false)]
+            do {
+                if let result = try context.fetch(request) as? [Contact] {
+                    allContacts = result
+                }
+            } catch {
+                print("There was an error fetching contacts in SelectParticipantsVC: \(error)")
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
