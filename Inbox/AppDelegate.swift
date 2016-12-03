@@ -18,12 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let allConvosVC = AllConversationsViewController()
-        let nav = UINavigationController(rootViewController: allConvosVC)
-        window?.rootViewController = nav
-        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        context.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
-        allConvosVC.context = context
+        let mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        mainContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
         
         let importerContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         importerContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
@@ -31,6 +27,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         importContacts(importerContext)
         contactImporter?.listenForChanges()
         
+        let tabBarController = UITabBarController()
+        let vcData : [(UIViewController, UIImage)] = [(AllConversationsViewController(), UIImage(named: "chat_icon")!)]
+        
+        let viewControllers = vcData.map {
+            (vc: UIViewController, image: UIImage) -> UINavigationController in
+            
+            if var vc = vc as? ContextViewController {
+                vc.context = mainContext
+            }
+            let nav = UINavigationController(rootViewController: vc)
+            nav.tabBarItem.image = image
+            return nav
+        }
+        tabBarController.viewControllers = viewControllers
+        window?.rootViewController = tabBarController
         return true
     }
 
