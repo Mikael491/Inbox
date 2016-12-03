@@ -66,7 +66,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         let convo = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation
     }
     
-    func configureCell (cell: UITableViewCell, indexPath: IndexPath) {
+    func configureCell (cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         
         let cell = cell as! ConversationCell
         guard let convo = fetchedResultsController?.object(at: indexPath) else { return } //not casting necessary b/c fetchResultsVC is generic
@@ -174,8 +174,14 @@ extension AllConversationsViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        configureCell(cell: cell, indexPath: indexPath)
+        configureCell(cell: cell, atIndexPath: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController?.sections else { return nil }
+        let currentSection = sections[section]
+        return currentSection.name
     }
     
 }

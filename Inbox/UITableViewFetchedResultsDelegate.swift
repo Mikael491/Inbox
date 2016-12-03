@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-protocol UITableViewFetchedResultsController {
-    func configureCell(cell: UITableViewCell, indexPath: IndexPath)
-}
-
 class UITableViewFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDelegate {
 
     fileprivate var tableView : UITableView?
@@ -44,7 +40,7 @@ class UITableViewFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDel
             tableView?.insertRows(at: [newIndexPath!], with: .fade)
         case .update:
             let cell = tableView?.cellForRow(at: indexPath!)
-            self.controller?.configureCell(cell: cell!, indexPath: indexPath!)
+            self.controller?.configureCell(cell: cell!, atIndexPath: indexPath!)
             tableView?.reloadRows(at: [indexPath!], with: .fade)
         case .move:
             tableView?.deleteRows(at: [indexPath!], with: .fade)
