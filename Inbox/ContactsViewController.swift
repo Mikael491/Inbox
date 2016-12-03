@@ -20,7 +20,7 @@ class ContactsViewController: UIViewController, ContextViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Contacts"
+        navigationController?.navigationBar.topItem?.title = "Contacts"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ContactsViewController.addContact(sender:)))
         automaticallyAdjustsScrollViewInsets = true
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)

@@ -28,16 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         contactImporter?.listenForChanges()
         
         let tabBarController = UITabBarController()
-        let vcData : [(UIViewController, UIImage)] = [(AllConversationsViewController(), UIImage(named: "chat_icon")!)]
+        let vcData : [(UIViewController, UIImage, String)] = [(ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"), (AllConversationsViewController(), UIImage(named: "chat_icon")!, "Conversations")]
         
         let viewControllers = vcData.map {
-            (vc: UIViewController, image: UIImage) -> UINavigationController in
+            (vc: UIViewController, image: UIImage, title: String) -> UINavigationController in
             
             if var vc = vc as? ContextViewController {
                 vc.context = mainContext
             }
             let nav = UINavigationController(rootViewController: vc)
             nav.tabBarItem.image = image
+            nav.title = title
             return nav
         }
         tabBarController.viewControllers = viewControllers

@@ -21,7 +21,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Messages"
+        navigationController?.navigationBar.topItem?.title = "Conversations"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "new-chat"), style: .plain, target: self, action: #selector(AllConversationsViewController.newConvo))
         automaticallyAdjustsScrollViewInsets = true
         
