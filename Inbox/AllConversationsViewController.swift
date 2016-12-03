@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController, ConversationStartedDelegate {
+class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController, ConversationStartedDelegate, ContextViewController {
     
     var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Conversation>?
