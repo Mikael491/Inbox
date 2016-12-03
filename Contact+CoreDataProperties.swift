@@ -2,12 +2,13 @@
 //  Contact+CoreDataProperties.swift
 //  Inbox
 //
-//  Created by Mikael Teklehaimanot on 11/29/16.
+//  Created by Mikael Teklehaimanot on 12/2/16.
 //  Copyright © 2016 Mikael Teklehaimanot. All rights reserved.
 //
 
 import Foundation
 import CoreData
+
 
 extension Contact {
 
@@ -17,6 +18,7 @@ extension Contact {
 
     @NSManaged public var firstName: String?
     @NSManaged public var lastName: String?
+    @NSManaged public var contactID: String?
     @NSManaged public var conversations: NSSet?
     @NSManaged public var messages: NSSet?
 

@@ -33,7 +33,11 @@ class ContactImporter {
                     })
                 } catch let error as NSError {
                     print("There was an error importing contacts: \(error)")
+                } catch {
+                    
                 }
+            } else {
+                print("Not granted access to contacts...")
             }
             
         })
