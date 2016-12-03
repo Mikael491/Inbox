@@ -20,6 +20,8 @@ class ContactsViewController: UIViewController, ContextViewController, UITableVi
     fileprivate var fetchedResultsController : NSFetchedResultsController<Contact>?
     fileprivate var fetchedResultsDelegate : NSFetchedResultsControllerDelegate?
     
+    private var searchController : UISearchController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +47,14 @@ class ContactsViewController: UIViewController, ContextViewController, UITableVi
             }
         }
         
+        let resultsVC = ContactSearchResultsViewController()
+        resultsVC.contacts = fetchedResultsController?.fetchedObjects as [Contact]!
+        
+        searchController = UISearchController(searchResultsController: resultsVC)
+        searchController?.searchResultsUpdater = resultsVC
+        definesPresentationContext = true
+        
+        tableView.tableHeaderView = searchController?.searchBar
     }
 
     override func didReceiveMemoryWarning() {
