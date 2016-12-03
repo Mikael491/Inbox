@@ -35,12 +35,13 @@ class ContactsViewController: UIViewController, ContextViewController, UITableVi
         setupMainView(subview: tableView)
         
         if let context = context {
+            
+            let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
+            request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true)]
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsDelegate = UITableViewFetchedResultsDelegate(tableView: tableView, controller: self)
+            fetchedResultsController?.delegate = fetchedResultsDelegate
             do {
-                let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
-                request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true)]
-                fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-                fetchedResultsDelegate = UITableViewFetchedResultsDelegate(tableView: tableView, controller: self)
-                fetchedResultsController?.delegate = fetchedResultsDelegate
                 try fetchedResultsController?.performFetch()
             } catch {
                 print("There was an error fetching contacts in ContactsVC: \(error)")
