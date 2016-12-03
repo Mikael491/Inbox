@@ -10,12 +10,21 @@ import Foundation
 import CoreData
 import Contacts
 
-class ContactImporter {
+class ContactImporter : NSObject {
     
     private var context : NSManagedObjectContext?
     
     init(context: NSManagedObjectContext) {
         self.context = context
+    }
+    
+    func listenForChanges() {
+        CNContactStore.authorizationStatus(for: .contacts)
+        NotificationCenter.default.addObserver(self, selector: #selector(ContactImporter.addressbookDidChange(notification:)), name: NSNotification.Name.CNContactStoreDidChange, object: nil)
+    }
+    
+    func addressbookDidChange(notification: Notification) {
+        print(notification)
     }
     
     func formatPhoneNumber(number: CNPhoneNumber) -> String {
