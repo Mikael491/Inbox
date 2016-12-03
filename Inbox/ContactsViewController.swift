@@ -28,6 +28,7 @@ class ContactsViewController: UIViewController, ContextViewController, UITableVi
         automaticallyAdjustsScrollViewInsets = true
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        tableView.dataSource = self
         
         setupMainView(subview: tableView)
         
