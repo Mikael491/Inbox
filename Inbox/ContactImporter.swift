@@ -13,6 +13,7 @@ import Contacts
 class ContactImporter : NSObject {
     
     private var context : NSManagedObjectContext?
+    private var lastCNNotificationTime : NSDate?
     
     init(context: NSManagedObjectContext) {
         self.context = context
@@ -24,12 +25,39 @@ class ContactImporter : NSObject {
     }
     
     func addressbookDidChange(notification: Notification) {
-        print(notification)
+        let now = NSDate()
+        guard lastCNNotificationTime == nil || now.timeIntervalSince(lastCNNotificationTime! as Date) > 1 else { return }
+        lastCNNotificationTime = now
+        fetchContacts()
     }
     
     func formatPhoneNumber(number: CNPhoneNumber) -> String {
         return number.stringValue.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
     }
+    
+    func fetchExisting() -> (contacts: [String:Contact], phoneNumbers: [String:PhoneNumber]) {
+        
+        var phoneNumbers = [String : PhoneNumber]()
+        var contacts = [String : Contact]()
+        
+        do {
+            let request : NSFetchRequest<Contact> = NSFetchRequest<Contact>(entityName: "Contact")
+            request.relationshipKeyPathsForPrefetching = ["phoneNumbers"]
+            if let contactsResult = try context?.fetch(request) {
+                for contact in contactsResult {
+                    contacts[contact.contactID!] = contact
+                    for phoneNumber in contact.phoneNumbers! {
+                        let phoneNumber = phoneNumber as! PhoneNumber
+                        phoneNumbers[phoneNumber.value!] = phoneNumber
+                    }
+                }
+            }
+        } catch let error as NSError {
+            print("There was an error fetching existing contacts: \(error)")
+        }
+        return (contacts, phoneNumbers)
+    }
+    
     
     func fetchContacts() {
         
@@ -40,6 +68,9 @@ class ContactImporter : NSObject {
                 
                 if granted {
                     do {
+                        
+                        let (contacts, phoneNumbers) = self.fetchExisting()
+                        
                         let req = CNContactFetchRequest(keysToFetch: [
                             CNContactGivenNameKey as CNKeyDescriptor,
                             CNContactFamilyNameKey as CNKeyDescriptor,
@@ -48,12 +79,12 @@ class ContactImporter : NSObject {
                         try store.enumerateContacts(with: req, usingBlock: {
                             cnContact, stop in
                             
-                            guard let contact = NSEntityDescription.insertNewObject(forEntityName: "Contact", into: self.context!) as? Contact else { return }
+                            guard let contact = contacts[cnContact.identifier] ?? NSEntityDescription.insertNewObject(forEntityName: "Contact", into: self.context!) as? Contact else { return }
                             contact.firstName = cnContact.givenName
                             contact.lastName = cnContact.familyName
                             contact.contactID = cnContact.identifier
                             for cnVal in cnContact.phoneNumbers {
-                                guard let phoneNumber = NSEntityDescription.insertNewObject(forEntityName: "PhoneNumber", into: self.context!) as? PhoneNumber else { continue }
+                                guard let phoneNumber = phoneNumbers[cnVal.value.stringValue] ?? NSEntityDescription.insertNewObject(forEntityName: "PhoneNumber", into: self.context!) as? PhoneNumber else { continue }
                                 phoneNumber.value = self.formatPhoneNumber(number: cnVal.value)
                                 phoneNumber.contact = contact
                             }
