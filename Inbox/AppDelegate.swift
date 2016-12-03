@@ -14,7 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    private var contactImporter : ContactImporter?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let allConvosVC = AllConversationsViewController()
@@ -26,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let importerContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         importerContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
+        contactImporter = ContactImporter(context: importerContext)
         importContacts(importerContext)
+        contactImporter?.listenForChanges()
         
         return true
     }
@@ -55,14 +58,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func importContacts(_ context: NSManagedObjectContext) {
         
-        let dataSeeded = UserDefaults.standard.bool(forKey: "dataSeeded")
+        let dataSeeded = UserDefaults.standard.bool(forKey: "contactsAdded")
         
         guard !dataSeeded else { return }
         
-        let contactImporter = ContactImporter(context: context)
-        contactImporter.fetchContacts()
+        contactImporter?.fetchContacts()
         
-        UserDefaults.standard.set(true, forKey: "dataSeeded")
+        UserDefaults.standard.set(true, forKey: "contactsAdded")
     }
     
 }
