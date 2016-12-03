@@ -84,7 +84,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         let vc = MessageViewController()
         vc.context = inContext
         vc.conversation = convo
-        
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -153,6 +153,7 @@ extension AllConversationsViewController : UITableViewDelegate {
         let vc = MessageViewController()
         vc.conversation = convo
         vc.context = context
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
         dismiss(animated: true, completion: nil)
     }
