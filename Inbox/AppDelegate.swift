@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
-        ContextSynchronizer = ContextSynchronizer(mainContext: mainContext, backgroundContext: backgroundContext)
+        contextSyncer = ContextSynchronizer(mainContext: mainContext, backgroundContext: backgroundContext)
         contactImporter = ContactImporter(context: backgroundContext)
         importContacts(backgroundContext)
         contactImporter?.listenForChanges()
