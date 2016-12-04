@@ -26,6 +26,7 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
         super.viewDidLoad()
         
         navigationController?.navigationBar.topItem?.title = "Favorites"
+        navigationItem.leftBarButtonItem = editButtonItem
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: cellIdentifier)
         automaticallyAdjustsScrollViewInsets = true
         tableView.tableFooterView = UIView(frame: .zero)
@@ -56,16 +57,41 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
         // Dispose of any resources that can be recreated.
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        if editing {
+            tableView.setEditing(true, animated: true)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .plain, target: self, action: #selector(FavoritesViewController.deleteAll))
+        } else {
+            tableView.setEditing(false, animated: true)
+            navigationItem.rightBarButtonItem = nil
+            guard let context = context , context.hasChanges else { return }
+            do {
+                try context.save()
+            } catch {
+                print("There was an error saving context in FavoritesVC: \(error)")
+            }
+        }
+    }
+    
+    func deleteAll() {
+        guard let contacts = fetchedResultsController?.fetchedObjects else { return }
+        for contact in contacts {
+            context?.delete(contact)
+        }
+    }
+    
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
         guard let cell = cell as? FavoriteCell else { return }
         cell.textLabel?.text = contact.fullName
         cell.detailTextLabel?.text = contact.status ?? ""
-        cell.phoneTypeLabel.text = ((contact.phoneNumbers?.filter({
-            number in
-            guard let number = number as? PhoneNumber else { return false }
-            return number.registered
-        }).first) as! PhoneNumber).kind
+//        cell.phoneTypeLabel.text = ((contact.phoneNumbers?.filter({
+//            number in
+//            guard let number = number as? PhoneNumber else { return false }
+//            return number.registered
+//        }).first) as! PhoneNumber).kind
+        cell.phoneTypeLabel.text = (contact.phoneNumbers?.allObjects.first as! PhoneNumber).kind
         cell.accessoryType = .detailButton
     }
 
@@ -91,9 +117,16 @@ extension FavoritesViewController : UITableViewDelegate {
         } catch {
             return
         }
-        let vc = CNContactViewController()
+        let vc = CNContactViewController(for: cnContact)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard let contact = fetchedResultsController?.object(at: indexPath) else {
+            return
+        }
+        contact.favorite = false
     }
     
 }
