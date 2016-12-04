@@ -36,6 +36,7 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
         
         if let context = context {
             let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
+            request.predicate = NSPredicate(format: "favorite = true")
             request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true),
                                        NSSortDescriptor(key: "firstName", ascending: true)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
@@ -59,8 +60,12 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
         guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
         guard let cell = cell as? FavoriteCell else { return }
         cell.textLabel?.text = contact.fullName
-        cell.detailTextLabel?.text = "*********"
-        cell.phoneTypeLabel.text = "mobile"
+        cell.detailTextLabel?.text = contact.status ?? ""
+        cell.phoneTypeLabel.text = ((contact.phoneNumbers?.filter({
+            number in
+            guard let number = number as? PhoneNumber else { return false }
+            return number.registered
+        }).first) as! PhoneNumber).kind
         cell.accessoryType = .detailButton
     }
 
