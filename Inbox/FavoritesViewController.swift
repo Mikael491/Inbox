@@ -26,7 +26,7 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
         super.viewDidLoad()
         
         navigationController?.navigationBar.topItem?.title = "Favorites"
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(FavoriteCell.self, forCellReuseIdentifier: cellIdentifier)
         automaticallyAdjustsScrollViewInsets = true
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.dataSource = self
@@ -95,6 +95,12 @@ extension FavoritesViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         configureCell(cell: cell, atIndexPath: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController?.sections else { return nil }
+        let currentSection = sections[section]
+        return currentSection.name
     }
     
 }
