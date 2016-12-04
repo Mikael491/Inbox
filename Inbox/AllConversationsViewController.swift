@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController, ConversationStartedDelegate {
+class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController, ConversationStartedDelegate, ContextViewController {
     
     var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Conversation>?
@@ -21,7 +21,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Messages"
+        navigationController?.navigationBar.topItem?.title = "Conversations"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "new-chat"), style: .plain, target: self, action: #selector(AllConversationsViewController.newConvo))
         automaticallyAdjustsScrollViewInsets = true
         
@@ -66,7 +66,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         let convo = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation
     }
     
-    func configureCell (cell: UITableViewCell, indexPath: IndexPath) {
+    func configureCell (cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         
         let cell = cell as! ConversationCell
         guard let convo = fetchedResultsController?.object(at: indexPath) else { return } //not casting necessary b/c fetchResultsVC is generic
@@ -84,7 +84,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
         let vc = MessageViewController()
         vc.context = inContext
         vc.conversation = convo
-        
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -153,6 +153,7 @@ extension AllConversationsViewController : UITableViewDelegate {
         let vc = MessageViewController()
         vc.conversation = convo
         vc.context = context
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
         dismiss(animated: true, completion: nil)
     }
@@ -173,8 +174,14 @@ extension AllConversationsViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        configureCell(cell: cell, indexPath: indexPath)
+        configureCell(cell: cell, atIndexPath: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController?.sections else { return nil }
+        let currentSection = sections[section]
+        return currentSection.name
     }
     
 }

@@ -14,18 +14,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    private var contactImporter : ContactImporter?
+    private var contextSyncer : ContextSynchronizer?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let allConvosVC = AllConversationsViewController()
-        let nav = UINavigationController(rootViewController: allConvosVC)
-        window?.rootViewController = nav
-        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        context.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
-        allConvosVC.context = context
+        let mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        mainContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
         
-        fakeData(context: context)
+        let backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        backgroundContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
+        contextSyncer = ContextSynchronizer(mainContext: mainContext, backgroundContext: backgroundContext)
+        contactImporter = ContactImporter(context: backgroundContext)
+        importContacts(backgroundContext)
+        contactImporter?.listenForChanges()
         
+        let tabBarController = UITabBarController()
+        let vcData : [(UIViewController, UIImage, String)] = [(ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"), (AllConversationsViewController(), UIImage(named: "chat_icon")!, "Conversations")]
+        
+        let viewControllers = vcData.map {
+            (vc: UIViewController, image: UIImage, title: String) -> UINavigationController in
+            
+            if var vc = vc as? ContextViewController {
+                vc.context = mainContext
+            }
+            let nav = UINavigationController(rootViewController: vc)
+            nav.tabBarItem.image = image
+            nav.title = title
+            return nav
+        }
+        tabBarController.viewControllers = viewControllers
+        window?.rootViewController = tabBarController
         return true
     }
 
@@ -51,27 +70,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func fakeData(context: NSManagedObjectContext) {
+    func importContacts(_ context: NSManagedObjectContext) {
         
-        let dataSeeded = UserDefaults.standard.bool(forKey: "dataSeeded")
+        let dataSeeded = UserDefaults.standard.bool(forKey: "contactsAdded")
         
         guard !dataSeeded else { return }
         
-        let people = [("Mitta", "Tesfa"), ("Mikael", "Teklehaimanot"), ("Tiffany", "Walker")]
-        for person in people {
-            
-            let contact = NSEntityDescription.insertNewObject(forEntityName: "Contact", into: context) as! Contact
-            contact.firstName = person.0
-            contact.lastName = person.1
-            do {
-                try context.save()
-            } catch let error as NSError {
-                print("There was an error seeding fake contact data: \(error)")
-            }
-            UserDefaults.standard.set(true, forKey: "dataSeeded")
-        }
+        contactImporter?.fetchContacts()
+        
+        UserDefaults.standard.set(true, forKey: "contactsAdded")
     }
-
-
+    
 }
+
+
+
 

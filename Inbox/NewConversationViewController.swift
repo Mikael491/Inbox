@@ -58,7 +58,7 @@ class NewConversationViewController: UIViewController, UITableViewFetchedResults
         dismiss(animated: true, completion: nil)
     }
     
-    func configureCell(cell: UITableViewCell, indexPath: IndexPath) {
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
         cell.textLabel?.text = contact.fullName
     }
@@ -80,7 +80,7 @@ extension NewConversationViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        configureCell(cell: cell, indexPath: indexPath)
+        configureCell(cell: cell, atIndexPath: indexPath)
         return cell
     }
     

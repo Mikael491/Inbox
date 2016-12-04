@@ -2,12 +2,13 @@
 //  Contact+CoreDataProperties.swift
 //  Inbox
 //
-//  Created by Mikael Teklehaimanot on 11/29/16.
+//  Created by Mikael Teklehaimanot on 12/2/16.
 //  Copyright © 2016 Mikael Teklehaimanot. All rights reserved.
 //
 
 import Foundation
 import CoreData
+
 
 extension Contact {
 
@@ -15,10 +16,12 @@ extension Contact {
         return NSFetchRequest<Contact>(entityName: "Contact");
     }
 
+    @NSManaged public var contactID: String?
     @NSManaged public var firstName: String?
     @NSManaged public var lastName: String?
     @NSManaged public var conversations: NSSet?
     @NSManaged public var messages: NSSet?
+    @NSManaged public var phoneNumbers: NSSet?
 
 }
 
@@ -53,5 +56,22 @@ extension Contact {
 
     @objc(removeMessages:)
     @NSManaged public func removeFromMessages(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for phoneNumbers
+extension Contact {
+
+    @objc(addPhoneNumbersObject:)
+    @NSManaged public func addToPhoneNumbers(_ value: PhoneNumber)
+
+    @objc(removePhoneNumbersObject:)
+    @NSManaged public func removeFromPhoneNumbers(_ value: PhoneNumber)
+
+    @objc(addPhoneNumbers:)
+    @NSManaged public func addToPhoneNumbers(_ values: NSSet)
+
+    @objc(removePhoneNumbers:)
+    @NSManaged public func removeFromPhoneNumbers(_ values: NSSet)
 
 }

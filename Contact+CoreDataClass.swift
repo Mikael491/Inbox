@@ -13,7 +13,7 @@ import CoreData
 public class Contact: NSManagedObject {
 
     var sortLetter : String {
-        let letter = lastName?.characters.first ?? lastName?.characters.first
+        let letter = lastName?.characters.first ?? firstName?.characters.first
         let s = String(letter!)
         return s
     }
