@@ -34,7 +34,12 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        
+        guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
+        guard let cell = cell as? FavoriteCell else { return }
+        cell.textLabel?.text = contact.fullName
+        cell.detailTextLabel?.text = "*********"
+        cell.phoneTypeLabel.text = "mobile"
+        cell.accessoryType = .detailButton
     }
 
 }
