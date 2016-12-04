@@ -2,7 +2,7 @@
 //  Contact+CoreDataProperties.swift
 //  Inbox
 //
-//  Created by Mikael Teklehaimanot on 12/2/16.
+//  Created by Mikael Teklehaimanot on 12/4/16.
 //  Copyright © 2016 Mikael Teklehaimanot. All rights reserved.
 //
 
@@ -19,6 +19,8 @@ extension Contact {
     @NSManaged public var contactID: String?
     @NSManaged public var firstName: String?
     @NSManaged public var lastName: String?
+    @NSManaged public var favorite: Bool
+    @NSManaged public var status: String?
     @NSManaged public var conversations: NSSet?
     @NSManaged public var messages: NSSet?
     @NSManaged public var phoneNumbers: NSSet?

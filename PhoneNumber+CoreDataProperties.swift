@@ -2,7 +2,7 @@
 //  PhoneNumber+CoreDataProperties.swift
 //  Inbox
 //
-//  Created by Mikael Teklehaimanot on 12/2/16.
+//  Created by Mikael Teklehaimanot on 12/4/16.
 //  Copyright © 2016 Mikael Teklehaimanot. All rights reserved.
 //
 
@@ -17,6 +17,8 @@ extension PhoneNumber {
     }
 
     @NSManaged public var value: String?
+    @NSManaged public var kind: String?
+    @NSManaged public var registered: Bool
     @NSManaged public var contact: Contact?
 
 }
