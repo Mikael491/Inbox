@@ -25,6 +25,12 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.topItem?.title = "Favorites"
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        automaticallyAdjustsScrollViewInsets = true
+        tableView.tableFooterView = UIView(frame: .zero)
+        
+        setupMainView(subview: tableView)
         
     }
 
