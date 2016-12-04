@@ -17,6 +17,7 @@ class ContactSearchResultsViewController: UITableViewController {
         }
     }
     private let cellIdentifier = "Search Cell"
+    var contactSelector: ContactSelector?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,7 @@ class ContactSearchResultsViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
          let contact = filteredContacts[indexPath.row]
         cell.textLabel?.text = contact.fullName
