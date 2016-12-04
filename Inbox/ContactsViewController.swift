@@ -66,7 +66,9 @@ class ContactsViewController: UIViewController, ContextViewController, UITableVi
     }
     
     func addContact(sender: AnyObject) {
-        
+        let vc = CNContactViewController(forNewContact: nil)
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
@@ -126,10 +128,16 @@ extension ContactsViewController : UITableViewDelegate {
     
 }
 
-
-
-
-
+extension ContactsViewController : CNContactViewControllerDelegate {
+    
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+        if contact == nil {
+            navigationController?.popViewController(animated: true)
+            return
+        }
+    }
+    
+}
 
 
 
