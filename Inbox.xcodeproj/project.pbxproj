@@ -23,6 +23,7 @@
 		FC7F23521DF38E9E0086F375 /* ContactSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F23511DF38E9E0086F375 /* ContactSelector.swift */; };
 		FC7F23541DF39F9F0086F375 /* ContextSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F23531DF39F9F0086F375 /* ContextSynchronizer.swift */; };
 		FC7F23561DF40C8B0086F375 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F23551DF40C8B0086F375 /* FavoriteCell.swift */; };
+		FC7F23581DF411580086F375 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F23571DF411580086F375 /* FavoritesViewController.swift */; };
 		FC85E4381DE3DB48004AE574 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4371DE3DB48004AE574 /* AppDelegate.swift */; };
 		FC85E43A1DE3DB48004AE574 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4391DE3DB48004AE574 /* MessageViewController.swift */; };
 		FC85E43D1DE3DB48004AE574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC85E43B1DE3DB48004AE574 /* Main.storyboard */; };
@@ -60,6 +61,7 @@
 		FC7F23511DF38E9E0086F375 /* ContactSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactSelector.swift; sourceTree = "<group>"; };
 		FC7F23531DF39F9F0086F375 /* ContextSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextSynchronizer.swift; sourceTree = "<group>"; };
 		FC7F23551DF40C8B0086F375 /* FavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		FC7F23571DF411580086F375 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		FC85E4341DE3DB48004AE574 /* Inbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85E4371DE3DB48004AE574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC85E4391DE3DB48004AE574 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */,
 				FC7F234B1DF35B740086F375 /* ContactsViewController.swift */,
 				FC7F234F1DF37D520086F375 /* ContactSearchResultsViewController.swift */,
+				FC7F23571DF411580086F375 /* FavoritesViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				FC7F23541DF39F9F0086F375 /* ContextSynchronizer.swift in Sources */,
 				FC7F23481DF2ACF50086F375 /* PhoneNumber+CoreDataProperties.swift in Sources */,
 				FC6E9A0F1DEFCADC006EDFE2 /* NewGroupViewController.swift in Sources */,
+				FC7F23581DF411580086F375 /* FavoritesViewController.swift in Sources */,
 				FC7F23461DF2ACF50086F375 /* Contact+CoreDataProperties.swift in Sources */,
 				FC85E45B1DE7A314004AE574 /* CoreDataHelper.swift in Sources */,
 				FCDE7C101DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift in Sources */,

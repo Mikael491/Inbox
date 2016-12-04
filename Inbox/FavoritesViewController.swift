@@ -1,0 +1,40 @@
+//
+//  FavoritesViewController.swift
+//  Inbox
+//
+//  Created by Mikael Teklehaimanot on 12/4/16.
+//  Copyright © 2016 Mikael Teklehaimanot. All rights reserved.
+//
+
+import UIKit
+import CoreData
+import Contacts
+import ContactsUI
+
+class FavoritesViewController: UIViewController, UITableViewFetchedResultsController, ContextViewController {
+
+    var context: NSManagedObjectContext?
+    
+    var fetchedResultsController : NSFetchedResultsController<Contact>?
+    var fetchedResultsDelegate : NSFetchedResultsControllerDelegate?
+    
+    fileprivate let tableView = UITableView(frame: CGRect.zero, style: .plain)
+    fileprivate let cellIdentifier = "FavoriteCell"
+    fileprivate let store = CNContactStore()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        
+    }
+
+}
