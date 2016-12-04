@@ -29,8 +29,24 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         automaticallyAdjustsScrollViewInsets = true
         tableView.tableFooterView = UIView(frame: .zero)
+        tableView.dataSource = self
+        tableView.delegate = self
         
         setupMainView(subview: tableView)
+        
+        if let context = context {
+            let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
+            request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true),
+                                       NSSortDescriptor(key: "firstName", ascending: true)]
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsDelegate = UITableViewFetchedResultsDelegate(tableView: tableView, controller: self)
+            fetchedResultsController?.delegate = fetchedResultsDelegate
+            do {
+                try fetchedResultsController?.performFetch()
+            } catch {
+                print("There was an error fetching contacts in FavoritesVC: \(error)")
+            }
+        }
         
     }
 
@@ -49,3 +65,41 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
     }
 
 }
+
+
+extension FavoritesViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
+    }
+    
+}
+
+extension FavoritesViewController : UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController?.sections?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let sections = fetchedResultsController?.sections else { return 0 }
+        let currentSection = sections[section]
+        return currentSection.numberOfObjects
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        configureCell(cell: cell, atIndexPath: indexPath)
+        return cell
+    }
+    
+}
+
+
+
+
+
