@@ -32,4 +32,24 @@ public class Conversation: NSManagedObject {
         mutableSetValue(forKey: "participants").add(contact)
     }
     
+    static func existing(directWith contact: Contact, inContext context: NSManagedObjectContext) -> Conversation? {
+        
+        let request : NSFetchRequest<Conversation> = NSFetchRequest(entityName: "Conversation")
+        request.predicate = NSPredicate(format: "ANY participants = %@ AND participants.@count = 1", contact)
+        do {
+            guard let results = try context.fetch(request) as? [Conversation] else { return nil }
+            return results.first
+        } catch {
+            
+        }
+        
+        return nil
+    }
+    
+    static func new(directWith contact: Contact, inContext context: NSManagedObjectContext) -> Conversation {
+        let convo = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as! Conversation
+        convo.add(participant: contact)
+        return convo
+    }
+    
 }
