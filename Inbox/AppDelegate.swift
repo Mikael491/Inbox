@@ -15,16 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private var contactImporter : ContactImporter?
+    private var contextSyncer : ContextSynchronizer?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         mainContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
         
-        let importerContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        importerContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
-        contactImporter = ContactImporter(context: importerContext)
-        importContacts(importerContext)
+        let backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        backgroundContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
+        ContextSynchronizer = ContextSynchronizer(mainContext: mainContext, backgroundContext: backgroundContext)
+        contactImporter = ContactImporter(context: backgroundContext)
+        importContacts(backgroundContext)
         contactImporter?.listenForChanges()
         
         let tabBarController = UITabBarController()
