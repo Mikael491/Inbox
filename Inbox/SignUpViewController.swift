@@ -71,7 +71,42 @@ class SignUpViewController: UIViewController {
     }
     
     func pressedContinue(sender: AnyObject) {
+        guard let phonenumber = phoneNumberTextField.text , phonenumber.characters.count > 0 else {
+            alertForError(error: "Phone number invalid")
+            return
+        }
         
+        guard let email = emailTextField.text , email.characters.count > 0 else {
+            alertForError(error: "Email invalid")
+            return
+        }
+        
+        guard let password = passwordTextField.text , password.characters.count > 6 else {
+            alertForError(error: "Password length must be greater than 6")
+            return
+        }
+    }
+    
+    func alertForError(error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
