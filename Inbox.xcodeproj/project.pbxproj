@@ -10,6 +10,8 @@
 		FC06CD0F1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */; };
 		FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */; };
 		FC1547621DED57CC009037ED /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */; };
+		FC43E22C1E01E358002110E5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22B1E01E358002110E5 /* SignUpViewController.swift */; };
+		FC43E22E1E01F64D002110E5 /* RemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22D1E01F64D002110E5 /* RemoteStore.swift */; };
 		FC6E9A0D1DEE9FDA006EDFE2 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E9A0B1DEE9FDA006EDFE2 /* Message+CoreDataProperties.swift */; };
 		FC6E9A0F1DEFCADC006EDFE2 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E9A0E1DEFCADC006EDFE2 /* NewGroupViewController.swift */; };
 		FC7F230A1DF273950086F375 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F23091DF273950086F375 /* ContactImporter.swift */; };
@@ -48,6 +50,8 @@
 		FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectParticipantsViewController.swift; sourceTree = "<group>"; };
 		FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataClass.swift"; path = "../Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC43E22B1E01E358002110E5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		FC43E22D1E01F64D002110E5 /* RemoteStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteStore.swift; sourceTree = "<group>"; };
 		FC6E9A0B1DEE9FDA006EDFE2 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "../Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC6E9A0E1DEFCADC006EDFE2 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 		FC7F23091DF273950086F375 /* ContactImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactImporter.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				FC7F234B1DF35B740086F375 /* ContactsViewController.swift */,
 				FC7F234F1DF37D520086F375 /* ContactSearchResultsViewController.swift */,
 				FC7F23571DF411580086F375 /* FavoritesViewController.swift */,
+				FC43E22B1E01E358002110E5 /* SignUpViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				FC7F23491DF33CCC0086F375 /* ContextViewController.swift */,
 				FC7F234D1DF369F40086F375 /* UITableViewFetchedResutsController.swift */,
 				FC7F23511DF38E9E0086F375 /* ContactSelector.swift */,
+				FC43E22D1E01F64D002110E5 /* RemoteStore.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -275,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC43E22C1E01E358002110E5 /* SignUpViewController.swift in Sources */,
 				FC85E4511DE4D1B7004AE574 /* BubbleImageView.swift in Sources */,
 				FC7F234C1DF35B740086F375 /* ContactsViewController.swift in Sources */,
 				FCDE7C0E1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift in Sources */,
@@ -289,6 +296,7 @@
 				FC85E45B1DE7A314004AE574 /* CoreDataHelper.swift in Sources */,
 				FCDE7C101DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift in Sources */,
 				FC7F234A1DF33CCC0086F375 /* ContextViewController.swift in Sources */,
+				FC43E22E1E01F64D002110E5 /* RemoteStore.swift in Sources */,
 				FC7F23561DF40C8B0086F375 /* FavoriteCell.swift in Sources */,
 				FC85E43A1DE3DB48004AE574 /* MessageViewController.swift in Sources */,
 				FC85E4581DE6362A004AE574 /* UITableView+Scroll.swift in Sources */,

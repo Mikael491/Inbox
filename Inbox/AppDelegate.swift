@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return nav
         }
         tabBarController.viewControllers = viewControllers
-        window?.rootViewController = tabBarController
+        window?.rootViewController = SignUpViewController()
         return true
     }
 

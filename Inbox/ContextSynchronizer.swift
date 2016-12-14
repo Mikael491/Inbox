@@ -14,6 +14,8 @@ class ContextSynchronizer: NSObject {
     private var mainContext : NSManagedObjectContext?
     private var backgroundContext : NSManagedObjectContext?
     
+    var remoteStore : RemoteStore?
+    
     init(mainContext: NSManagedObjectContext, backgroundContext: NSManagedObjectContext) {
         self.mainContext = mainContext
         self.backgroundContext = backgroundContext
@@ -27,7 +29,15 @@ class ContextSynchronizer: NSObject {
     
     func syncMainContext(notification: Notification) {
         backgroundContext?.perform({
+            
+            let inserted = self.objectsForKey(key: NSInsertedObjectsKey, dictionary: notification.userInfo!, context: self.backgroundContext!)
+            let updated = self.objectsForKey(key: NSUpdatedObjectsKey, dictionary: notification.userInfo!, context: self.backgroundContext!)
+            let deleted = self.objectsForKey(key: NSDeletedObjectsKey, dictionary: notification.userInfo!, context: self.backgroundContext!)
+            
+            
             self.backgroundContext?.mergeChanges(fromContextDidSave: notification)
+            
+            self.remoteStore?.store(insert: inserted, updated: updated, deleted: deleted)
         })
     }
     
@@ -35,6 +45,12 @@ class ContextSynchronizer: NSObject {
         mainContext?.perform({
             self.mainContext?.mergeChanges(fromContextDidSave: notification)
         })
+    }
+    
+    private func objectsForKey(key: String, dictionary: [AnyHashable : Any], context: NSManagedObjectContext) -> [NSManagedObject] {
+        guard let set = (dictionary[key] as? NSSet) else { return [] }
+        guard let objects = set.allObjects as? [NSManagedObject] else { return [] }
+        return objects.map{context.object(with: $0.objectID)}
     }
     
 }
