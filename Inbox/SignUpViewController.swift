@@ -14,7 +14,11 @@ class SignUpViewController: UIViewController {
     private let emailTextField = UITextField()
     private let passwordTextField = UITextField()
     private var fields = [(UITextField, String)]()
-
+    
+    var remoteStore : RemoteStore?
+    var rootViewController : UIViewController?
+    var contactImporter : ContactImporter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,21 +74,40 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func pressedContinue(sender: AnyObject) {
+    func pressedContinue(sender: UIButton) {
+        sender.isEnabled = false
         guard let phonenumber = phoneNumberTextField.text , phonenumber.characters.count > 0 else {
             alertForError(error: "Phone number invalid")
+            sender.isEnabled = true
             return
         }
         
         guard let email = emailTextField.text , email.characters.count > 0 else {
             alertForError(error: "Email invalid")
+            sender.isEnabled = true
             return
         }
         
         guard let password = passwordTextField.text , password.characters.count > 6 else {
             alertForError(error: "Password length must be greater than 6")
+            sender.isEnabled = true
             return
         }
+        
+        remoteStore?.signUp(phoneNumber: phonenumber, email: email, password: password, success: {
+            
+            guard let rootVC = self.rootViewController, let importer = self.contactImporter, let remoteStore = self.remoteStore else {return}
+            remoteStore.startSyncing()
+            importer.fetchContacts()
+            importer.listenForChanges()
+            
+            self.present(rootVC, animated: true, completion: nil)
+            
+        }, error: {
+            error in
+            self.alertForError(error: error)
+            sender.isEnabled = true
+        })
     }
     
     func alertForError(error: String) {
