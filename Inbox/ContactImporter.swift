@@ -83,8 +83,10 @@ class ContactImporter : NSObject {
                             contact.firstName = cnContact.givenName
                             contact.lastName = cnContact.familyName
                             contact.contactID = cnContact.identifier
+                            contact.favorite = true
                             for cnVal in cnContact.phoneNumbers {
                                 guard let phoneNumber = phoneNumbers[cnVal.value.stringValue] ?? NSEntityDescription.insertNewObject(forEntityName: "PhoneNumber", into: self.context!) as? PhoneNumber else { continue }
+                                phoneNumber.kind = CNLabeledValue<NSString>.localizedString(forLabel: cnVal.label!)
                                 phoneNumber.value = self.formatPhoneNumber(number: cnVal.value)
                                 phoneNumber.contact = contact
                             }
