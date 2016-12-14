@@ -101,7 +101,7 @@ extension NewConversationViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let contact = fetchedResultsController?.object(at: indexPath) else { return }
         guard let context = context else { return }
-        guard let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation else { return }
+        let conversation = Conversation.existing(directWith: contact, inContext: context) ?? Conversation.new(directWith: contact, inContext: context)
         conversation.add(participant: contact)
         conversationStartedDelegate?.conversationStarted(withConvo: conversation, inContext: context)
         dismiss(animated: false, completion: nil)
