@@ -65,3 +65,4 @@ fastlane/screenshots
 fastlane/test_output
 
 Inbox/Info.plist
+Inbox/GoogleService-Info.plist

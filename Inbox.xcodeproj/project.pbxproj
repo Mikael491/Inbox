@@ -11,6 +11,7 @@
 		FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */; };
 		FC115EA21E26C514006AB6FB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA11E26C514006AB6FB /* .gitignore */; };
 		FC115EA41E26C776006AB6FB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA31E26C776006AB6FB /* Info.plist */; };
+		FC115EA61E26CB4E006AB6FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA51E26CB4E006AB6FB /* GoogleService-Info.plist */; };
 		FC1547621DED57CC009037ED /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */; };
 		FC43E22C1E01E358002110E5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22B1E01E358002110E5 /* SignUpViewController.swift */; };
 		FC43E22E1E01F64D002110E5 /* RemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22D1E01F64D002110E5 /* RemoteStore.swift */; };
@@ -49,10 +50,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A18FE8FEF5AE47892782B73 /* Pods_Inbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF094B809D543E69C1F253B7 /* Pods-Inbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inbox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inbox/Pods-Inbox.debug.xcconfig"; sourceTree = "<group>"; };
+		E7F1682B84D012C883309464 /* Pods-Inbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inbox.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inbox/Pods-Inbox.release.xcconfig"; sourceTree = "<group>"; };
 		FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectParticipantsViewController.swift; sourceTree = "<group>"; };
 		FC115EA11E26C514006AB6FB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FC115EA31E26C776006AB6FB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC115EA51E26CB4E006AB6FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataClass.swift"; path = "../Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC43E22B1E01E358002110E5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FC43E22D1E01F64D002110E5 /* RemoteStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteStore.swift; sourceTree = "<group>"; };
@@ -140,6 +145,7 @@
 				FC85E43B1DE3DB48004AE574 /* Main.storyboard */,
 				FC85E4401DE3DB48004AE574 /* LaunchScreen.storyboard */,
 				FC85E43E1DE3DB48004AE574 /* Assets.xcassets */,
+				FC115EA51E26CB4E006AB6FB /* GoogleService-Info.plist */,
 				FC115EA31E26C776006AB6FB /* Info.plist */,
 			);
 			path = Inbox;
@@ -285,6 +291,7 @@
 				FC85E43F1DE3DB48004AE574 /* Assets.xcassets in Resources */,
 				FC115EA41E26C776006AB6FB /* Info.plist in Resources */,
 				FC85E43D1DE3DB48004AE574 /* Main.storyboard in Resources */,
+				FC115EA61E26CB4E006AB6FB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
