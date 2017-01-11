@@ -6,6 +6,6 @@ target 'Inbox' do
   use_frameworks!
 
   # Pods for Inbox
-  pod 'Firebase'
+  pod 'Firebase', '2.5.1'
 
 end
