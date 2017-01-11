@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var contactImporter : ContactImporter?
     private var contextSyncer : ContextSynchronizer?
     
+    //firbase context properties
+    private var contactImportSync : ContextSynchronizer?
+    private var firebaseSync : ContextSynchronizer?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
@@ -25,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
         contextSyncer = ContextSynchronizer(mainContext: mainContext, backgroundContext: backgroundContext)
+        let firebaseContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        firebaseContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
+        contactImportSync = ContextSynchronizer(mainContext: mainContext, backgroundContext: firebaseContext)
+        firebaseSync = ContextSynchronizer(mainContext: mainContext, backgroundContext: firebaseContext)
         contactImporter = ContactImporter(context: backgroundContext)
         importContacts(backgroundContext)
         contactImporter?.listenForChanges()
