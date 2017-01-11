@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FC06CD0F1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */; };
 		FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */; };
+		FC115EA21E26C514006AB6FB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA11E26C514006AB6FB /* .gitignore */; };
 		FC1547621DED57CC009037ED /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */; };
 		FC43E22C1E01E358002110E5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22B1E01E358002110E5 /* SignUpViewController.swift */; };
 		FC43E22E1E01F64D002110E5 /* RemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22D1E01F64D002110E5 /* RemoteStore.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectParticipantsViewController.swift; sourceTree = "<group>"; };
+		FC115EA11E26C514006AB6FB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataClass.swift"; path = "../Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC43E22B1E01E358002110E5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FC43E22D1E01F64D002110E5 /* RemoteStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteStore.swift; sourceTree = "<group>"; };
@@ -99,9 +101,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC115EA01E26C272006AB6FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FC85E42B1DE3DB48004AE574 = {
 			isa = PBXGroup;
 			children = (
+				FC115EA11E26C514006AB6FB /* .gitignore */,
 				FC85E4361DE3DB48004AE574 /* Inbox */,
 				FC85E4351DE3DB48004AE574 /* Products */,
 			);
@@ -118,6 +128,7 @@
 		FC85E4361DE3DB48004AE574 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
+				FC115EA01E26C272006AB6FB /* Frameworks */,
 				FCDE7C191DEE419C0049F1D0 /* Protocols */,
 				FC85E4591DE63B20004AE574 /* Resources */,
 				FC85E4561DE6360A004AE574 /* Extensions */,
@@ -268,6 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC115EA21E26C514006AB6FB /* .gitignore in Resources */,
 				FC85E4421DE3DB48004AE574 /* LaunchScreen.storyboard in Resources */,
 				FC85E43F1DE3DB48004AE574 /* Assets.xcassets in Resources */,
 				FC85E43D1DE3DB48004AE574 /* Main.storyboard in Resources */,
