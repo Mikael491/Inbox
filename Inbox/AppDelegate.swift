@@ -32,35 +32,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         contextSyncer = ContextSynchronizer(mainContext: mainContext, backgroundContext: backgroundContext)
         let firebaseContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         firebaseContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
-        contactImportSync = ContextSynchronizer(mainContext: mainContext, backgroundContext: firebaseContext)
-        firebaseSync = ContextSynchronizer(mainContext: mainContext, backgroundContext: firebaseContext)
-        contactImporter = ContactImporter(context: backgroundContext)
         
         let firebaseService = FirebaseService(context: firebaseContext)
         self.firebaseService = firebaseService
         
+        contactImportSync = ContextSynchronizer(mainContext: mainContext, backgroundContext: firebaseContext)
+        contactImportSync?.remoteStore = firebaseService
+        firebaseSync = ContextSynchronizer(mainContext: mainContext, backgroundContext: firebaseContext)
+        firebaseSync?.remoteStore = firebaseService
+        
+        contactImporter = ContactImporter(context: backgroundContext)
+        
 //        importContacts(backgroundContext)
-        contactImporter?.listenForChanges()
+        
+        //clipped code===================
+        let tabBarController = UITabBarController()
+        let vcData : [(UIViewController, UIImage, String)] = [(FavoritesViewController(), UIImage(named: "favorites_icon")!, "Favorites"), (ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"), (AllConversationsViewController(), UIImage(named: "chat_icon")!, "Conversations")]
+
+        let viewControllers = vcData.map {
+            (vc: UIViewController, image: UIImage, title: String) -> UINavigationController in
+            
+            if var vc = vc as? ContextViewController {
+                vc.context = mainContext
+            }
+            let nav = UINavigationController(rootViewController: vc)
+            nav.tabBarItem.image = image
+            nav.title = title
+            return nav
+        }
+        //===================
         
         if firebaseService.hasAuthenticated() {
-            let tabBarController = UITabBarController()
-            let vcData : [(UIViewController, UIImage, String)] = [(FavoritesViewController(), UIImage(named: "favorites_icon")!, "Favorites"), (ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"), (AllConversationsViewController(), UIImage(named: "chat_icon")!, "Conversations")]
             
-            let viewControllers = vcData.map {
-                (vc: UIViewController, image: UIImage, title: String) -> UINavigationController in
-                
-                if var vc = vc as? ContextViewController {
-                    vc.context = mainContext
-                }
-                let nav = UINavigationController(rootViewController: vc)
-                nav.tabBarItem.image = image
-                nav.title = title
-                return nav
-            }
+            firebaseService.startSyncing()
+            contactImporter?.listenForChanges()
+
             tabBarController.viewControllers = viewControllers
             window?.rootViewController = tabBarController
         } else {
-            window?.rootViewController = SignUpViewController()
+            let vc = SignUpViewController()
+            vc.remoteStore = firebaseService
+            vc.rootViewController = tabBarController
+            vc.contactImporter = contactImporter
+            window?.rootViewController = vc
         }
         return true
     }
