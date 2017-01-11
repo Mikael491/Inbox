@@ -13,6 +13,7 @@
 		FC115EA21E26C514006AB6FB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA11E26C514006AB6FB /* .gitignore */; };
 		FC115EA41E26C776006AB6FB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA31E26C776006AB6FB /* Info.plist */; };
 		FC115EA61E26CB4E006AB6FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA51E26CB4E006AB6FB /* GoogleService-Info.plist */; };
+		FC115EA81E26CFC2006AB6FB /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC115EA71E26CFC2006AB6FB /* FirebaseService.swift */; };
 		FC1547621DED57CC009037ED /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */; };
 		FC43E22C1E01E358002110E5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22B1E01E358002110E5 /* SignUpViewController.swift */; };
 		FC43E22E1E01F64D002110E5 /* RemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22D1E01F64D002110E5 /* RemoteStore.swift */; };
@@ -59,6 +60,7 @@
 		FC115EA11E26C514006AB6FB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FC115EA31E26C776006AB6FB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC115EA51E26CB4E006AB6FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FC115EA71E26CFC2006AB6FB /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataClass.swift"; path = "../Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC43E22B1E01E358002110E5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FC43E22D1E01F64D002110E5 /* RemoteStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteStore.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				FC85E45C1DE7B2F8004AE574 /* Model.xcdatamodeld */,
 				FC7F23091DF273950086F375 /* ContactImporter.swift */,
 				FC7F23531DF39F9F0086F375 /* ContextSynchronizer.swift */,
+				FC115EA71E26CFC2006AB6FB /* FirebaseService.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				FC85E45E1DE7B2F8004AE574 /* Model.xcdatamodeld in Sources */,
 				FC7F23541DF39F9F0086F375 /* ContextSynchronizer.swift in Sources */,
 				FC6E9A0F1DEFCADC006EDFE2 /* NewGroupViewController.swift in Sources */,
+				FC115EA81E26CFC2006AB6FB /* FirebaseService.swift in Sources */,
 				FC7F23581DF411580086F375 /* FavoritesViewController.swift in Sources */,
 				FC85E45B1DE7A314004AE574 /* CoreDataHelper.swift in Sources */,
 				FCDE7C101DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift in Sources */,
