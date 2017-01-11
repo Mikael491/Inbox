@@ -13,13 +13,13 @@ import CoreData
 class FirebaseService {
     
     private var context : NSManagedObjectContext
-    private let rootRef = FIRDatabase.fi
+    private let rootRef = Firebase(url: "https://Inbox.firebaseio.com")
     
     init (context: NSManagedObjectContext) {
         self.context = context
     }
     
     func hasAuthenticated() -> Bool {
-        return true
+        return rootRef?.authData != nil
     }
 }
