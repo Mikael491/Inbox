@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05F44679AC4C18478984AA63 /* Pods_Inbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A18FE8FEF5AE47892782B73 /* Pods_Inbox.framework */; };
 		FC06CD0F1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */; };
 		FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */; };
 		FC115EA21E26C514006AB6FB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA11E26C514006AB6FB /* .gitignore */; };
@@ -101,12 +102,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05F44679AC4C18478984AA63 /* Pods_Inbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15592178772A11179F64C6E2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CF094B809D543E69C1F253B7 /* Pods-Inbox.debug.xcconfig */,
+				E7F1682B84D012C883309464 /* Pods-Inbox.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		55965907031662A04FE1D922 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A18FE8FEF5AE47892782B73 /* Pods_Inbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FC115EA01E26C272006AB6FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +139,8 @@
 				FC115EA11E26C514006AB6FB /* .gitignore */,
 				FC85E4361DE3DB48004AE574 /* Inbox */,
 				FC85E4351DE3DB48004AE574 /* Products */,
+				15592178772A11179F64C6E2 /* Pods */,
+				55965907031662A04FE1D922 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -233,9 +254,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC85E4461DE3DB48004AE574 /* Build configuration list for PBXNativeTarget "Inbox" */;
 			buildPhases = (
+				CAE5E3632D19001546B4B879 /* [CP] Check Pods Manifest.lock */,
 				FC85E4301DE3DB48004AE574 /* Sources */,
 				FC85E4311DE3DB48004AE574 /* Frameworks */,
 				FC85E4321DE3DB48004AE574 /* Resources */,
+				CAA8DC1D8CAD95E9CE3FB98F /* [CP] Embed Pods Frameworks */,
+				CBA483214F4F87768610DE52 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -296,6 +320,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CAA8DC1D8CAD95E9CE3FB98F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inbox/Pods-Inbox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CAE5E3632D19001546B4B879 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CBA483214F4F87768610DE52 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inbox/Pods-Inbox-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FC85E4301DE3DB48004AE574 /* Sources */ = {
@@ -456,6 +528,7 @@
 		};
 		FC85E4471DE3DB48004AE574 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF094B809D543E69C1F253B7 /* Pods-Inbox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -471,6 +544,7 @@
 		};
 		FC85E4481DE3DB48004AE574 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7F1682B84D012C883309464 /* Pods-Inbox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
