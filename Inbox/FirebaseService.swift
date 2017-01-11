@@ -15,6 +15,15 @@ class FirebaseService {
     private var context : NSManagedObjectContext
     private let rootRef = Firebase(url: "https://Inbox.firebaseio.com")
     
+    private var currentPhoneNumber: String? {
+        set(phoneNumber) {
+            UserDefaults.standard.set(phoneNumber, forKey: "phoneNumber")
+        }
+        get {
+            return UserDefaults.standard.string(forKey: "phoneNumber")!
+        }
+    }
+    
     init (context: NSManagedObjectContext) {
         self.context = context
     }
