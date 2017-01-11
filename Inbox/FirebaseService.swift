@@ -23,3 +23,17 @@ class FirebaseService {
         return rootRef?.authData != nil
     }
 }
+
+extension FirebaseService : RemoteStore {
+    func startSyncing() {
+        
+    }
+    
+    func store(insert inserted: [NSManagedObject], updated: [NSManagedObject], deleted: [NSManagedObject]) {
+        
+    }
+    
+    func signUp(phoneNumber: String, email: String, password: String, success: () -> (), error: (String) -> ()) {
+        
+    }
+}
