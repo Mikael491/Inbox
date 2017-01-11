@@ -10,6 +10,7 @@
 		FC06CD0F1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */; };
 		FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */; };
 		FC115EA21E26C514006AB6FB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA11E26C514006AB6FB /* .gitignore */; };
+		FC115EA41E26C776006AB6FB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA31E26C776006AB6FB /* Info.plist */; };
 		FC1547621DED57CC009037ED /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */; };
 		FC43E22C1E01E358002110E5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22B1E01E358002110E5 /* SignUpViewController.swift */; };
 		FC43E22E1E01F64D002110E5 /* RemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22D1E01F64D002110E5 /* RemoteStore.swift */; };
@@ -51,6 +52,7 @@
 		FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectParticipantsViewController.swift; sourceTree = "<group>"; };
 		FC115EA11E26C514006AB6FB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		FC115EA31E26C776006AB6FB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataClass.swift"; path = "../Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC43E22B1E01E358002110E5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FC43E22D1E01F64D002110E5 /* RemoteStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteStore.swift; sourceTree = "<group>"; };
@@ -74,7 +76,6 @@
 		FC85E43C1DE3DB48004AE574 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC85E43E1DE3DB48004AE574 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC85E4411DE3DB48004AE574 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FC85E4431DE3DB48004AE574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC85E44E1DE4B715004AE574 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		FC85E4501DE4D1B7004AE574 /* BubbleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleImageView.swift; sourceTree = "<group>"; };
 		FC85E4571DE6362A004AE574 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Scroll.swift"; sourceTree = "<group>"; };
@@ -139,7 +140,7 @@
 				FC85E43B1DE3DB48004AE574 /* Main.storyboard */,
 				FC85E4401DE3DB48004AE574 /* LaunchScreen.storyboard */,
 				FC85E43E1DE3DB48004AE574 /* Assets.xcassets */,
-				FC85E4431DE3DB48004AE574 /* Info.plist */,
+				FC115EA31E26C776006AB6FB /* Info.plist */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -282,6 +283,7 @@
 				FC115EA21E26C514006AB6FB /* .gitignore in Resources */,
 				FC85E4421DE3DB48004AE574 /* LaunchScreen.storyboard in Resources */,
 				FC85E43F1DE3DB48004AE574 /* Assets.xcassets in Resources */,
+				FC115EA41E26C776006AB6FB /* Info.plist in Resources */,
 				FC85E43D1DE3DB48004AE574 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
