@@ -29,21 +29,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         mainContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
         
-        let backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        backgroundContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
-        contextSyncer = ContextSynchronizer(mainContext: mainContext, backgroundContext: backgroundContext)
+        let contactsContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        contactsContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
+        contextSyncer = ContextSynchronizer(mainContext: mainContext, backgroundContext: contactsContext)
         let firebaseContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         firebaseContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
         
         let firebaseService = FirebaseService(context: firebaseContext)
         self.firebaseService = firebaseService
         
-        contactImportSync = ContextSynchronizer(mainContext: mainContext, backgroundContext: firebaseContext)
+        contactImportSync = ContextSynchronizer(mainContext: contactsContext, backgroundContext: firebaseContext)
         contactImportSync?.remoteStore = firebaseService
         firebaseSync = ContextSynchronizer(mainContext: mainContext, backgroundContext: firebaseContext)
         firebaseSync?.remoteStore = firebaseService
         
-        contactImporter = ContactImporter(context: backgroundContext)
+        contactImporter = ContactImporter(context: contactsContext)
         
 //        importContacts(backgroundContext)
         
