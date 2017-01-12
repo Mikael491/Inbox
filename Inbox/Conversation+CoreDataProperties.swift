@@ -1,9 +1,9 @@
 //
 //  Conversation+CoreDataProperties.swift
-//  Inbox
+//  
 //
-//  Created by Mikael Teklehaimanot on 12/1/16.
-//  Copyright © 2016 Mikael Teklehaimanot. All rights reserved.
+//  Created by Mikael Teklehaimanot on 1/12/17.
+//
 //
 
 import Foundation
@@ -18,6 +18,7 @@ extension Conversation {
 
     @NSManaged public var lastMessageTime: NSDate?
     @NSManaged public var name: String?
+    @NSManaged public var storageID: String?
     @NSManaged public var message: NSSet?
     @NSManaged public var participants: NSSet?
 
