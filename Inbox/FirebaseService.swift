@@ -12,7 +12,7 @@ import CoreData
 
 class FirebaseService {
     
-    private var context : NSManagedObjectContext
+    fileprivate var context : NSManagedObjectContext
     fileprivate let rootRef = FIRDatabase.database().reference(fromURL: "https://inbox-6c25d.firebaseio.com/")
     fileprivate let authData = FIRAuth.auth()
     
@@ -47,6 +47,11 @@ extension FirebaseService : RemoteStore {
     func store(insert inserted: [NSManagedObject], updated: [NSManagedObject], deleted: [NSManagedObject]) {
         inserted.forEach { (object) in
             upload(model: object)
+        }
+        do {
+            try context.save()
+        } catch {
+            print("Error saving: \(error)")
         }
     }
     
