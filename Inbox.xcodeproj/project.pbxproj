@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		05F44679AC4C18478984AA63 /* Pods_Inbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A18FE8FEF5AE47892782B73 /* Pods_Inbox.framework */; };
-		FC06CD0F1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */; };
 		FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */; };
 		FC115EA21E26C514006AB6FB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA11E26C514006AB6FB /* .gitignore */; };
 		FC115EA41E26C776006AB6FB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA31E26C776006AB6FB /* Info.plist */; };
@@ -46,6 +45,7 @@
 		FC85E4721DECDB20004AE574 /* AllConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4711DECDB20004AE574 /* AllConversationsViewController.swift */; };
 		FCC5820C1E27F0B000F146C8 /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5820B1E27F0B000F146C8 /* FirebaseModel.swift */; };
 		FCC5820E1E27F4ED00F146C8 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5820D1E27F4ED00F146C8 /* Contact+CoreDataProperties.swift */; };
+		FCC582121E27FECB00F146C8 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC582111E27FECB00F146C8 /* Conversation+CoreDataProperties.swift */; };
 		FCDE7C0C1DED6D670049F1D0 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */; };
 		FCDE7C0E1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0D1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift */; };
 		FCDE7C101DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0F1DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift */; };
@@ -56,7 +56,6 @@
 		0A18FE8FEF5AE47892782B73 /* Pods_Inbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF094B809D543E69C1F253B7 /* Pods-Inbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inbox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inbox/Pods-Inbox.debug.xcconfig"; sourceTree = "<group>"; };
 		E7F1682B84D012C883309464 /* Pods-Inbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inbox.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inbox/Pods-Inbox.release.xcconfig"; sourceTree = "<group>"; };
-		FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectParticipantsViewController.swift; sourceTree = "<group>"; };
 		FC115EA11E26C514006AB6FB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FC115EA31E26C776006AB6FB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		FC85E4711DECDB20004AE574 /* AllConversationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllConversationsViewController.swift; sourceTree = "<group>"; };
 		FCC5820B1E27F0B000F146C8 /* FirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
 		FCC5820D1E27F4ED00F146C8 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FCC582111E27FECB00F146C8 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		FCDE7C0D1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewFetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		FCDE7C0F1DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SetupMainView.swift"; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 				FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */,
 				FC6E9A0B1DEE9FDA006EDFE2 /* Message+CoreDataProperties.swift */,
 				FC85E46B1DECA4F3004AE574 /* Message+CoreDataClass.swift */,
-				FC06CD0E1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift */,
+				FCC582111E27FECB00F146C8 /* Conversation+CoreDataProperties.swift */,
 				FC85E4651DECA4AE004AE574 /* Conversation+CoreDataClass.swift */,
 				FC85E45C1DE7B2F8004AE574 /* Model.xcdatamodeld */,
 				FC7F23091DF273950086F375 /* ContactImporter.swift */,
@@ -402,9 +402,9 @@
 				FC85E43A1DE3DB48004AE574 /* MessageViewController.swift in Sources */,
 				FC85E4581DE6362A004AE574 /* UITableView+Scroll.swift in Sources */,
 				FC1547621DED57CC009037ED /* Contact+CoreDataClass.swift in Sources */,
+				FCC582121E27FECB00F146C8 /* Conversation+CoreDataProperties.swift in Sources */,
 				FC85E4721DECDB20004AE574 /* AllConversationsViewController.swift in Sources */,
 				FC85E4701DECACDB004AE574 /* ConversationCell.swift in Sources */,
-				FC06CD0F1DF0ADA500C04162 /* Conversation+CoreDataProperties.swift in Sources */,
 				FC7F234E1DF369F40086F375 /* UITableViewFetchedResutsController.swift in Sources */,
 				FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */,
 				FC7F235B1DF41CD80086F375 /* PhoneNumber+CoreDataProperties.swift in Sources */,
