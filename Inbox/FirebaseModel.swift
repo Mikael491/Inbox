@@ -67,7 +67,20 @@ extension Conversation : FirebaseModel {
     }
 }
 
-
+extension Message : FirebaseModel {
+    func upload(rootRef: FIRDatabaseReference, context: NSManagedObjectContext) {
+        if conversation?.storageID == nil {
+            conversation?.upload(rootRef: rootRef, context: context)
+        }
+        let data = [
+            "message" : text!,
+            "sender" : FirebaseService.currentPhoneNumber!
+        ]
+        guard let conversation = conversation, let timestamp = timestamp, let storageID = conversation.storageID else { return }
+        let timeInterval = String(Int(timestamp.timeIntervalSince1970 * 100000))
+        rootRef.child("conversations").child(storageID).child("messages").child(timeInterval).setValue(data)
+    }
+}
 
 
 
