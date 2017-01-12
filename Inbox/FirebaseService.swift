@@ -16,7 +16,7 @@ class FirebaseService {
     fileprivate let rootRef = FIRDatabase.database().reference(fromURL: "https://inbox-6c25d.firebaseio.com/")
     fileprivate let authData = FIRAuth.auth()
     
-    fileprivate var currentPhoneNumber: String? {
+    fileprivate(set) static var currentPhoneNumber: String? {
         set(phoneNumber) {
             UserDefaults.standard.set(phoneNumber, forKey: "phoneNumber")
         }
@@ -27,8 +27,6 @@ class FirebaseService {
     
     init (context: NSManagedObjectContext) {
         self.context = context
-        print("Custom Root: \(rootRef)")
-        print("Internal Root: \(rootRef.root)")
     }
     
     func hasAuthenticated() -> Bool {
@@ -63,7 +61,7 @@ extension FirebaseService : RemoteStore {
                 ]
                 print("Result: \(result)")
                 let uid = result?.uid
-                self.currentPhoneNumber = phoneNumber
+                FirebaseService.currentPhoneNumber = phoneNumber
                 self.rootRef.child("users").child(uid!).setValue(newUser)
                 FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (result, error) in
                     if (error != nil) {
