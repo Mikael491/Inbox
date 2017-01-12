@@ -37,3 +37,63 @@ extension Contact : FirebaseModel {
         }
     }
 }
+
+extension Conversation : FirebaseModel {
+    func upload(rootRef: FIRDatabaseReference, context: NSManagedObjectContext) {
+        guard storageID == nil else { return }
+        let ref = rootRef.child("conversations").childByAutoId()
+        storageID = ref.key
+        var data: Dictionary<String,AnyObject> = [
+            "id" : ref.key as AnyObject
+        ]
+        guard let participants = participants?.allObjects as? [Contact] else { return }
+        var numbers = [FirebaseService.currentPhoneNumber! : true]
+        var userIds = [FIRAuth.auth()?.currentUser?.uid]
+        
+        for participant in participants {
+            guard let phoneNumbers = participant.phoneNumbers?.allObjects as? [PhoneNumber] else { continue }
+            guard let number = phoneNumbers.filter({$0.registered}).first else { continue }
+            numbers[number.value!] = true
+            userIds.append(participant.storageID)
+        }
+        data["participants"] = numbers as AnyObject?
+        if let name = name {
+            data["name"] = name as AnyObject?
+        }
+        ref.setValue(["meta":data])
+        for id in userIds {
+            rootRef.child("users").child(id!).child("conversations").child(ref.key).setValue(true)
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
