@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        importContacts(backgroundContext)
         
-        //clipped code===================
+
         let tabBarController = UITabBarController()
         let vcData : [(UIViewController, UIImage, String)] = [(FavoritesViewController(), UIImage(named: "favorites_icon")!, "Favorites"), (ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"), (AllConversationsViewController(), UIImage(named: "chat_icon")!, "Conversations")]
 
@@ -60,14 +60,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             nav.title = title
             return nav
         }
-        //===================
+
+        tabBarController.viewControllers = viewControllers
         
         if firebaseService.hasAuthenticated() {
             
             firebaseService.startSyncing()
             contactImporter?.listenForChanges()
 
-            tabBarController.viewControllers = viewControllers
             window?.rootViewController = tabBarController
         } else {
             let vc = SignUpViewController()
