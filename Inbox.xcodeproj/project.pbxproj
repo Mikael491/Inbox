@@ -45,6 +45,7 @@
 		FC85E46D1DECA4F3004AE574 /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E46B1DECA4F3004AE574 /* Message+CoreDataClass.swift */; };
 		FC85E4701DECACDB004AE574 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E46F1DECACDB004AE574 /* ConversationCell.swift */; };
 		FC85E4721DECDB20004AE574 /* AllConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4711DECDB20004AE574 /* AllConversationsViewController.swift */; };
+		FCC5820C1E27F0B000F146C8 /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5820B1E27F0B000F146C8 /* FirebaseModel.swift */; };
 		FCDE7C0C1DED6D670049F1D0 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */; };
 		FCDE7C0E1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0D1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift */; };
 		FCDE7C101DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0F1DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift */; };
@@ -93,6 +94,7 @@
 		FC85E46B1DECA4F3004AE574 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataClass.swift"; path = "../Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC85E46F1DECACDB004AE574 /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		FC85E4711DECDB20004AE574 /* AllConversationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllConversationsViewController.swift; sourceTree = "<group>"; };
+		FCC5820B1E27F0B000F146C8 /* FirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
 		FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		FCDE7C0D1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewFetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		FCDE7C0F1DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SetupMainView.swift"; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				FC7F234D1DF369F40086F375 /* UITableViewFetchedResutsController.swift */,
 				FC7F23511DF38E9E0086F375 /* ContactSelector.swift */,
 				FC43E22D1E01F64D002110E5 /* RemoteStore.swift */,
+				FCC5820B1E27F0B000F146C8 /* FirebaseModel.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC5820C1E27F0B000F146C8 /* FirebaseModel.swift in Sources */,
 				FC43E22C1E01E358002110E5 /* SignUpViewController.swift in Sources */,
 				FC85E4511DE4D1B7004AE574 /* BubbleImageView.swift in Sources */,
 				FC7F234C1DF35B740086F375 /* ContactsViewController.swift in Sources */,

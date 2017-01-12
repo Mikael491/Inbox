@@ -34,6 +34,10 @@ class FirebaseService {
     func hasAuthenticated() -> Bool {
         return UserDefaults.standard.string(forKey: "phoneNumber") != nil
     }
+    fileprivate func upload(model: NSManagedObject) {
+        guard let model = model as? FirebaseModel else { return }
+        model.upload(rootRef: rootRef, context: context)
+    }
 }
 
 extension FirebaseService : RemoteStore {
@@ -43,7 +47,9 @@ extension FirebaseService : RemoteStore {
     }
     
     func store(insert inserted: [NSManagedObject], updated: [NSManagedObject], deleted: [NSManagedObject]) {
-        
+        inserted.forEach { (object) in
+            upload(model: object)
+        }
     }
     
     func signUp(phoneNumber: String, email: String, password: String, success: @escaping () -> (), error errorCallback: @escaping (String) -> ()) {
