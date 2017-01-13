@@ -35,8 +35,9 @@ class NewConversationViewController: UIViewController, UITableViewFetchedResults
         
         if let context = context {
             let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
+            request.predicate = NSPredicate(format: "storageID != nil")
             request.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true)]
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: "NewConversationViewController")
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: nil)
             tableViewFetchedResults = UITableViewFetchedResultsDelegate(tableView: tableView, controller: self)
             fetchedResultsController?.delegate = tableViewFetchedResults
             do {
