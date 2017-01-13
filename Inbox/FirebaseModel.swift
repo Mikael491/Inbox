@@ -15,6 +15,24 @@ protocol FirebaseModel {
 }
 
 extension Contact : FirebaseModel {
+    
+    func getContactID(phoneNumber: String, rootRef: FIRDatabaseReference, context: NSManagedObjectContext) {
+        rootRef.child("users").queryOrdered(byChild: "phoneNumber").queryEnding(atValue: phoneNumber).observeSingleEvent(of: .value, with:
+            {
+                snapshot in
+                guard let user = snapshot.value as? NSDictionary else { return }
+                let uid = user.allKeys.first as? String
+                context.perform {
+                    self.storageID = uid
+                    do {
+                        try context.save()
+                    } catch {
+                        print("Error saving to context extension Contact#getContactID... ")
+                    }
+                }
+        })
+    }
+    
     func upload(rootRef: FIRDatabaseReference, context: NSManagedObjectContext) {
         guard let phoneNumbers = phoneNumbers?.allObjects as? [PhoneNumber] else { return }
         for number in phoneNumbers {
