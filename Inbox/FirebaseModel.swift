@@ -108,6 +108,31 @@ extension Contact : FirebaseModel {
 
 extension Conversation : FirebaseModel {
     
+    func observeMessages(rootRef: FIRDatabaseReference, context: NSManagedObjectContext) {
+        guard let storageID = storageID else { return }
+        let lastFetch = lastMessage?.timestamp?.timeIntervalSince1970 ?? 0
+        
+        rootRef.child("conversations").child(storageID).child("messages").queryOrderedByKey().queryStarting(atValue: String(lastFetch * 100000)).observe(.childAdded, with: {
+            snapshot in
+            guard let timeInterval = Double(snapshot.key) else { return }
+            guard let snapshot = snapshot.value as? NSDictionary else { return }
+            context.perform {
+                guard let phoneNumber = snapshot["sender"] as? String, phoneNumber != FirebaseService.currentPhoneNumber else { return }
+                guard let recievedMessage = snapshot["message"] as? String else { return }
+                let date = NSDate(timeIntervalSince1970: timeInterval/100000)
+                
+                guard let messageObject = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as? Message else { return }
+                messageObject.text = recievedMessage
+                messageObject.timestamp = date
+                messageObject.sender = Contact.existing(withPhoneNumber: phoneNumber, rootRef: rootRef, inContext: context) ?? Contact.new(forPhoneNumber: phoneNumber, rootRef: rootRef, inContext: context)
+                messageObject.conversation = self
+                do {
+                    try context.save()
+                } catch { print( "Error saving in extension Conversation#observeMessages...\(error)" ) }
+            }
+        })
+    }
+    
     static func new(forStorageId storageId: String, rootRef: FIRDatabaseReference, inContext context: NSManagedObjectContext) -> Conversation {
         let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as! Conversation
         conversation.storageID = storageId
