@@ -153,6 +153,7 @@ extension Conversation : FirebaseModel {
                 conversation.name = name
                 try context.save()
             } catch { print("Error saving in extension Conversation#new....\(error)") }
+            conversation.observeMessages(rootRef: rootRef, context: context)
         })
         return conversation
     }
