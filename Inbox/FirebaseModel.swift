@@ -30,12 +30,32 @@ extension Contact : FirebaseModel {
                     do {
                         try context.save()
                     } catch {
-                        print("Error saving context when importing phoneNumber")
+                        print("Error saving context when importing phoneNumber...\(error)")
                     }
                 }
             })
         }
     }
+    
+    func observeStatus(rootRef: FIRDatabaseReference, context: NSManagedObjectContext) {
+        print("============================================")
+        print("hit extension Contacts#observeStatus ....")
+        print("============================================")
+
+        rootRef.child("users").child(storageID!).child("status").observe(.value, with: {
+            snapshot in
+            guard let status = snapshot.value as? String else { return }
+            context.perform {
+                self.status = status
+                do {
+                    try context.save()
+                } catch {
+                    print("Error saving, line 49 in FirebaseModel...\(error)")
+                }
+            }
+        })
+    }
+    
 }
 
 extension Conversation : FirebaseModel {
