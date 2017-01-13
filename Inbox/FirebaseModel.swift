@@ -106,6 +106,46 @@ extension Contact : FirebaseModel {
 }
 
 extension Conversation : FirebaseModel {
+    
+    static func new(forStorageId storageId: String, rootRef: FIRDatabaseReference, inContext context: NSManagedObjectContext) -> Conversation {
+        let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as! Conversation
+        conversation.storageID = storageId
+        rootRef.child("conversations").child(storageId).child("meta").observeSingleEvent(of: .value, with: {
+            snapshot in
+            guard let data = snapshot.value as? NSDictionary else { return }
+            guard let participantsDict = data["participants"] as? NSMutableDictionary else { return }
+            
+            participantsDict.removeObject(forKey: FirebaseService.currentPhoneNumber!)
+            let participants = participantsDict.allKeys.map{
+                (phoneNumber: Any) -> Contact in
+                let phoneNumber = phoneNumber as! String
+                return Contact.existing(withPhoneNumber: phoneNumber, rootRef: rootRef, inContext: context) ?? Contact.new(forPhoneNumber: phoneNumber, rootRef: rootRef, inContext: context)
+            }
+            let name = data["name"] as? String
+            do {
+                conversation.participants = NSSet(array: participants)
+                conversation.name = name
+                try context.save()
+            } catch { print("Error saving in extension Conversation#new....\(error)") }
+        })
+        return conversation
+    }
+    
+    static func existing(withStorageId storageID: String, inContext context: NSManagedObjectContext) -> Conversation? {
+        let request : NSFetchRequest<Conversation> = NSFetchRequest(entityName: "Conversation")
+        request.predicate = NSPredicate(format: "storageID=%@", storageID)
+        do {
+            if let results = try context.fetch(request) as? [Conversation], results.count > 0 {
+                if let conversation = results.first {
+                    return conversation
+                }
+            }
+        } catch {
+            print("Error returning existing conversations in extension Conversation#existing...\(error)")
+        }
+        return nil
+    }
+    
     func upload(rootRef: FIRDatabaseReference, context: NSManagedObjectContext) {
         guard storageID == nil else { return }
         let ref = rootRef.child("conversations").childByAutoId()
