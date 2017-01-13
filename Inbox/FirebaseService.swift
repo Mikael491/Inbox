@@ -62,6 +62,19 @@ class FirebaseService {
         //TODO: fix issue of inability obtaining status of contacts on signup
     }
     
+    fileprivate func observeConvesations() {
+        rootRef.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("conversations").observe(.childAdded, with: {
+            snapshot in
+            let uid = snapshot.key
+            let conversation = Conversation.existing(withStorageId: uid, inContext: self.context) ?? Conversation.new(forStorageId: uid, rootRef: self.rootRef, inContext: self.context)
+            if conversation.isInserted {
+                do {
+                    try self.context.save()
+                } catch { print("error saveing in FirebaseService#observeConversations...\(error)") }
+            }
+        })
+    }
+    
 }
 
 extension FirebaseService : RemoteStore {
