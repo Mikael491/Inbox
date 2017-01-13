@@ -48,6 +48,7 @@ class SelectParticipantsViewController: UIViewController {
         
         if let context = context {
             let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
+            request.predicate = NSPredicate(format: "storageID != nil")
             request.sortDescriptors = [NSSortDescriptor.init(key: "lastName", ascending: true), NSSortDescriptor.init(key: "firstName", ascending: true)]
             do {
                 if let result = try context.fetch(request) as? [Contact] {
