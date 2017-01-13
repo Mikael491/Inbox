@@ -79,6 +79,7 @@ extension Contact : FirebaseModel {
                     } catch {
                         print("Error saving context when importing phoneNumber...\(error)")
                     }
+                    self.observeStatus(rootRef: rootRef, context: context)
                 }
             })
         }
