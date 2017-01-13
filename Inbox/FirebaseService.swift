@@ -36,12 +36,40 @@ class FirebaseService {
         guard let model = model as? FirebaseModel else { return }
         model.upload(rootRef: rootRef, context: context)
     }
+    
+    func fetchAppContacts() -> [Contact] {
+        do {
+            let request: NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
+            request.predicate = NSPredicate(format: "storageID != nil")
+            if let results = try self.context.fetch(request) as? [Contact] {
+                return results
+            }
+            
+        } catch {
+            print("Error fetching app contacts in line 61 of FirebaseModel...\(error)")
+            return []
+        }
+    }
+    
+    //following function is strictly for readability and cleanliness
+    fileprivate func observeUserStatus(contact: Contact) {
+        contact.observeStatus(rootRef: rootRef, context: context)
+    }
+    
+    fileprivate func observeStatuses() {
+        let contacts = fetchAppContacts()
+        contacts.forEach(observeUserStatus)
+        //TODO: fix issue of inability obtaining status of contacts on signup
+    }
+    
 }
 
 extension FirebaseService : RemoteStore {
 
     func startSyncing() {
-        
+        context.perform {
+            self.observeStatuses()
+        }
     }
     
     func store(insert inserted: [NSManagedObject], updated: [NSManagedObject], deleted: [NSManagedObject]) {
