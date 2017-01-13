@@ -59,7 +59,6 @@ class FirebaseService {
     fileprivate func observeStatuses() {
         let contacts = fetchAppContacts()
         contacts.forEach(observeUserStatus)
-        //TODO: fix issue of inability obtaining status of contacts on signup
     }
     
     fileprivate func observeConvesations() {
