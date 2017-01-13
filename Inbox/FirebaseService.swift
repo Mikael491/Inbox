@@ -81,6 +81,7 @@ extension FirebaseService : RemoteStore {
     func startSyncing() {
         context.perform {
             self.observeStatuses()
+            self.observeConvesations()
         }
     }
     
