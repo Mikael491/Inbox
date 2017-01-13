@@ -16,7 +16,7 @@ protocol FirebaseModel {
 
 extension Contact : FirebaseModel {
     
-    static func new(forPhoneNumber phoneNumberVal: String, rootRef: FIRDatabaseReference, inContext context: NSManagedObjectContext) -> Contact? {
+    static func new(forPhoneNumber phoneNumberVal: String, rootRef: FIRDatabaseReference, inContext context: NSManagedObjectContext) -> Contact {
         let contact = NSEntityDescription.insertNewObject(forEntityName: "Contact", into: context) as! Contact
         let phoneNumber = NSEntityDescription.insertNewObject(forEntityName: "PhoneNumber", into: context) as! PhoneNumber
         
