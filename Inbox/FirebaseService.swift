@@ -32,6 +32,11 @@ class FirebaseService {
     func hasAuthenticated() -> Bool {
         return UserDefaults.standard.string(forKey: "phoneNumber") != nil
     }
+    
+    fileprivate func listenForMessages(conversation: Conversation) {
+        conversation.observeMessages(rootRef: rootRef, context: context)
+    }
+    
     fileprivate func upload(model: NSManagedObject) {
         guard let model = model as? FirebaseModel else { return }
         model.upload(rootRef: rootRef, context: context)
@@ -71,6 +76,7 @@ class FirebaseService {
                     try self.context.save()
                 } catch { print("error saveing in FirebaseService#observeConversations...\(error)") }
             }
+            self.listenForMessages(conversation: conversation)
         })
     }
     
