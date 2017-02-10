@@ -12,6 +12,7 @@ import CoreData
 class AllConversationsViewController: UIViewController, UITableViewFetchedResultsController, ConversationStartedDelegate, ContextViewController {
     
     //TODO: fix issue with blank chat on first(signup) init
+    //TODO: Conversation indicator cells blank
     
     var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Conversation>?
