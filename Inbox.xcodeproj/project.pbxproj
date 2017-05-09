@@ -46,6 +46,7 @@
 		FCC5820C1E27F0B000F146C8 /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5820B1E27F0B000F146C8 /* FirebaseModel.swift */; };
 		FCC5820E1E27F4ED00F146C8 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5820D1E27F4ED00F146C8 /* Contact+CoreDataProperties.swift */; };
 		FCC582121E27FECB00F146C8 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC582111E27FECB00F146C8 /* Conversation+CoreDataProperties.swift */; };
+		FCDB0F941E54F4EF0077951D /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB0F931E54F4EF0077951D /* ForgotPasswordViewController.swift */; };
 		FCDE7C0C1DED6D670049F1D0 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */; };
 		FCDE7C0E1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0D1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift */; };
 		FCDE7C101DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE7C0F1DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift */; };
@@ -95,6 +96,7 @@
 		FCC5820B1E27F0B000F146C8 /* FirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
 		FCC5820D1E27F4ED00F146C8 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FCC582111E27FECB00F146C8 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FCDB0F931E54F4EF0077951D /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		FCDE7C0B1DED6D670049F1D0 /* NewConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		FCDE7C0D1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewFetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		FCDE7C0F1DEDE7DD0049F1D0 /* UIViewController+SetupMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SetupMainView.swift"; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				FC7F234F1DF37D520086F375 /* ContactSearchResultsViewController.swift */,
 				FC7F23571DF411580086F375 /* FavoritesViewController.swift */,
 				FC43E22B1E01E358002110E5 /* SignUpViewController.swift */,
+				FCDB0F931E54F4EF0077951D /* ForgotPasswordViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -288,7 +291,7 @@
 				TargetAttributes = {
 					FC85E4331DE3DB48004AE574 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 89W2VT2ZMS;
+						DevelopmentTeam = 2WAWR77T4M;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -387,6 +390,7 @@
 				FCDE7C0E1DEDDB0A0049F1D0 /* UITableViewFetchedResultsDelegate.swift in Sources */,
 				FC7F23501DF37D520086F375 /* ContactSearchResultsViewController.swift in Sources */,
 				FCDE7C0C1DED6D670049F1D0 /* NewConversationViewController.swift in Sources */,
+				FCDB0F941E54F4EF0077951D /* ForgotPasswordViewController.swift in Sources */,
 				FC85E44F1DE4B715004AE574 /* MessageCell.swift in Sources */,
 				FC85E45E1DE7B2F8004AE574 /* Model.xcdatamodeld in Sources */,
 				FC7F23541DF39F9F0086F375 /* ContextSynchronizer.swift in Sources */,
@@ -540,7 +544,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 89W2VT2ZMS;
+				DEVELOPMENT_TEAM = 2WAWR77T4M;
 				INFOPLIST_FILE = Inbox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -556,7 +560,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 89W2VT2ZMS;
+				DEVELOPMENT_TEAM = 2WAWR77T4M;
 				INFOPLIST_FILE = Inbox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

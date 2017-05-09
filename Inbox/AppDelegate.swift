@@ -63,21 +63,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return nav
         }
 
-        tabBarController.viewControllers = viewControllers
-        
-        if firebaseService.hasAuthenticated() {
-            
-            firebaseService.startSyncing()
-            contactImporter?.listenForChanges()
-
-            window?.rootViewController = tabBarController
-        } else {
-            let vc = SignUpViewController()
-            vc.remoteStore = firebaseService
-            vc.rootViewController = tabBarController
-            vc.contactImporter = contactImporter
-            window?.rootViewController = vc
-        }
+//        tabBarController.viewControllers = viewControllers
+//        
+//        if firebaseService.hasAuthenticated() {
+//            
+//            firebaseService.startSyncing()
+//            contactImporter?.listenForChanges()
+//
+//            window?.rootViewController = tabBarController
+//        } else {
+//            let vc = SignUpViewController()
+//            vc.remoteStore = firebaseService
+//            vc.rootViewController = tabBarController
+//            vc.contactImporter = contactImporter
+//            window?.rootViewController = vc
+//        }
+//        let fpvc = ForgotPasswordViewController()
+//        window?.rootViewController = fpvc
         return true
     }
 
