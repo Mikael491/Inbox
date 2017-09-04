@@ -10,7 +10,6 @@
 		05F44679AC4C18478984AA63 /* Pods_Inbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A18FE8FEF5AE47892782B73 /* Pods_Inbox.framework */; };
 		FC06CD121DF0B1A200C04162 /* SelectParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */; };
 		FC115EA21E26C514006AB6FB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA11E26C514006AB6FB /* .gitignore */; };
-		FC115EA41E26C776006AB6FB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC115EA31E26C776006AB6FB /* Info.plist */; };
 		FC115EA81E26CFC2006AB6FB /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC115EA71E26CFC2006AB6FB /* FirebaseService.swift */; };
 		FC1547621DED57CC009037ED /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */; };
 		FC43E22C1E01E358002110E5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC43E22B1E01E358002110E5 /* SignUpViewController.swift */; };
@@ -28,7 +27,8 @@
 		FC7F23561DF40C8B0086F375 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F23551DF40C8B0086F375 /* FavoriteCell.swift */; };
 		FC7F23581DF411580086F375 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F23571DF411580086F375 /* FavoritesViewController.swift */; };
 		FC7F235B1DF41CD80086F375 /* PhoneNumber+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F23591DF41CD80086F375 /* PhoneNumber+CoreDataProperties.swift */; };
-		FC8074AD1F5DCC7300D0D902 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC8074AC1F5DCC7300D0D902 /* GoogleService-Info.plist */; };
+		FC8074AF1F5DD23D00D0D902 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC8074AE1F5DD23D00D0D902 /* Info.plist */; };
+		FC8074B11F5DD24200D0D902 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC8074B01F5DD24200D0D902 /* GoogleService-Info.plist */; };
 		FC85E4381DE3DB48004AE574 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4371DE3DB48004AE574 /* AppDelegate.swift */; };
 		FC85E43A1DE3DB48004AE574 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E4391DE3DB48004AE574 /* MessageViewController.swift */; };
 		FC85E43D1DE3DB48004AE574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC85E43B1DE3DB48004AE574 /* Main.storyboard */; };
@@ -59,7 +59,6 @@
 		E7F1682B84D012C883309464 /* Pods-Inbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inbox.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inbox/Pods-Inbox.release.xcconfig"; sourceTree = "<group>"; };
 		FC06CD111DF0B1A200C04162 /* SelectParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectParticipantsViewController.swift; sourceTree = "<group>"; };
 		FC115EA11E26C514006AB6FB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		FC115EA31E26C776006AB6FB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC115EA71E26CFC2006AB6FB /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		FC1547601DED57CC009037ED /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataClass.swift"; path = "../Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC43E22B1E01E358002110E5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +76,8 @@
 		FC7F23551DF40C8B0086F375 /* FavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		FC7F23571DF411580086F375 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		FC7F23591DF41CD80086F375 /* PhoneNumber+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PhoneNumber+CoreDataProperties.swift"; path = "../PhoneNumber+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		FC8074AC1F5DCC7300D0D902 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FC8074AE1F5DD23D00D0D902 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC8074B01F5DD24200D0D902 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC85E4341DE3DB48004AE574 /* Inbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85E4371DE3DB48004AE574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC85E4391DE3DB48004AE574 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -172,8 +172,8 @@
 				FC85E43B1DE3DB48004AE574 /* Main.storyboard */,
 				FC85E4401DE3DB48004AE574 /* LaunchScreen.storyboard */,
 				FC85E43E1DE3DB48004AE574 /* Assets.xcassets */,
-				FC8074AC1F5DCC7300D0D902 /* GoogleService-Info.plist */,
-				FC115EA31E26C776006AB6FB /* Info.plist */,
+				FC8074B01F5DD24200D0D902 /* GoogleService-Info.plist */,
+				FC8074AE1F5DD23D00D0D902 /* Info.plist */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -322,9 +322,9 @@
 				FC115EA21E26C514006AB6FB /* .gitignore in Resources */,
 				FC85E4421DE3DB48004AE574 /* LaunchScreen.storyboard in Resources */,
 				FC85E43F1DE3DB48004AE574 /* Assets.xcassets in Resources */,
-				FC115EA41E26C776006AB6FB /* Info.plist in Resources */,
+				FC8074AF1F5DD23D00D0D902 /* Info.plist in Resources */,
 				FC85E43D1DE3DB48004AE574 /* Main.storyboard in Resources */,
-				FC8074AD1F5DCC7300D0D902 /* GoogleService-Info.plist in Resources */,
+				FC8074B11F5DD24200D0D902 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
