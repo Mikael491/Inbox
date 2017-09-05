@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
     private var emailTextField = UITextField()
     private var passwordTextField = UITextField()
+    private var continueButton: UIButton?
     private var fields = [(UITextField, String)]()
     
     var remoteStore: RemoteStore?
@@ -31,6 +33,7 @@ class LoginViewController: UIViewController {
         view.addSubview(loginLabel)
         
         let continueButton = UIButton()
+        self.continueButton = continueButton
         continueButton.setTitle("Continue", for: .normal)
         continueButton.setTitleColor(.black, for: .normal)
         continueButton.addTarget(self, action: #selector(LoginViewController.pressedContinue(sender:)), for: .touchUpInside)
@@ -77,13 +80,30 @@ class LoginViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        continueButton?.isEnabled = true
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
     
     func pressedContinue(sender: UIButton) {
-        print("Hello, world!")
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text, let rootVC = self.rootViewController else { return }
+        
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+            if let error = error {
+                print("There was an error")
+            } else {
+                //Move to roor vc
+                self.present(rootVC, animated: true, completion: nil)
+            }
+        })
     }
     
     func toSignUpVC(sender: UIButton) {

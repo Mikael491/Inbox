@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 
         let tabBarController = UITabBarController()
-        let vcData : [(UIViewController, UIImage, String)] = [(FavoritesViewController(), UIImage(named: "favorites_icon")!, "Favorites"), (ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"), (AllConversationsViewController(), UIImage(named: "chat_icon")!, "Conversations")]
+        let vcData : [(UIViewController, UIImage, String)] = [(FavoritesViewController(), UIImage(named: "favorites_icon")!, "Favorites"), (ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"), (AllConversationsViewController(), UIImage(named: "chat_icon")!, "Conversations"), (SettingsTableViewController(style: .grouped), UIImage(named: "Control")!, "Settings")]
 
         let viewControllers = vcData.map {
             (vc: UIViewController, image: UIImage, title: String) -> UINavigationController in
