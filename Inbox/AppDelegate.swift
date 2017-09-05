@@ -73,13 +73,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = tabBarController
             self.window?.makeKeyAndVisible()
         } else {
-            print("MiKE: FB Has not authed ==========================")
-            print("MiKE: This is your window => \(window)")
-            let vc = SignUpViewController()
+
+//            let vc = SignUpViewController()
+//            vc.remoteStore = firebaseService
+//            vc.rootViewController = tabBarController
+//            vc.contactImporter = contactImporter
+        
+            let vc = LoginViewController()
+            let nav = UINavigationController(rootViewController: vc)
             vc.remoteStore = firebaseService
             vc.rootViewController = tabBarController
             vc.contactImporter = contactImporter
-            window?.rootViewController = vc
+            window?.rootViewController = nav
             self.window?.makeKeyAndVisible()
         }
         return true

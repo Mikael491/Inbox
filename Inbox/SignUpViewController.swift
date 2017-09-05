@@ -54,6 +54,14 @@ class SignUpViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         
+        let toLoginButton = UIButton()
+        toLoginButton.setTitle("back to login", for: .normal)
+        toLoginButton.setTitleColor(.black, for: .normal)
+        toLoginButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightMedium)
+        toLoginButton.addTarget(self, action: #selector(SignUpViewController.toLoginVC(sender:)), for: .touchUpInside)
+        toLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(toLoginButton)
+        
         let constraints = [
             label.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -61,7 +69,9 @@ class SignUpViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             continueButton.topAnchor.constraint(equalTo: stackView.bottomAnchor),
-            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            toLoginButton.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor),
+            toLoginButton.centerXAnchor.constraint(equalTo:  view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
         phoneNumberTextField.becomeFirstResponder()
@@ -123,6 +133,10 @@ class SignUpViewController: UIViewController {
         let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func toLoginVC(sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 
 }

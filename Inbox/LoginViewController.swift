@@ -14,10 +14,15 @@ class LoginViewController: UIViewController {
     private var passwordTextField = UITextField()
     private var fields = [(UITextField, String)]()
     
+    var remoteStore: RemoteStore?
+    var rootViewController: UIViewController?
+    var contactImporter: ContactImporter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
+        self.navigationController?.isNavigationBarHidden = true
         
         let loginLabel = UILabel()
         loginLabel.text = "Login"
@@ -48,6 +53,14 @@ class LoginViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         
+        let signupButton = UIButton()
+        signupButton.setTitle("don't have an account? Sign Up now!", for: .normal)
+        signupButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightMedium)
+        signupButton.setTitleColor(.black, for: .normal)
+        signupButton.addTarget(self, action: #selector(LoginViewController.toSignUpVC(sender:)), for: .touchUpInside)
+        signupButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(signupButton)
+        
         let constraints = [
             loginLabel.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 20),
             loginLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -55,7 +68,9 @@ class LoginViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             continueButton.topAnchor.constraint(equalTo: stackView.bottomAnchor),
-            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signupButton.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor),
+            signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
         emailTextField.becomeFirstResponder()
@@ -68,7 +83,15 @@ class LoginViewController: UIViewController {
     }
     
     func pressedContinue(sender: UIButton) {
-        
+        print("Hello, world!")
+    }
+    
+    func toSignUpVC(sender: UIButton) {
+        let signUpVC = SignUpViewController()
+        signUpVC.remoteStore = remoteStore
+        signUpVC.rootViewController = rootViewController
+        signUpVC.contactImporter = contactImporter
+        self.navigationController?.pushViewController(signUpVC, animated: true)
     }
     
 }
