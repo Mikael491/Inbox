@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var firebaseService : FirebaseService?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        window = UIWindow(frame: UIScreen.main.bounds)
         FIRApp.configure()
         let mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         mainContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
@@ -63,23 +63,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return nav
         }
 
-//        tabBarController.viewControllers = viewControllers
-//        
-//        if firebaseService.hasAuthenticated() {
-//            
-//            firebaseService.startSyncing()
-//            contactImporter?.listenForChanges()
-//
-//            window?.rootViewController = tabBarController
-//        } else {
-//            let vc = SignUpViewController()
-//            vc.remoteStore = firebaseService
-//            vc.rootViewController = tabBarController
-//            vc.contactImporter = contactImporter
-//            window?.rootViewController = vc
-//        }
-//        let fpvc = ForgotPasswordViewController()
-//        window?.rootViewController = fpvc
+        tabBarController.viewControllers = viewControllers
+        
+        if firebaseService.hasAuthenticated() {
+            
+            firebaseService.startSyncing()
+            contactImporter?.listenForChanges()
+
+            window?.rootViewController = tabBarController
+            self.window?.makeKeyAndVisible()
+        } else {
+            print("MiKE: FB Has not authed ==========================")
+            print("MiKE: This is your window => \(window)")
+            let vc = SignUpViewController()
+            vc.remoteStore = firebaseService
+            vc.rootViewController = tabBarController
+            vc.contactImporter = contactImporter
+            window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+        }
         return true
     }
 

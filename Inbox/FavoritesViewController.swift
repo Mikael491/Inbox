@@ -113,6 +113,7 @@ extension FavoritesViewController : UITableViewDelegate {
         let convo = Conversation.existing(directWith: contact, inContext: convoContext) ?? Conversation.new(directWith: contact, inContext: convoContext)
         
         let vc = MessageViewController()
+        vc.hidesBottomBarWhenPushed = true
         vc.context = convoContext
         vc.conversation = convo
         navigationController?.pushViewController(vc, animated: true)

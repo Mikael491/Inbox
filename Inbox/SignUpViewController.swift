@@ -21,7 +21,7 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("MiKE: SignUpVC has loaded......")
         view.backgroundColor = UIColor.white
         
         let label = UILabel()
