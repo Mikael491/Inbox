@@ -39,8 +39,11 @@ class UITableViewFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDel
         case .insert:
             tableView?.insertRows(at: [newIndexPath!], with: .fade)
         case .update:
-            let cell = tableView?.cellForRow(at: indexPath!)
-            self.controller?.configureCell(cell: cell!, atIndexPath: indexPath!)
+            guard let cell = tableView?.cellForRow(at: indexPath!) else { break }
+            
+            print("This is the controller: \(self.controller), the cell: \(cell), the indexPath: \(indexPath)")
+            
+            self.controller?.configureCell(cell: cell, atIndexPath: indexPath!)
             tableView?.reloadRows(at: [indexPath!], with: .fade)
         case .move:
             tableView?.deleteRows(at: [indexPath!], with: .fade)

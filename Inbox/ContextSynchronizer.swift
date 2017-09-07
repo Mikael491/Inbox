@@ -34,7 +34,6 @@ class ContextSynchronizer: NSObject {
             let updated = self.objectsForKey(key: NSUpdatedObjectsKey, dictionary: notification.userInfo!, context: self.backgroundContext!)
             let deleted = self.objectsForKey(key: NSDeletedObjectsKey, dictionary: notification.userInfo!, context: self.backgroundContext!)
             
-            
             self.backgroundContext?.mergeChanges(fromContextDidSave: notification)
             
             self.remoteStore?.store(insert: inserted, updated: updated, deleted: deleted)
@@ -43,6 +42,9 @@ class ContextSynchronizer: NSObject {
     
     func syncBackgroundContext(notification: Notification) {
         mainContext?.perform({
+            
+            self.objectsForKey(key: NSUpdatedObjectsKey, dictionary: notification.userInfo!, context: self.mainContext!).forEach{$0.willAccessValue(forKey: nil)}
+            
             self.mainContext?.mergeChanges(fromContextDidSave: notification)
         })
     }

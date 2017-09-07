@@ -37,7 +37,7 @@ class FavoritesViewController: UIViewController, UITableViewFetchedResultsContro
         
         if let context = context {
             let request : NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
-            request.predicate = NSPredicate(format: "favorite = true")
+            request.predicate = NSPredicate(format: "storageID != nil AND favorite = true")
             request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true),
                                        NSSortDescriptor(key: "firstName", ascending: true)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
@@ -113,6 +113,7 @@ extension FavoritesViewController : UITableViewDelegate {
         let convo = Conversation.existing(directWith: contact, inContext: convoContext) ?? Conversation.new(directWith: contact, inContext: convoContext)
         
         let vc = MessageViewController()
+        vc.hidesBottomBarWhenPushed = true
         vc.context = convoContext
         vc.conversation = convo
         navigationController?.pushViewController(vc, animated: true)

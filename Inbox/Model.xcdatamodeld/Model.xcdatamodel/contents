@@ -6,6 +6,7 @@
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="storageID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="conversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conversation" inverseName="participants" inverseEntity="Conversation" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="sender" inverseEntity="Message" syncable="YES"/>
         <relationship name="phoneNumbers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhoneNumber" inverseName="contact" inverseEntity="PhoneNumber" syncable="YES"/>
@@ -13,6 +14,7 @@
     <entity name="Conversation" representedClassName=".Conversation" syncable="YES">
         <attribute name="lastMessageTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="storageID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="message" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="conversation" inverseEntity="Message" syncable="YES"/>
         <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="conversations" inverseEntity="Contact" syncable="YES"/>
     </entity>
@@ -29,8 +31,8 @@
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="phoneNumbers" inverseEntity="Contact" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Contact" positionX="-54" positionY="27" width="128" height="165"/>
-        <element name="Conversation" positionX="-54" positionY="18" width="128" height="105"/>
+        <element name="Contact" positionX="-54" positionY="27" width="128" height="180"/>
+        <element name="Conversation" positionX="-54" positionY="18" width="128" height="120"/>
         <element name="Message" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="PhoneNumber" positionX="-9" positionY="99" width="128" height="105"/>
     </elements>

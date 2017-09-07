@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, Authenticatable {
     
     private let phoneNumberTextField = UITextField()
     private let emailTextField = UITextField()
@@ -21,7 +21,7 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("MiKE: SignUpVC has loaded......")
         view.backgroundColor = UIColor.white
         
         let label = UILabel()
@@ -37,6 +37,9 @@ class SignUpViewController: UIViewController {
         continueButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(continueButton)
         
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.autocorrectionType = .no
+        passwordTextField.autocorrectionType = .no
         phoneNumberTextField.keyboardType = .phonePad
         passwordTextField.isSecureTextEntry = true
         fields = [(phoneNumberTextField, "Phone Number"), (emailTextField, "Email"), (passwordTextField, "Password")]
@@ -51,6 +54,14 @@ class SignUpViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         
+        let toLoginButton = UIButton()
+        toLoginButton.setTitle("back to login", for: .normal)
+        toLoginButton.setTitleColor(.black, for: .normal)
+        toLoginButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightMedium)
+        toLoginButton.addTarget(self, action: #selector(SignUpViewController.toLoginVC(sender:)), for: .touchUpInside)
+        toLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(toLoginButton)
+        
         let constraints = [
             label.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -58,10 +69,11 @@ class SignUpViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             continueButton.topAnchor.constraint(equalTo: stackView.bottomAnchor),
-            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            toLoginButton.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor),
+            toLoginButton.centerXAnchor.constraint(equalTo:  view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-        phoneNumberTextField.becomeFirstResponder()
         
     }
     
@@ -75,6 +87,7 @@ class SignUpViewController: UIViewController {
     }
     
     func pressedContinue(sender: UIButton) {
+        print("hit continue....")
         sender.isEnabled = false
         guard let phonenumber = phoneNumberTextField.text , phonenumber.characters.count > 0 else {
             alertForError(error: "Phone number invalid")
@@ -93,19 +106,25 @@ class SignUpViewController: UIViewController {
             sender.isEnabled = true
             return
         }
-        
+        print("===========================================")
+        print("phoneNumber: \(phonenumber), email: \(email), password: \(password)")
+        print("===========================================")
+
         remoteStore?.signUp(phoneNumber: phonenumber, email: email, password: password, success: {
-            
+            user in
             guard let rootVC = self.rootViewController, let importer = self.contactImporter, let remoteStore = self.remoteStore else {return}
             remoteStore.startSyncing()
             importer.fetchContacts()
             importer.listenForChanges()
             
+            self.saveUserToDefaults()
+            
             self.present(rootVC, animated: true, completion: nil)
             
         }, error: {
             error in
-            self.alertForError(error: error)
+            print("hit error....")
+            self.alertForError(error: error.description)
             sender.isEnabled = true
         })
     }
@@ -115,6 +134,10 @@ class SignUpViewController: UIViewController {
         let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func toLoginVC(sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 
 }

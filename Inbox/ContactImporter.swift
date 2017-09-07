@@ -14,6 +14,7 @@ class ContactImporter : NSObject {
     
     private var context : NSManagedObjectContext?
     private var lastCNNotificationTime : NSDate?
+    var contactsImported: Bool = false
     
     init(context: NSManagedObjectContext) {
         self.context = context
@@ -86,7 +87,7 @@ class ContactImporter : NSObject {
                             contact.favorite = true
                             for cnVal in cnContact.phoneNumbers {
                                 guard let phoneNumber = phoneNumbers[cnVal.value.stringValue] ?? NSEntityDescription.insertNewObject(forEntityName: "PhoneNumber", into: self.context!) as? PhoneNumber else { continue }
-                                phoneNumber.kind = CNLabeledValue<NSString>.localizedString(forLabel: cnVal.label!)
+                                phoneNumber.kind = CNLabeledValue<NSString>.localizedString(forLabel: cnVal.label ?? "")
                                 phoneNumber.value = self.formatPhoneNumber(number: cnVal.value)
                                 phoneNumber.contact = contact
                             }
@@ -98,7 +99,9 @@ class ContactImporter : NSObject {
                     } catch {
                         
                     }
+                    self.contactsImported = true
                 } else {
+                    self.contactsImported = false
                     print("Not granted access to contacts...")
                 }
                 

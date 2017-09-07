@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,21 +18,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var contactImporter : ContactImporter?
     private var contextSyncer : ContextSynchronizer?
     
+    //firbase context properties
+    private var contactImportSync : ContextSynchronizer?
+    private var firebaseSync : ContextSynchronizer?
+    private var firebaseService : FirebaseService?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        FIRApp.configure()
         let mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         mainContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
         
-        let backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        backgroundContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
-        contextSyncer = ContextSynchronizer(mainContext: mainContext, backgroundContext: backgroundContext)
-        contactImporter = ContactImporter(context: backgroundContext)
-        importContacts(backgroundContext)
-        contactImporter?.listenForChanges()
+        let contactsContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        contactsContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
+        contextSyncer = ContextSynchronizer(mainContext: mainContext, backgroundContext: contactsContext)
+        let firebaseContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        firebaseContext.persistentStoreCoordinator = CoreDataHelper.sharedInstance.coordinator
         
+        let firebaseService = FirebaseService(context: firebaseContext)
+        self.firebaseService = firebaseService
+        
+        contactImportSync = ContextSynchronizer(mainContext: contactsContext, backgroundContext: firebaseContext)
+        contactImportSync?.remoteStore = firebaseService
+        firebaseSync = ContextSynchronizer(mainContext: mainContext, backgroundContext: firebaseContext)
+        firebaseSync?.remoteStore = firebaseService
+        
+        contactImporter = ContactImporter(context: contactsContext)
+        
+//        importContacts(backgroundContext)
+        
+
         let tabBarController = UITabBarController()
-        let vcData : [(UIViewController, UIImage, String)] = [(FavoritesViewController(), UIImage(named: "favorites_icon")!, "Favorites"), (ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"), (AllConversationsViewController(), UIImage(named: "chat_icon")!, "Conversations")]
-        
+        let vcData : [(UIViewController, UIImage, String)] = [(FavoritesViewController(), UIImage(named: "favorites_icon")!, "Favorites"), (ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"), (AllConversationsViewController(), UIImage(named: "chat_icon")!, "Conversations"), (SettingsTableViewController(style: .grouped), UIImage(named: "Control")!, "Settings")]
+
         let viewControllers = vcData.map {
             (vc: UIViewController, image: UIImage, title: String) -> UINavigationController in
             
@@ -43,8 +62,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             nav.title = title
             return nav
         }
+
         tabBarController.viewControllers = viewControllers
-        window?.rootViewController = SignUpViewController()
+        
+        if firebaseService.hasAuthenticated() {
+            
+            firebaseService.startSyncing()
+            contactImporter?.listenForChanges()
+
+            window?.rootViewController = tabBarController
+            self.window?.makeKeyAndVisible()
+        } else if UserDefaults.standard.value(forKey: "currentUser") != nil {
+            window?.rootViewController = tabBarController
+            window?.makeKeyAndVisible()
+        } else {
+
+//            let vc = SignUpViewController()
+//            vc.remoteStore = firebaseService
+//            vc.rootViewController = tabBarController
+//            vc.contactImporter = contactImporter
+        makeLoginVC(tabVC: tabBarController)
+        }
         return true
     }
 
@@ -68,6 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        UserDefaults.standard.removeObject(forKey: "phoneNumber")
     }
     
     func importContacts(_ context: NSManagedObjectContext) {
@@ -79,6 +118,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         contactImporter?.fetchContacts()
         
         UserDefaults.standard.set(true, forKey: "contactsAdded")
+    }
+    
+    func makeLoginVC(tabVC: UITabBarController) {
+        let vc = LoginViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        vc.remoteStore = firebaseService
+        vc.rootViewController = tabVC
+        vc.contactImporter = contactImporter
+        window?.rootViewController = nav
+        window?.makeKeyAndVisible()
     }
     
 }
