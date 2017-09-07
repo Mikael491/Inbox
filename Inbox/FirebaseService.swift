@@ -21,6 +21,8 @@ class FirebaseService {
             UserDefaults.standard.set(phoneNumber, forKey: "phoneNumber")
         }
         get {
+            print("This is the phone number: \(UserDefaults.standard.string(forKey: "phoneNumber"))")
+            
             return UserDefaults.standard.string(forKey: "phoneNumber")!
         }
     }
@@ -42,6 +44,10 @@ class FirebaseService {
         model.upload(rootRef: rootRef, context: context)
     }
     
+    static func setCurrentPhoneNumber(_ phoneNumber: String) {
+        FirebaseService.currentPhoneNumber = phoneNumber
+    }
+    
     func fetchAppContacts() -> [Contact] {
         do {
             let request: NSFetchRequest<Contact> = NSFetchRequest(entityName: "Contact")
@@ -56,7 +62,6 @@ class FirebaseService {
         }
     }
     
-    //following function is strictly for readability and cleanliness
     fileprivate func observeUserStatus(contact: Contact) {
         contact.observeStatus(rootRef: rootRef, context: context)
     }

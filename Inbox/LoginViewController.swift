@@ -79,6 +79,8 @@ class LoginViewController: UIViewController, Authenticatable {
         ]
         NSLayoutConstraint.activate(constraints)
         
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +98,9 @@ class LoginViewController: UIViewController, Authenticatable {
     
     func pressedContinue(sender: UIButton) {
         
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        
         guard let email = emailTextField.text, let password = passwordTextField.text, let rootVC = self.rootViewController else { return }
         
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
@@ -104,8 +109,16 @@ class LoginViewController: UIViewController, Authenticatable {
             } else {
                 //Move to roor vc
                 guard let user = user else { return }
-                self.saveUserToDefaults()
-                self.present(rootVC, animated: true, completion: nil)
+                
+                let database = FIRDatabase.database().reference()
+                database.child("users").child(user.uid).observe(.value, with: {
+                    snapshot in
+                    guard let snapshot = snapshot.value as? NSDictionary else { return }
+                    guard let phoneNumber = snapshot["phoneNumber"] as? String else { return }
+                    FirebaseService.setCurrentPhoneNumber(phoneNumber)
+                    self.saveUserToDefaults()
+                    self.present(rootVC, animated: true, completion: nil)
+                })
             }
         })
     }
