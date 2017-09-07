@@ -102,7 +102,7 @@ extension FirebaseService : RemoteStore {
         }
     }
     
-    func signUp(phoneNumber: String, email: String, password: String, success: @escaping () -> (), error errorCallback: @escaping (String) -> ()) {
+    func signUp(phoneNumber: String, email: String, password: String, success: @escaping (FIRUser?) -> (), error errorCallback: @escaping (String) -> ()) {
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (result, error) in
             if (error != nil) {
                 print((error?.localizedDescription)!)
@@ -119,7 +119,7 @@ extension FirebaseService : RemoteStore {
                     if (error != nil) {
                         errorCallback((error?.localizedDescription)!)
                     } else {
-                        success()
+                        success(result)
                     }
                 })
             }

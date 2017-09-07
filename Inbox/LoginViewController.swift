@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, Authenticatable {
 
     private var emailTextField = UITextField()
     private var passwordTextField = UITextField()
@@ -49,6 +49,8 @@ class LoginViewController: UIViewController {
             $0.0.placeholder = $0.1
         }
         
+        
+        
         let stackView = UIStackView(arrangedSubviews: fields.map{$0.0})
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -85,6 +87,12 @@ class LoginViewController: UIViewController {
         emailTextField.text = ""
         passwordTextField.text = ""
         continueButton?.isEnabled = true
+        
+//        if UserDefaults.standard.value(forKey: "currentUser") != nil {
+//            guard let rootVC = self.rootViewController else { return }
+//            self.present(rootVC, animated: true, completion: nil)
+//        }
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -98,9 +106,11 @@ class LoginViewController: UIViewController {
         
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if let error = error {
-                print("There was an error")
+                print("There was an error -> \(error)")
             } else {
                 //Move to roor vc
+                guard let user = user else { return }
+                self.saveUserToDefaults()
                 self.present(rootVC, animated: true, completion: nil)
             }
         })

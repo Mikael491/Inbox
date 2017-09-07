@@ -72,20 +72,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             window?.rootViewController = tabBarController
             self.window?.makeKeyAndVisible()
+        } else if UserDefaults.standard.value(forKey: "currentUser") != nil {
+            window?.rootViewController = tabBarController
+            window?.makeKeyAndVisible()
         } else {
 
 //            let vc = SignUpViewController()
 //            vc.remoteStore = firebaseService
 //            vc.rootViewController = tabBarController
 //            vc.contactImporter = contactImporter
-        
-            let vc = LoginViewController()
-            let nav = UINavigationController(rootViewController: vc)
-            vc.remoteStore = firebaseService
-            vc.rootViewController = tabBarController
-            vc.contactImporter = contactImporter
-            window?.rootViewController = nav
-            self.window?.makeKeyAndVisible()
+        makeLoginVC(tabVC: tabBarController)
         }
         return true
     }
@@ -122,6 +118,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         contactImporter?.fetchContacts()
         
         UserDefaults.standard.set(true, forKey: "contactsAdded")
+    }
+    
+    func makeLoginVC(tabVC: UITabBarController) {
+        let vc = LoginViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        vc.remoteStore = firebaseService
+        vc.rootViewController = tabVC
+        vc.contactImporter = contactImporter
+        window?.rootViewController = nav
+        window?.makeKeyAndVisible()
     }
     
 }

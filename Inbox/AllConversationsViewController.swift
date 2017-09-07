@@ -49,7 +49,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
                 print("There was an error performing fetch on AllConversationsVC: \(error)")
             }
         }
-//        fakeData()
+        fakeData()
     }
     
     func newConvo() {

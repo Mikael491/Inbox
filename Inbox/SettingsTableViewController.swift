@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, Authenticatable {
 
     private var source = ["Logout"]
     
@@ -70,7 +70,10 @@ class SettingsTableViewController: UITableViewController {
         let auth = FIRAuth.auth()
         do {
             try auth?.signOut()
+            self.removeUserFromDefaults()
             self.tabBarController?.dismiss(animated: true, completion: nil)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.makeLoginVC(tabVC: self.tabBarController!)
         } catch let signoutError as NSError {
             print("There was an error signing out: \(signoutError)")
         }

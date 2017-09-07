@@ -134,6 +134,7 @@ class MessageViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.scrollToBottom()
+        
     }
     
     func contextUpdated(notification: Notification) {

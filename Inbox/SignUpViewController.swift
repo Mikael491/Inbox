@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, Authenticatable {
     
     private let phoneNumberTextField = UITextField()
     private let emailTextField = UITextField()
@@ -112,11 +112,13 @@ class SignUpViewController: UIViewController {
         print("===========================================")
 
         remoteStore?.signUp(phoneNumber: phonenumber, email: email, password: password, success: {
-            print("hit success...")
+            user in
             guard let rootVC = self.rootViewController, let importer = self.contactImporter, let remoteStore = self.remoteStore else {return}
             remoteStore.startSyncing()
             importer.fetchContacts()
             importer.listenForChanges()
+            
+            self.saveUserToDefaults()
             
             self.present(rootVC, animated: true, completion: nil)
             
