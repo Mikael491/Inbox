@@ -21,6 +21,10 @@ class ContactsViewController: UIViewController, ContextViewController, UITableVi
     fileprivate var fetchedResultsDelegate : NSFetchedResultsControllerDelegate?
     
     private var searchController : UISearchController?
+    private var contactsImporter: ContactImporter? {
+        guard let context = context else { return nil }
+        return ContactImporter(context: context)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +62,11 @@ class ContactsViewController: UIViewController, ContextViewController, UITableVi
         definesPresentationContext = true
         
         tableView.tableHeaderView = searchController?.searchBar
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        contactsImporter?.fetchContacts()
     }
 
     override func didReceiveMemoryWarning() {

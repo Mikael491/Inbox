@@ -14,6 +14,7 @@ class ContactImporter : NSObject {
     
     private var context : NSManagedObjectContext?
     private var lastCNNotificationTime : NSDate?
+    var contactsImported: Bool = false
     
     init(context: NSManagedObjectContext) {
         self.context = context
@@ -98,7 +99,9 @@ class ContactImporter : NSObject {
                     } catch {
                         
                     }
+                    self.contactsImported = true
                 } else {
+                    self.contactsImported = false
                     print("Not granted access to contacts...")
                 }
                 
