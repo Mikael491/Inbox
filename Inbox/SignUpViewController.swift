@@ -74,7 +74,6 @@ class SignUpViewController: UIViewController, Authenticatable {
             toLoginButton.centerXAnchor.constraint(equalTo:  view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-        phoneNumberTextField.becomeFirstResponder()
         
     }
     

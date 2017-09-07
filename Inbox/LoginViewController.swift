@@ -78,7 +78,6 @@ class LoginViewController: UIViewController, Authenticatable {
             signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-        emailTextField.becomeFirstResponder()
         
     }
     
@@ -87,11 +86,6 @@ class LoginViewController: UIViewController, Authenticatable {
         emailTextField.text = ""
         passwordTextField.text = ""
         continueButton?.isEnabled = true
-        
-//        if UserDefaults.standard.value(forKey: "currentUser") != nil {
-//            guard let rootVC = self.rootViewController else { return }
-//            self.present(rootVC, animated: true, completion: nil)
-//        }
         
     }
     
