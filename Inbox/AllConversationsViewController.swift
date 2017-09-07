@@ -13,6 +13,7 @@ class AllConversationsViewController: UIViewController, UITableViewFetchedResult
     
     //TODO: fix issue with blank chat on first(signup) init
     //TODO: Conversation indicator cells blank
+    //TODO: Errors with live incoming messages
     
     var context : NSManagedObjectContext?
     fileprivate var fetchedResultsController : NSFetchedResultsController<Conversation>?
